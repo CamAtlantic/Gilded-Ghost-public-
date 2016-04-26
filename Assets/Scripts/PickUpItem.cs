@@ -4,7 +4,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class PickUpItem : MonoBehaviour {
     Camera cam;
-    FirstPersonController playerFPS;
+    //FirstPersonController playerFPS;
 
     public GameObject heldItem;
     public Item heldItemScript;
@@ -15,13 +15,13 @@ public class PickUpItem : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         cam = Camera.main;
-        playerFPS = GetComponent<FirstPersonController>();
+        //playerFPS = GetComponent<FirstPersonController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerFPS.mouseLookSlow = false;
+        //playerFPS.mouseLookSlow = false;
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
@@ -33,13 +33,13 @@ public class PickUpItem : MonoBehaviour {
 
             if (!heldItem && objectHit.CompareTag("Item"))
             {
-                playerFPS.mouseLookSlow = true;
+                //playerFPS.mouseLookSlow = true;
                 lookingAtItem = true;
             }
 
             if (heldItem && objectHit.CompareTag("ItemLocation"))
             {
-                playerFPS.mouseLookSlow = true;
+                //playerFPS.mouseLookSlow = true;
                 lookingAtLocation = true;
             }
 

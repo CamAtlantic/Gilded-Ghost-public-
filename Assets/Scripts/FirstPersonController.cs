@@ -44,7 +44,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         [HideInInspector] public bool mouseLookSlow = false;
 
-        [SerializeField] private SleepingAndWaking m_SleepingAndWaking = new SleepingAndWaking();
+        SleepingAndWaking m_SleepingAndWaking;
 
         // Use this for initialization
         private void Start()
@@ -62,7 +62,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
 
-            
+            m_SleepingAndWaking = GetComponent<SleepingAndWaking>();
         }
 
 
@@ -146,7 +146,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
             }
-            m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
+
+            if (m_SleepingAndWaking.sleepState == SleepState.standing)
+            {
+                m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
+            }
 
             ProgressStepCycle(speed);
             UpdateCameraPosition(speed);

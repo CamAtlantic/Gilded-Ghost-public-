@@ -6,12 +6,19 @@ using UnityStandardAssets.Characters.FirstPerson;
 public enum SleepState { sleeping, lyingAwake, goingUp, standing, goingDown };
 
 [Serializable]
-public class SleepingAndWaking {
+public class SleepingAndWaking : MonoBehaviour{
 
     public SleepState sleepState;
 
     public int facingTriggerDegree = 70;
     public float standingSleepingSpeed = 0.2f;
+
+    CharacterController controller;
+
+    void Start()
+    {
+        controller = GetComponent<CharacterController>();
+    }
 
     public bool UpdateSleepState(Transform player, FirstPersonController fpsController)
     {
@@ -22,7 +29,6 @@ public class SleepingAndWaking {
                 break;
 
             case SleepState.lyingAwake:
-
                 if(CheckPlayerFacing(player))
                 {
                     sleepState = SleepState.goingUp;
@@ -33,9 +39,8 @@ public class SleepingAndWaking {
                 player.rotation = Quaternion.Lerp(player.rotation, Quaternion.Euler(new Vector3(0, -90, 0)), standingSleepingSpeed);
                 player.position = Vector3.Lerp(player.position, new Vector3(-0.1f, player.position.y, player.position.z), standingSleepingSpeed);
 
-                if(Quaternion.Angle(player.rotation,Quaternion.Euler(Vector3.back)) < 1)
+                if(Quaternion.Angle(player.rotation,Quaternion.Euler(new Vector3(0, -90, 0))) < 1)
                 {
-                    
                     sleepState = SleepState.standing;
                     fpsController.ResetMouseLook();
                 }
@@ -43,7 +48,7 @@ public class SleepingAndWaking {
                 
 
             case SleepState.standing:
-
+                controller.enabled = true;
                 break;
 
             case SleepState.goingDown:
