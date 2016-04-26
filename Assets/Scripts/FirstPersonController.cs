@@ -44,10 +44,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         [HideInInspector] public bool mouseLookSlow = false;
 
+        [SerializeField] private SleepingAndWaking m_SleepingAndWaking = new SleepingAndWaking();
+
         // Use this for initialization
         private void Start()
         {
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
             m_OriginalCameraPosition = m_Camera.transform.localPosition;
@@ -58,13 +61,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+
+            
         }
 
 
         // Update is called once per frame
         private void Update()
         {
-            RotateView();
+            if(m_SleepingAndWaking.UpdateSleepState(transform, this))
+            {
+                //lock mouse rotation
+            }
+            else
+            {
+                RotateView();
+            }
+
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
@@ -84,6 +97,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+        }
+
+        public void ResetMouseLook()
+        {
+            m_MouseLook.Init(transform, m_Camera.transform);
         }
 
 
@@ -245,7 +263,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 m_MouseLook.slow = false;
             }
-            m_MouseLook.LookRotation (transform, m_Camera.transform);
+            m_MouseLook.LookRotation(transform, m_Camera.transform);
+            
         }
 
 
