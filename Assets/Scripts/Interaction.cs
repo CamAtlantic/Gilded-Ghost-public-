@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Holds a tag for what kind of object the player is currently looking at.
+/// </summary>
 public enum LookingAt { none, item,itemLocation,interactable};
 
 public class Interaction : MonoBehaviour
@@ -8,7 +11,7 @@ public class Interaction : MonoBehaviour
 
     //------------------------------------------------
     //This script should contain all code relevant to
-    //looking at objects, triggering GUI responses,
+    //looking at objects, exposing that data to MainGUI,
     //and triggering object responses.
     //------------------------------------------------
 
@@ -59,7 +62,6 @@ public class Interaction : MonoBehaviour
             //if holding item, looking at location is valid
             if (pickUpScript.heldItem && objectHit.CompareTag("ItemLocation"))
             {
-                //playerFPS.mouseLookSlow = true;
                 reticule = LookingAt.itemLocation;
             }
 
@@ -68,18 +70,6 @@ public class Interaction : MonoBehaviour
                 reticule = LookingAt.interactable;
             }
 
-            //Hide or show GUI response---------------------
-
-            if (reticule != LookingAt.none)
-            {
-                //print("showing");
-                mainGUI.ShowSelectRing();
-            }
-            else
-            {
-                mainGUI.HideSelectRing();
-            }
-            
             GetInput();
 
         }

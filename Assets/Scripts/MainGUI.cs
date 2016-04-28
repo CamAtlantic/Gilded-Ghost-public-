@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class MainGUI : MonoBehaviour {
 
+    Interaction interactionScript;
+
     GameObject selector;
     RectTransform rect_Selector;
     RawImage image_Selector;
@@ -12,15 +14,20 @@ public class MainGUI : MonoBehaviour {
     RectTransform rect_SelectRing;
     RawImage image_SelectRing;
 
-    bool lookingAtInteractable = false;
     private float normalScale_SelectRing = 0.05f;
     public float bigScale_SelectRing = 0.15f;
     public float speed_SelectRing = 0.2f;
 
-    public Color color_Select;
+    private Color normal_Color = Color.white;
+    public Color item_Color;
+    public Color location_Color;
+    public Color interactable_Color;
+
+    private LookingAt reticule = LookingAt.none;
 
 	// Use this for initialization
 	void Start () {
+        interactionScript = GameObject.Find("Player").GetComponent<Interaction>();
         selectRing = GameObject.Find("SelectRing");
         rect_SelectRing = selectRing.GetComponent<RectTransform>();
         image_SelectRing = selectRing.GetComponent<RawImage>();
@@ -29,40 +36,37 @@ public class MainGUI : MonoBehaviour {
         rect_Selector = selector.GetComponent<RectTransform>();
         image_Selector = selector.GetComponent<RawImage>();
 
-
     }
 	
 	// Update is called once per frame
 	void Update () {
+        reticule = interactionScript.reticule;
 	
-        if(lookingAtInteractable)
+        switch (reticule)
         {
-            rect_SelectRing.localScale = Vector3.Lerp(rect_SelectRing.localScale, new Vector3(bigScale_SelectRing, bigScale_SelectRing, bigScale_SelectRing), speed_SelectRing);
+            case LookingAt.item:
+                SelectRingLerp(bigScale_SelectRing, item_Color);
+                break;
 
-            image_Selector.color = Color.Lerp(image_Selector.color, color_Select, speed_SelectRing);
-            image_SelectRing.color = Color.Lerp(image_SelectRing.color, color_Select, speed_SelectRing);
-        }
-        else
-        {
-            rect_SelectRing.localScale = Vector3.Lerp(rect_SelectRing.localScale, new Vector3(normalScale_SelectRing, normalScale_SelectRing, normalScale_SelectRing), speed_SelectRing);
+            case LookingAt.itemLocation:
+                SelectRingLerp(bigScale_SelectRing, location_Color);
+                break;
 
-            image_Selector.color = Color.Lerp(image_Selector.color, Color.white, speed_SelectRing);
-            image_SelectRing.color = Color.Lerp(image_SelectRing.color, Color.white, speed_SelectRing);
+            case LookingAt.interactable:
+                SelectRingLerp(bigScale_SelectRing, interactable_Color);
+                break;
+
+            case LookingAt.none:
+                SelectRingLerp(normalScale_SelectRing, normal_Color);
+                break;
         }
 	}
 
-    public void ShowSelectRing()
+    void SelectRingLerp(float newScale, Color newColor)
     {
-        if (!lookingAtInteractable)
-        {
-            lookingAtInteractable = true;
-        }
-    }
-    public void HideSelectRing()
-    {
-        if (lookingAtInteractable)
-        {
-            lookingAtInteractable = false;
-        }
+        rect_SelectRing.localScale = Vector3.Lerp(rect_SelectRing.localScale, new Vector3(newScale, newScale, newScale), speed_SelectRing);
+
+        image_Selector.color = Color.Lerp(image_Selector.color, newColor, speed_SelectRing);
+        image_SelectRing.color = Color.Lerp(image_SelectRing.color, newColor, speed_SelectRing);
     }
 }
