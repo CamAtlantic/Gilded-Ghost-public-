@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Tray : MonoBehaviour {
+public class Tray : Interactable {
 
     Vector3 corridorPosition;
     Vector3 insidePosition;
 
     bool inside = false;
     public float pushSpeed = 0.3f;
+
 	// Use this for initialization
 	void Start () {
         corridorPosition = transform.localPosition;
@@ -26,6 +27,13 @@ public class Tray : MonoBehaviour {
         }
 
 	}
+
+    public override void InteractTrigger()
+    {
+        base.InteractTrigger();
+
+        PushOutside();
+    }
 
     public void PushInside()
     {

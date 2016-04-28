@@ -149,7 +149,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             if (m_SleepingAndWaking.sleepState == SleepState.standing)
             {
-                m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);
+                m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);     
             }
 
             ProgressStepCycle(speed);

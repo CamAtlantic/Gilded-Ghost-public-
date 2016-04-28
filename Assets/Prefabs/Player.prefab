@@ -329,6 +329,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reticule: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967035
 --- !u!143 &14381694
 CharacterController:
   m_ObjectHideFlags: 1

@@ -34,7 +34,8 @@ public class DayManager : MonoBehaviour {
             doorScript.OpenEyeSlot();
             doorScript.OpenTraySlot();
 
-            if (feedingTimer > trayPushTime)
+            //should mean this triggers for a quarter second
+            if (feedingTimer > trayPushTime && feedingTimer < trayPushTime + 0.25f)
             {
                 trayScript.PushInside();
             }
@@ -48,7 +49,6 @@ public class DayManager : MonoBehaviour {
         else
         {
             doorScript.CloseEyeSlot();
-            doorScript.CloseTraySlot();
         }
 
     }

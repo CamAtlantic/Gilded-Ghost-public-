@@ -11,7 +11,6 @@ public class PickUpItem : MonoBehaviour {
     public GameObject heldItem;
     private Item heldItemScript;
 
-    //float holdDistance = 1;
     public float speed = 10;
     
     //---------------------------------
@@ -23,12 +22,16 @@ public class PickUpItem : MonoBehaviour {
         heldItem = item;
         heldItemScript = heldItem.GetComponent<Item>();
         heldItemScript.PickUp();
+
+        
     }
 
     public void PutDownOn(GameObject itemLocation)
     {
         heldItemScript.PutDownOn(itemLocation);
         heldItem.transform.parent = itemLocation.transform;
+        itemLocation.GetComponent<ItemLocation>().ReceiveItem(heldItem);
+
         Reset();
     }
 

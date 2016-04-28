@@ -24,6 +24,9 @@ public class Interaction : MonoBehaviour
 
     public LookingAt reticule = LookingAt.none;
 
+    public LayerMask noItem_LayerMask;
+    public LayerMask item_LayerMask;
+
     void Start()
     {
         cam = Camera.main;
@@ -34,23 +37,35 @@ public class Interaction : MonoBehaviour
     
     void Update()
     {
-        //Check if ray hits------------------------------
-        RaycastHit hit;
-        Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        objectHit = null;
-        
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             pickUpScript.EatFood();
         }
 
+        //Check if ray hits------------------------------
+        RaycastHit hit;
+        Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        objectHit = null;
 
-        if (Physics.Raycast(ray, out hit, 5))
+        LayerMask layerMask = noItem_LayerMask;
+        if(pickUpScript.heldItem)
+        {
+            layerMask = item_LayerMask;
+        }
+        
+        if (Physics.Raycast(ray, out hit, 500,layerMask))
         {
             objectHit = hit.transform;
             reticule = LookingAt.none;
-            
+
             //Identify type of object------------------------
+
+            //interactable is less important than location.
+            //It should be overwritten by location if both are true
+            if (objectHit.CompareTag("Interactable"))
+            {
+                reticule = LookingAt.interactable;
+            }
 
             //if not holding item, looking at item is valid
             if (!pickUpScript.heldItem && objectHit.CompareTag("Item"))
@@ -65,11 +80,6 @@ public class Interaction : MonoBehaviour
                 reticule = LookingAt.itemLocation;
             }
 
-            if(objectHit.CompareTag("Interactable"))
-            {
-                reticule = LookingAt.interactable;
-            }
-
             GetInput();
 
         }
@@ -81,7 +91,7 @@ public class Interaction : MonoBehaviour
         {
             // Do something with the object that was hit by the raycast.
 
-            //I should change item and itemLocation to also have InteractTrigger() functions.
+            //Should I change item and itemLocation to also have InteractTrigger() functions.
 
             if (reticule == LookingAt.item)
             {

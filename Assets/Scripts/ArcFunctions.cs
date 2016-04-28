@@ -7,13 +7,13 @@ public class ArcFunctions  {
     {
         //Vector3 currentNormal;
         Vector3 toEndNormal;
-        Vector3 toStartNormal;
+        //Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
         //Vector3 startPoint;
         //Vector3 endPoint;
-        Vector3 anglePoint;
+        //Vector3 anglePoint;
         Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
         float radius;
@@ -35,10 +35,10 @@ public class ArcFunctions  {
 
         if (properAngle > 0)
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+            //anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, angle, 0)) * -toEndNormal;
@@ -49,10 +49,10 @@ public class ArcFunctions  {
         }
         else
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+            //anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, -angle, 0)) * -toEndNormal;
@@ -121,7 +121,7 @@ public class ArcFunctions  {
         }
 
 
-        float newAngle =AngleFull(startNormal, endNormal, Vector3.up);
+        //float newAngle =AngleFull(startNormal, endNormal, Vector3.up);
 
         data = new ArcData(startPosition, startNormal,endPosition,  -endNormal, radius, 2 * radius * Mathf.PI, angleToStart, circleCentre, ArcFunctions.ArcLength(startPosition, startNormal, endPosition), tNormal);
 
@@ -132,65 +132,65 @@ public class ArcFunctions  {
     {
         //Vector3 currentNormal;
         Vector3 toEndNormal;
-        Vector3 toStartNormal;
+        //Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
         //Vector3 startPoint;
         //Vector3 endPoint;
-        Vector3 anglePoint;
-        Vector3 circleCentre = Vector3.zero;
+        //Vector3 anglePoint;
+        //Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
-        float radius;
+        //float radius;
         float angle = 0;
         float properAngle = 0;
-        float angleToStart;
+        //float angleToStart;
         //float angleToEnd;
-        float worldAngle;
-        float worldAngleTwo;
+        //float worldAngle;
+        //float worldAngleTwo;
 
         toEndNormal = Vector3.Normalize(endPosition - startPosition);
         properAngle = AngleHalf(startNormal, toEndNormal, Vector3.up);
-        worldAngle = Vector3.Angle(Vector3.forward, startNormal);
-        worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
+        //worldAngle = Vector3.Angle(Vector3.forward, startNormal);
+        //worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
 
         if (properAngle > 0)
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+           // anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * startNormal;
-            angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
         }
         else
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+            //anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, -angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * startNormal;
-            angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
         }
         if (LineLineIntersection(out intersect, startPosition, startInsideNormal * 100000, endPosition, endInsideNormal * 100000))
         {
-            circleCentre = intersect;
+//            circleCentre = intersect;
         }
         else
         {
             endNormal = Vector3.Normalize(startPosition - endPosition);
         }
-        radius = Vector3.Distance(circleCentre, startPosition);
+        //radius = Vector3.Distance(circleCentre, startPosition);
 
         return -endNormal;
     }
@@ -198,58 +198,58 @@ public class ArcFunctions  {
     public static float ArcAngleToNormalised(Vector3 startPosition, Vector3 startNormal, Vector3 endPosition, float currentAngle)
     {
         Vector3 toEndNormal;
-        Vector3 toStartNormal;
+//        Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
-        Vector3 anglePoint;
-        Vector3 circleCentre = Vector3.zero;
+//        Vector3 anglePoint;
+//        Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
-        float radius;
+//        float radius;
         float angle = 0;
         float properAngle = 0;
-        float angleToStart;
-        float worldAngle;
+        //float angleToStart;
+        //float worldAngle;
         float worldAngleTwo;
 
         toEndNormal = Vector3.Normalize(endPosition - startPosition);
         properAngle = AngleHalf(startNormal, toEndNormal, Vector3.up);
-        worldAngle = Vector3.Angle(Vector3.forward, startNormal);
+        //worldAngle = Vector3.Angle(Vector3.forward, startNormal);
         worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
 
         if (properAngle > 0)
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+          //  anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * startNormal;
-            angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
         }
         else
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+            //anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, -angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * startNormal;
-            angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
         }
 
         float convertetAngle = currentAngle;
         if (LineLineIntersection(out intersect, startPosition, startInsideNormal * 100000, endPosition, endInsideNormal * 100000))
         {
-            circleCentre = intersect;
+//            circleCentre = intersect;
             if (properAngle > 0)
             {
                 if (worldAngleTwo >= 0)
@@ -289,9 +289,9 @@ public class ArcFunctions  {
 
         if (LineLineIntersection(out intersect, startPosition, startInsideNormal * 100000, endPosition, endInsideNormal * 100000))
         {
-            circleCentre = intersect;
+//            circleCentre = intersect;
         }
-        radius = Vector3.Distance(circleCentre, startPosition);
+        //radius = Vector3.Distance(circleCentre, startPosition);
 
         return convertetAngle;
     }
@@ -300,55 +300,55 @@ public class ArcFunctions  {
     {
         //Vector3 currentNormal;
         Vector3 toEndNormal;
-        Vector3 toStartNormal;
+//        Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
         //Vector3 startPoint;
         //Vector3 endPoint;
-        Vector3 anglePoint;
+//        Vector3 anglePoint;
         Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
         float radius;
         float angle = 0;
         float properAngle = 0;
-        float angleToStart;
+//        float angleToStart;
         //float angleToEnd;
-        float worldAngle;
-        float worldAngleTwo;
+//        float worldAngle;
+//        float worldAngleTwo;
 
         toEndNormal = Vector3.Normalize(endPosition - startPosition);
         properAngle = AngleHalf(startNormal, toEndNormal, Vector3.up);
-        worldAngle = Vector3.Angle(Vector3.forward, startNormal);
-        worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
+        //worldAngle = Vector3.Angle(Vector3.forward, startNormal);
+        //worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
 
         if (properAngle > 0)
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+          //  anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * startNormal;
-            angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
         }
         else
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+            //anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, -angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * startNormal;
-            angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
         }
         if (LineLineIntersection(out intersect, startPosition, startInsideNormal * 100000, endPosition, endInsideNormal * 100000))
         {
@@ -363,55 +363,55 @@ public class ArcFunctions  {
     {
         //Vector3 currentNormal;
         Vector3 toEndNormal;
-        Vector3 toStartNormal;
+//        Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
         //Vector3 startPoint;
         //Vector3 endPoint;
-        Vector3 anglePoint;
+//        Vector3 anglePoint;
         Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
         float radius;
         float angle = 0;
         float properAngle = 0;
-        float angleToStart;
+//        float angleToStart;
         //float angleToEnd;
-        float worldAngle;
-        float worldAngleTwo;
+//        float worldAngle;
+//        float worldAngleTwo;
 
         toEndNormal = Vector3.Normalize(endPosition - startPosition);
         properAngle = AngleHalf(startNormal, toEndNormal, Vector3.up);
-        worldAngle = Vector3.Angle(Vector3.forward, startNormal);
-        worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
+        //worldAngle = Vector3.Angle(Vector3.forward, startNormal);
+        //worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
 
         if (properAngle > 0)
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+          //  anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * startNormal;
-            angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
         }
         else
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+            //anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, -angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * startNormal;
-            angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
         }
         if (LineLineIntersection(out intersect, startPosition, startInsideNormal * 100000, endPosition, endInsideNormal * 100000))
         {
@@ -426,55 +426,55 @@ public class ArcFunctions  {
     {
         //Vector3 currentNormal;
         Vector3 toEndNormal;
-        Vector3 toStartNormal;
+//        Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
         //Vector3 startPoint;
         //Vector3 endPoint;
-        Vector3 anglePoint;
+//        Vector3 anglePoint;
         Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
         float radius;
         float angle = 0;
         float properAngle = 0;
-        float angleToStart;
+//        float angleToStart;
         //float angleToEnd;
-        float worldAngle;
-        float worldAngleTwo;
+//        float worldAngle;
+//        float worldAngleTwo;
 
         toEndNormal = Vector3.Normalize(endPosition - startPosition);
         properAngle = AngleHalf(startNormal, toEndNormal, Vector3.up);
-        worldAngle = Vector3.Angle(Vector3.forward, startNormal);
-        worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
+        //worldAngle = Vector3.Angle(Vector3.forward, startNormal);
+        //worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
 
         if (properAngle > 0)
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+          //  anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * startNormal;
-            angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
         }
         else
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+            //anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, -angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * startNormal;
-            angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
         }
         if (LineLineIntersection(out intersect, startPosition, startInsideNormal * 100000, endPosition, endInsideNormal * 100000))
         {
@@ -488,7 +488,7 @@ public class ArcFunctions  {
         Vector3 norm1 = Vector3.Normalize(startPosition - circleCentre);
         Vector3 norm2 = Vector3.Normalize(endPosition - circleCentre);
 
-        float circumference = 2 * radius * Mathf.PI;
+//        float circumference = 2 * radius * Mathf.PI;
         float arcAngle = AngleFull(norm1, norm2, Vector3.up) * Mathf.Deg2Rad;
         if(properAngle < 0)
         {
@@ -496,7 +496,7 @@ public class ArcFunctions  {
             
         }
 
-        float num1 = arcAngle * circumference;
+//        float num1 = arcAngle * circumference;
 
         float length = 0;
         if (LineLineIntersection(out intersect, startPosition, startInsideNormal * 100000, endPosition, endInsideNormal * 100000))
@@ -514,59 +514,59 @@ public class ArcFunctions  {
     public static float ArcAngle(Vector3 startPosition, Vector3 startNormal, Vector3 endPosition)
     {
         Vector3 toEndNormal;
-        Vector3 toStartNormal;
+//        Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
-        Vector3 anglePoint;
+//        Vector3 anglePoint;
         Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
-        float radius;
+//        float radius;
         float angle = 0;
         float properAngle = 0;
-        float angleToStart;
+//        float angleToStart;
         //float angleToEnd;
-        float worldAngle;
-        float worldAngleTwo;
+//        float worldAngle;
+//        float worldAngleTwo;
 
         toEndNormal = Vector3.Normalize(endPosition - startPosition);
         properAngle = AngleHalf(startNormal, toEndNormal, Vector3.up);
-        worldAngle = Vector3.Angle(Vector3.forward, startNormal);
-        worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
+        //worldAngle = Vector3.Angle(Vector3.forward, startNormal);
+        //worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
 
         if (properAngle > 0)
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+          //  anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * startNormal;
-            angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
         }
         else
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+            //anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, -angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * startNormal;
-            angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
         }
         if (LineLineIntersection(out intersect, startPosition, startInsideNormal * 100000, endPosition, endInsideNormal * 100000))
         {
             circleCentre = intersect;
         }
-        radius = Vector3.Distance(circleCentre, startPosition);
+        //radius = Vector3.Distance(circleCentre, startPosition);
 
         Vector3 norm1 = Vector3.Normalize(startPosition - circleCentre);
         Vector3 norm2 = Vector3.Normalize(endPosition - circleCentre);
@@ -579,54 +579,54 @@ public class ArcFunctions  {
     {
 
         Vector3 toEndNormal;
-        Vector3 toStartNormal;
+//        Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
-        Vector3 anglePoint;
+//        Vector3 anglePoint;
         Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
         float radius;
         float angle = 0;
         float properAngle = 0;
-        float angleToStart;
+//        float angleToStart;
         //float angleToEnd;
-        float worldAngle;
-        float worldAngleTwo;
+//        float worldAngle;
+//        float worldAngleTwo;
         float distanceFromArc = 0;
 
         toEndNormal = Vector3.Normalize(endPosition - startPosition);
         properAngle = AngleHalf(startNormal, toEndNormal, Vector3.up);
-        worldAngle = Vector3.Angle(Vector3.forward, startNormal);
-        worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
+        //worldAngle = Vector3.Angle(Vector3.forward, startNormal);
+        //worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
 
         if (properAngle > 0)
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+          //  anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+//            toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * startNormal;
-            angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
         }
         else
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+            //anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+   //         toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, -angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * startNormal;
-            angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
+//            angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
         }
 
 
@@ -704,11 +704,11 @@ public class ArcFunctions  {
     {
 
         Vector3 toEndNormal;
-        Vector3 toStartNormal;
+//        Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
-        Vector3 anglePoint;
+//        Vector3 anglePoint;
         Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
         float radius;
@@ -717,20 +717,20 @@ public class ArcFunctions  {
         float angleToStart;
         //float angleToEnd;
         float worldAngle;
-        float worldAngleTwo;
-        float distanceFromArc = 0;
+//        float worldAngleTwo;
+//        float distanceFromArc = 0;
 
         toEndNormal = Vector3.Normalize(endPosition - startPosition);
         properAngle = AngleHalf(startNormal, toEndNormal, Vector3.up);
         worldAngle = Vector3.Angle(Vector3.forward, startNormal);
-        worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
+//        worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
 
         if (properAngle > 0)
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+  //          anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+    //        toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, angle, 0)) * -toEndNormal;
@@ -741,10 +741,10 @@ public class ArcFunctions  {
         }
         else
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+//            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+  //          toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, -angle, 0)) * -toEndNormal;
@@ -784,7 +784,7 @@ public class ArcFunctions  {
 
             
             float arcLength = ArcLength(startPosition, startNormal, endPosition);
-            float arcAngle = ArcAngle(startPosition, startNormal, endPosition);
+//            float arcAngle = ArcAngle(startPosition, startNormal, endPosition);
 
             distFromEndOne =  Mathf.Abs(angleToFirst - angleToMouse) * (arcLength);
             endOnePos = startPosition;
@@ -815,7 +815,7 @@ public class ArcFunctions  {
         }
         
 
-        distanceFromArc = Mathf.Abs(radius - Vector3.Distance(circleCentre, mousePosition));
+//        distanceFromArc = Mathf.Abs(radius - Vector3.Distance(circleCentre, mousePosition));
 
         //distance = distanceFromArc;
 
@@ -866,54 +866,54 @@ public class ArcFunctions  {
     {
 
         Vector3 toEndNormal;
-        Vector3 toStartNormal;
+//        Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
-        Vector3 anglePoint;
+//        Vector3 anglePoint;
         Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
         float radius;
         float angle = 0;
         float properAngle = 0;
-        float angleToStart;
+//        float angleToStart;
         //float angleToEnd;
-        float worldAngle;
-        float worldAngleTwo;
+//        float worldAngle;
+//        float worldAngleTwo;
         //float distanceFromArc = 0;
 
         toEndNormal = Vector3.Normalize(endPosition - startPosition);
         properAngle = AngleHalf(startNormal, toEndNormal, Vector3.up);
-        worldAngle = Vector3.Angle(Vector3.forward, startNormal);
-        worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
+        //worldAngle = Vector3.Angle(Vector3.forward, startNormal);
+        //worldAngleTwo = AngleHalf(Vector3.forward, startNormal, Vector3.up);
 
         if (properAngle > 0)
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+            //anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * startNormal;
-            angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(startInsideNormal, endInsideNormal, Vector3.up);
         }
         else
         {
-            anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
+            //anglePoint = startNormal * (Vector3.Distance(startPosition, endPosition) * 0.5f);
 
 
-            toStartNormal = Vector3.Normalize(startPosition - endPosition);
+            //toStartNormal = Vector3.Normalize(startPosition - endPosition);
             angle = Vector3.Angle(startNormal, toEndNormal);
 
             endNormal = Quaternion.Euler(new Vector3(0, -angle, 0)) * -toEndNormal;
 
             endInsideNormal = Quaternion.Euler(new Vector3(0, 90, 0)) * endNormal;
             startInsideNormal = Quaternion.Euler(new Vector3(0, -90, 0)) * startNormal;
-            angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
+            //angleToStart = AngleFull(endInsideNormal, startInsideNormal, Vector3.up);
         }
         if (LineLineIntersection(out intersect, startPosition, startInsideNormal * 100000, endPosition, endInsideNormal * 100000))
         {

@@ -32,6 +32,11 @@ ModelImporter:
     100048: WindowSill
     100050: Floor
     100052: Pillow
+    100054: FoodThing003
+    100056: FoodThing2
+    100058: Large
+    100060: Small1
+    100062: Small2
     400000: Box002
     400002: Ceiling
     400004: Door101
@@ -59,6 +64,11 @@ ModelImporter:
     400048: WindowSill
     400050: Floor
     400052: Pillow
+    400054: FoodThing003
+    400056: FoodThing2
+    400058: Large
+    400060: Small1
+    400062: Small2
     2300000: Box002
     2300002: Ceiling
     2300004: Door101
@@ -85,6 +95,11 @@ ModelImporter:
     2300046: WindowSill
     2300048: Floor
     2300050: Pillow
+    2300052: FoodThing003
+    2300054: FoodThing2
+    2300056: Large
+    2300058: Small1
+    2300060: Small2
     3300000: Box002
     3300002: Ceiling
     3300004: Door101
@@ -111,6 +126,11 @@ ModelImporter:
     3300046: WindowSill
     3300048: Floor
     3300050: Pillow
+    3300052: FoodThing003
+    3300054: FoodThing2
+    3300056: Large
+    3300058: Small1
+    3300060: Small2
     4300000: Door101
     4300002: Plane001
     4300004: Plane002
@@ -137,6 +157,11 @@ ModelImporter:
     4300046: WindowSill
     4300048: Floor
     4300050: Pillow
+    4300052: Large
+    4300054: Small1
+    4300056: Small2
+    4300058: FoodThing2
+    4300060: FoodThing003
   materials:
     importMaterials: 1
     materialName: 0

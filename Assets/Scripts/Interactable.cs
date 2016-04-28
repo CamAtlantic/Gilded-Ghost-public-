@@ -8,7 +8,7 @@ public class Interactable : MonoBehaviour {
 
     public virtual void Awake()
     {
-        tag = "Interactable";
+       tag = "Interactable";
 
        player = GameObject.Find("Player");
     }
