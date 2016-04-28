@@ -29,11 +29,11 @@ GameObject:
   - 114: {fileID: 11418046}
   - 54: {fileID: 5433708}
   - 82: {fileID: 8253840}
-  - 114: {fileID: 11419936}
   - 114: {fileID: 11421954}
+  - 114: {fileID: 11419936}
   - 114: {fileID: 11427912}
   m_Layer: 2
-  m_Name: FPSController
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -356,6 +356,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
