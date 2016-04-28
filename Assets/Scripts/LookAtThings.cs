@@ -39,7 +39,7 @@ public class LookAtThings : MonoBehaviour {
 
         for (int i = 0; i < handles.Count; i++)
         {
-            GameObject handleTarget = handles[i].handleTarget;
+            //GameObject handleTarget = handles[i].handleTarget;
            if(RectTransformUtility.RectangleContainsScreenPoint(handles[i].dotRect,screenCenter,mainCamera))
             {
                 print(handles[i].handleTarget.name);

@@ -5,14 +5,14 @@ public class ArcFunctions  {
 
 	public static Vector3 ArcNormalised(out ArcData data, Vector3 startPosition, Vector3 startNormal, Vector3 endPosition, float t)
     {
-        Vector3 currentNormal;
+        //Vector3 currentNormal;
         Vector3 toEndNormal;
         Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
-        Vector3 startPoint;
-        Vector3 endPoint;
+        //Vector3 startPoint;
+        //Vector3 endPoint;
         Vector3 anglePoint;
         Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
@@ -20,7 +20,7 @@ public class ArcFunctions  {
         float angle = 0;
         float properAngle = 0;
         float angleToStart;
-        float angleToEnd;
+        //float angleToEnd;
         float worldAngle;
         float worldAngleTwo;
 
@@ -130,14 +130,14 @@ public class ArcFunctions  {
 
     public static Vector3 ArcEndNormal(Vector3 startPosition, Vector3 startNormal, Vector3 endPosition)
     {
-        Vector3 currentNormal;
+        //Vector3 currentNormal;
         Vector3 toEndNormal;
         Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
-        Vector3 startPoint;
-        Vector3 endPoint;
+        //Vector3 startPoint;
+        //Vector3 endPoint;
         Vector3 anglePoint;
         Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
@@ -145,7 +145,7 @@ public class ArcFunctions  {
         float angle = 0;
         float properAngle = 0;
         float angleToStart;
-        float angleToEnd;
+        //float angleToEnd;
         float worldAngle;
         float worldAngleTwo;
 
@@ -298,14 +298,14 @@ public class ArcFunctions  {
 
     public static float ArcRadius(Vector3 startPosition, Vector3 startNormal, Vector3 endPosition)
     {
-        Vector3 currentNormal;
+        //Vector3 currentNormal;
         Vector3 toEndNormal;
         Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
-        Vector3 startPoint;
-        Vector3 endPoint;
+        //Vector3 startPoint;
+        //Vector3 endPoint;
         Vector3 anglePoint;
         Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
@@ -313,7 +313,7 @@ public class ArcFunctions  {
         float angle = 0;
         float properAngle = 0;
         float angleToStart;
-        float angleToEnd;
+        //float angleToEnd;
         float worldAngle;
         float worldAngleTwo;
 
@@ -361,14 +361,14 @@ public class ArcFunctions  {
 
     public static float ArcCircumference(Vector3 startPosition, Vector3 startNormal, Vector3 endPosition)
     {
-        Vector3 currentNormal;
+        //Vector3 currentNormal;
         Vector3 toEndNormal;
         Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
-        Vector3 startPoint;
-        Vector3 endPoint;
+        //Vector3 startPoint;
+        //Vector3 endPoint;
         Vector3 anglePoint;
         Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
@@ -376,7 +376,7 @@ public class ArcFunctions  {
         float angle = 0;
         float properAngle = 0;
         float angleToStart;
-        float angleToEnd;
+        //float angleToEnd;
         float worldAngle;
         float worldAngleTwo;
 
@@ -424,14 +424,14 @@ public class ArcFunctions  {
 
     public static float ArcLength(Vector3 startPosition, Vector3 startNormal, Vector3 endPosition)
     {
-        Vector3 currentNormal;
+        //Vector3 currentNormal;
         Vector3 toEndNormal;
         Vector3 toStartNormal;
         Vector3 endNormal;
         Vector3 startInsideNormal;
         Vector3 endInsideNormal;
-        Vector3 startPoint;
-        Vector3 endPoint;
+        //Vector3 startPoint;
+        //Vector3 endPoint;
         Vector3 anglePoint;
         Vector3 circleCentre = Vector3.zero;
         Vector3 intersect = Vector3.zero;
@@ -439,7 +439,7 @@ public class ArcFunctions  {
         float angle = 0;
         float properAngle = 0;
         float angleToStart;
-        float angleToEnd;
+        //float angleToEnd;
         float worldAngle;
         float worldAngleTwo;
 
@@ -525,7 +525,7 @@ public class ArcFunctions  {
         float angle = 0;
         float properAngle = 0;
         float angleToStart;
-        float angleToEnd;
+        //float angleToEnd;
         float worldAngle;
         float worldAngleTwo;
 
@@ -590,7 +590,7 @@ public class ArcFunctions  {
         float angle = 0;
         float properAngle = 0;
         float angleToStart;
-        float angleToEnd;
+        //float angleToEnd;
         float worldAngle;
         float worldAngleTwo;
         float distanceFromArc = 0;
@@ -715,7 +715,7 @@ public class ArcFunctions  {
         float angle = 0;
         float properAngle = 0;
         float angleToStart;
-        float angleToEnd;
+        //float angleToEnd;
         float worldAngle;
         float worldAngleTwo;
         float distanceFromArc = 0;
@@ -877,10 +877,10 @@ public class ArcFunctions  {
         float angle = 0;
         float properAngle = 0;
         float angleToStart;
-        float angleToEnd;
+        //float angleToEnd;
         float worldAngle;
         float worldAngleTwo;
-        float distanceFromArc = 0;
+        //float distanceFromArc = 0;
 
         toEndNormal = Vector3.Normalize(endPosition - startPosition);
         properAngle = AngleHalf(startNormal, toEndNormal, Vector3.up);

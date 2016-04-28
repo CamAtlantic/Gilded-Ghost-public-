@@ -13,9 +13,15 @@ public class SleepingAndWaking : MonoBehaviour{
     public int facingTriggerDegree = 70;
     public float standingSleepingSpeed = 0.2f;
 
+    Vector3 standUpPosition = new Vector3(-0.2f, 0.921f, -0.65f);
+    Vector3 standUpRotation = new Vector3(0, -90, 0);
+
+    Vector3 sleepingPosition = new Vector3(0.82f, 0.75f, -0.67f);
+    Vector3 sleepingRotation = new Vector3(275, 0, 0);
+
     CharacterController controller;
 
-    void Start()
+    void Awake()
     {
         controller = GetComponent<CharacterController>();
     }
@@ -36,10 +42,7 @@ public class SleepingAndWaking : MonoBehaviour{
                 break;
 
             case SleepState.goingUp:
-                player.rotation = Quaternion.Lerp(player.rotation, Quaternion.Euler(new Vector3(0, -90, 0)), standingSleepingSpeed);
-                player.position = Vector3.Lerp(player.position, new Vector3(-0.1f, player.position.y, player.position.z), standingSleepingSpeed);
-
-                if(Quaternion.Angle(player.rotation,Quaternion.Euler(new Vector3(0, -90, 0))) < 1)
+                if(PlayerLerp(player,fpsController,standUpPosition,standUpRotation))
                 {
                     sleepState = SleepState.standing;
                     fpsController.ResetMouseLook();
@@ -52,11 +55,21 @@ public class SleepingAndWaking : MonoBehaviour{
                 break;
 
             case SleepState.goingDown:
+                if (PlayerLerp(player, fpsController, sleepingPosition, sleepingRotation))
+                {
+                    sleepState = SleepState.lyingAwake;
+                    fpsController.ResetMouseLook();
+                }
                 return true;
                 
         }
 
         return false;
+    }
+
+    public void GoToSleep()
+    {
+        sleepState = SleepState.goingDown;
     }
 
     /// <summary>
@@ -68,7 +81,7 @@ public class SleepingAndWaking : MonoBehaviour{
     {
         float leftAngle = ArcFunctions.AngleHalf(Vector3.up, player.transform.forward, Vector3.forward);
         float forwardAngle = ArcFunctions.AngleHalf(Vector3.up, Camera.main.transform.forward, Vector3.left);
-        Debug.Log(leftAngle + " " + forwardAngle);
+        //Debug.Log(leftAngle + " " + forwardAngle);
 
         if ( leftAngle > facingTriggerDegree ||
              forwardAngle < -facingTriggerDegree)
@@ -82,5 +95,18 @@ public class SleepingAndWaking : MonoBehaviour{
 
     }
 
+    private bool PlayerLerp(Transform player, FirstPersonController fpsController, Vector3 targetPosition, Vector3 targetRotation)
+    {
+        player.rotation = Quaternion.Lerp(player.rotation, Quaternion.Euler(targetRotation), standingSleepingSpeed);
+        player.position = Vector3.Lerp(player.position, targetPosition, standingSleepingSpeed);
 
+        if (Quaternion.Angle(player.rotation, Quaternion.Euler(targetRotation)) < 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

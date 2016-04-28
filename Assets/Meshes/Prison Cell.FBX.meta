@@ -30,6 +30,8 @@ ModelImporter:
     100044: Tray
     100046: TraySlot
     100048: WindowSill
+    100050: Floor
+    100052: Pillow
     400000: Box002
     400002: Ceiling
     400004: Door101
@@ -55,6 +57,8 @@ ModelImporter:
     400044: Tray
     400046: TraySlot
     400048: WindowSill
+    400050: Floor
+    400052: Pillow
     2300000: Box002
     2300002: Ceiling
     2300004: Door101
@@ -79,6 +83,8 @@ ModelImporter:
     2300042: Tray
     2300044: TraySlot
     2300046: WindowSill
+    2300048: Floor
+    2300050: Pillow
     3300000: Box002
     3300002: Ceiling
     3300004: Door101
@@ -103,6 +109,8 @@ ModelImporter:
     3300042: Tray
     3300044: TraySlot
     3300046: WindowSill
+    3300048: Floor
+    3300050: Pillow
     4300000: Door101
     4300002: Plane001
     4300004: Plane002
@@ -127,6 +135,8 @@ ModelImporter:
     4300042: Tray
     4300044: FoodThing
     4300046: WindowSill
+    4300048: Floor
+    4300050: Pillow
   materials:
     importMaterials: 1
     materialName: 0

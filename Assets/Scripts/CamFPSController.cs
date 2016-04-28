@@ -8,7 +8,7 @@ public class CamFPSController : MonoBehaviour {
 
     [SerializeField]
     private CamMouseLook mouseLook;
-    private Camera camera;
+    private Camera cam;
 
     [SerializeField]
     private SleepingAndWaking sleepingAndWaking;
@@ -16,8 +16,8 @@ public class CamFPSController : MonoBehaviour {
     private CharacterController charactercontroller;
     // Use this for initialization
     void Start () {
-        camera = Camera.main;
-        mouseLook.Init(transform, camera.transform);
+        cam = Camera.main;
+        mouseLook.Init(transform, cam.transform);
         charactercontroller = GetComponent<CharacterController>();
     }
 	
@@ -71,12 +71,12 @@ public class CamFPSController : MonoBehaviour {
         //{
           //  mouseLook.slow = false;
         //}
-        mouseLook.LookRotation(transform, camera.transform);
+        mouseLook.LookRotation(transform, cam.transform);
 
     }
 
     public void ResetMouseLook()
     {
-        mouseLook.Init(transform, camera.transform);
+        mouseLook.Init(transform, cam.transform);
     }
 }
