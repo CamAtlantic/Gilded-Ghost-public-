@@ -3,10 +3,13 @@ using UnityEngine;
 using System.Collections;
 using UnityStandardAssets.Characters.FirstPerson;
 
-public enum SleepState { sleeping, lyingAwake, goingUp, standing, goingDown };
+public enum SleepState { sleeping, lyingAwake, goingUp, standing, goingDown, dream };
 
 [Serializable]
 public class SleepingAndWaking : MonoBehaviour{
+
+    CharacterController controller;
+    Eyelids eyelids;
 
     public SleepState sleepState;
 
@@ -19,11 +22,10 @@ public class SleepingAndWaking : MonoBehaviour{
     Vector3 sleepingPosition = new Vector3(0.82f, 0.75f, -0.67f);
     Vector3 sleepingRotation = new Vector3(275, 0, 0);
 
-    CharacterController controller;
-
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        eyelids = GameObject.Find("Eyelids").GetComponent<Eyelids>();
     }
 
     public bool UpdateSleepState(Transform player, FirstPersonController fpsController)
@@ -31,10 +33,20 @@ public class SleepingAndWaking : MonoBehaviour{
         switch (sleepState)
         {
             case SleepState.sleeping:
+                eyelids.CloseEyelids();
+
+                if (CheckPlayerFacing(player))
+                {
+                    sleepState = SleepState.goingUp;
+                    eyelids.OpenEyelids();
+                }
+
                 //open eyes, move to lyingAwake
                 break;
 
             case SleepState.lyingAwake:
+                eyelids.OpenEyelids();
+
                 if(CheckPlayerFacing(player))
                 {
                     sleepState = SleepState.goingUp;
@@ -57,10 +69,14 @@ public class SleepingAndWaking : MonoBehaviour{
             case SleepState.goingDown:
                 if (PlayerLerp(player, fpsController, sleepingPosition, sleepingRotation))
                 {
-                    sleepState = SleepState.lyingAwake;
+                    sleepState = SleepState.sleeping;
                     fpsController.ResetMouseLook();
                 }
                 return true;
+
+            case SleepState.dream:
+                Dream();
+                break;
                 
         }
 
@@ -72,6 +88,17 @@ public class SleepingAndWaking : MonoBehaviour{
         sleepState = SleepState.goingDown;
     }
 
+    public void StartDream()
+    {
+        sleepState = SleepState.dream;
+    }
+
+    private void Dream()
+    {
+        print("I had a really nice dream!");
+        sleepState = SleepState.lyingAwake;
+    }
+
     /// <summary>
     /// Returns true if player is facing away from the bed.
     /// </summary>
@@ -81,7 +108,7 @@ public class SleepingAndWaking : MonoBehaviour{
     {
         float leftAngle = ArcFunctions.AngleHalf(Vector3.up, player.transform.forward, Vector3.forward);
         float forwardAngle = ArcFunctions.AngleHalf(Vector3.up, Camera.main.transform.forward, Vector3.left);
-        //Debug.Log(leftAngle + " " + forwardAngle);
+        
 
         if ( leftAngle > facingTriggerDegree ||
              forwardAngle < -facingTriggerDegree)

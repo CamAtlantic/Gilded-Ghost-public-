@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Tray : Interactable {
 
+    Door door;
+
     Vector3 corridorPosition;
     Vector3 insidePosition;
 
@@ -11,6 +13,7 @@ public class Tray : Interactable {
 
 	// Use this for initialization
 	void Start () {
+        door = GameObject.Find("Door").GetComponent<Door>();
         corridorPosition = transform.localPosition;
         insidePosition = new Vector3(corridorPosition.x, corridorPosition.y, 1.5f);
 	}
@@ -43,5 +46,6 @@ public class Tray : Interactable {
     public void PushOutside()
     {
         inside = false;
+        door.CloseTraySlot();
     }
 }

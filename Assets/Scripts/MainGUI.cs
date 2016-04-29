@@ -14,20 +14,6 @@ public class MainGUI : MonoBehaviour {
     RectTransform selectRing_Rect;
     RawImage selectRing_Image;
 
-    GameObject topEyelid;
-    RectTransform topEyelid_Rect;
-    GameObject bottomEyelid;
-    RectTransform bottomEyelid_Rect;
-
-    float normal_Y_TopEyelid;
-    float normal_Y_BottomEyelid;
-    float max_Y_TopEyelid = 1000;
-    float max_Y_BottomEyelid = -1000;
-
-    float progress_TopEyelid;
-    float progress_BottomEyelid;
-
-    public float eyeOpenSpeed = 10;
     [Space(10)]
     [Header("Reticle Controls")]
     private float normalScale_SelectRing = 0.05f;
@@ -41,11 +27,6 @@ public class MainGUI : MonoBehaviour {
 
     private LookingAt reticule = LookingAt.none;
 
-    private bool hasTakenFirstMousePos = false;
-    private Vector2 oldMousePosition;
-
-    public AnimationCurve eyeBlinkCurve;
-
 	// Use this for initialization
 	void Start () {
         interactionScript = GameObject.Find("Player").GetComponent<Interaction>();
@@ -56,28 +37,12 @@ public class MainGUI : MonoBehaviour {
         selector = GameObject.Find("Selector");
         selector_Rect = selector.GetComponent<RectTransform>();
         selector_Image = selector.GetComponent<RawImage>();
-
-        topEyelid = GameObject.Find("TopEyelid");
-        topEyelid_Rect = topEyelid.GetComponent<RectTransform>();
-        bottomEyelid = GameObject.Find("BottomEyelid");
-        bottomEyelid_Rect = bottomEyelid.GetComponent<RectTransform>();
-
-        normal_Y_TopEyelid = topEyelid_Rect.anchoredPosition.y;
-        normal_Y_BottomEyelid= bottomEyelid_Rect.anchoredPosition.y;
-
-        print(normal_Y_BottomEyelid + " " + normal_Y_TopEyelid);
     }
 	
 	// Update is called once per frame
 	void Update () {
         reticule = interactionScript.reticule;
 
-        
-        //janked this need to fix
-        if (Time.timeSinceLevelLoad > 0.1f)
-        OpenEyelids();
-        
-	
         switch (reticule)
         {
             case LookingAt.item:
@@ -104,23 +69,5 @@ public class MainGUI : MonoBehaviour {
 
         selector_Image.color = Color.Lerp(selector_Image.color, newColor, speed_SelectRing);
         selectRing_Image.color = Color.Lerp(selectRing_Image.color, newColor, speed_SelectRing);
-    }
-
-    void OpenEyelids()
-    {
-        if(!hasTakenFirstMousePos)
-        {
-            oldMousePosition = Input.mousePosition;
-            hasTakenFirstMousePos = true;
-        }
-
-        float delta = 0;//Vector2.Distance(oldMousePosition, Input.mousePosition);
-        delta = eyeBlinkCurve.Evaluate(Time.timeSinceLevelLoad);
-
-        topEyelid_Rect.anchoredPosition = new Vector2(topEyelid_Rect.anchoredPosition.x, normal_Y_TopEyelid + delta * 2);
-        bottomEyelid_Rect.anchoredPosition = new Vector2(bottomEyelid_Rect.anchoredPosition.x, normal_Y_BottomEyelid - delta);
-
-        oldMousePosition = Input.mousePosition;
-
     }
 }
