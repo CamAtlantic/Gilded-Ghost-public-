@@ -38,10 +38,7 @@ public class SleepingAndWaking : MonoBehaviour{
                 if (CheckPlayerFacing(player))
                 {
                     sleepState = SleepState.goingUp;
-                    eyelids.OpenEyelids();
                 }
-
-                //open eyes, move to lyingAwake
                 break;
 
             case SleepState.lyingAwake:
@@ -54,7 +51,9 @@ public class SleepingAndWaking : MonoBehaviour{
                 break;
 
             case SleepState.goingUp:
-                if(PlayerLerp(player,fpsController,standUpPosition,standUpRotation))
+                eyelids.OpenEyelids();
+
+                if (PlayerLerp(player,fpsController,standUpPosition,standUpRotation))
                 {
                     sleepState = SleepState.standing;
                     fpsController.ResetMouseLook();
@@ -77,7 +76,6 @@ public class SleepingAndWaking : MonoBehaviour{
             case SleepState.dream:
                 Dream();
                 break;
-                
         }
 
         return false;
@@ -109,17 +107,11 @@ public class SleepingAndWaking : MonoBehaviour{
         float leftAngle = ArcFunctions.AngleHalf(Vector3.up, player.transform.forward, Vector3.forward);
         float forwardAngle = ArcFunctions.AngleHalf(Vector3.up, Camera.main.transform.forward, Vector3.left);
         
-
         if ( leftAngle > facingTriggerDegree ||
              forwardAngle < -facingTriggerDegree)
-        {
             return true;
-        }
         else
-        {
             return false;
-        }
-
     }
 
     private bool PlayerLerp(Transform player, FirstPersonController fpsController, Vector3 targetPosition, Vector3 targetRotation)

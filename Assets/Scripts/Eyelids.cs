@@ -152,7 +152,7 @@ public class Eyelids : MonoBehaviour {
     
     public void CloseEyelids()
     {
-        eye = Lid.closing;
+        eye = Lid.sleepBlink;
     }
 
     void MoveEyelid(RectTransform eyelid_Rect, float moveSpeed)
