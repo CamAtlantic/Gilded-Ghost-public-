@@ -16,6 +16,7 @@ public class Eyelids : MonoBehaviour {
     SleepingAndWaking sleepingScript;
 
     public Lid eye = Lid.opening;
+    private SleepState sleepState;
 
     float normal_Y_TopEyelid;
     float normal_Y_BottomEyelid;
@@ -29,16 +30,15 @@ public class Eyelids : MonoBehaviour {
 
     public float eyeOpenSpeed = 1;
     public float eyeOpenAmount = 10;
-
-    private bool hasTakenFirstMousePos = false;
-    private Vector2 oldMousePosition;
-
+    
     public AnimationCurve blinkCurve;
 
     float blinkTimer = 0;
     public float blinkLength = 0.5f;
 
     public float blurSpeed;
+
+    bool blurIsOn = true;
 
     // Use this for initialization
     void Start () {
@@ -51,12 +51,14 @@ public class Eyelids : MonoBehaviour {
         blur = cam.GetComponent<BlurOptimized>();
         sleepingScript = GameObject.Find("Player").GetComponent<SleepingAndWaking>();
 
+
         normal_Y_TopEyelid = topEyelid_Rect.anchoredPosition.y;
         normal_Y_BottomEyelid = bottomEyelid_Rect.anchoredPosition.y;
     }
 
     // Update is called once per frame
     void Update () {
+        sleepState = sleepingScript.sleepState;
 
         switch(eye)
         {
@@ -80,6 +82,8 @@ public class Eyelids : MonoBehaviour {
                 break;
 
             case Lid.open:
+                if (sleepState == SleepState.sleeping && !blurIsOn)
+                    eye = Lid.sleepBlink;
                 break;
 
             case Lid.sleepBlink:
@@ -88,12 +92,13 @@ public class Eyelids : MonoBehaviour {
                 break;
 
             case Lid.closing:
+                print(progress);
                 if (progress > 0.2f)
                 {
                     MoveEyelid(topEyelid_Rect, -eyeOpenSpeed * 1.5f);
                     MoveEyelid(bottomEyelid_Rect, eyeOpenSpeed);
 
-                    blur.blurSize = progress * blurSpeed;
+                    blur.blurSize = negProgress * blurSpeed;
                 }
                 else
                 {
@@ -103,6 +108,8 @@ public class Eyelids : MonoBehaviour {
                 break;
 
             case Lid.closed:
+                if (sleepState == SleepState.lyingAwake)
+                    eye = Lid.opening;
                 break;
 
         }
@@ -118,10 +125,10 @@ public class Eyelids : MonoBehaviour {
         eye = Lid.opening;
     }
 
-    /// <param name="blurOn">
-    /// True if the blink turns blur on.
+    /// <param name="blurOnOff">
+    /// Values of true/false turn blur on/off, respectively.
     /// </param>
-    bool Blink(bool blurOn)
+    bool Blink(bool blurOnOff)
     {
         float delta = 0;
         delta = blinkCurve.Evaluate((blinkTimer/blinkLength));
@@ -131,14 +138,10 @@ public class Eyelids : MonoBehaviour {
 
         if(blinkTimer/blinkLength> 0.5f)
         {
-            if (blurOn)
-                blur.enabled = true;
-            else
-                blur.enabled = false;
+            blur.enabled = blurOnOff;
+            blurIsOn = blurOnOff;
         }
-
-        //print(blinkTimer / blinkLength);
-
+        
         if (blinkTimer / blinkLength > 1)
         {
             blinkTimer = 0;

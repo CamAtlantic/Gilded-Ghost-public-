@@ -33,7 +33,6 @@ public class SleepingAndWaking : MonoBehaviour{
         switch (sleepState)
         {
             case SleepState.sleeping:
-                eyelids.CloseEyelids();
 
                 if (CheckPlayerFacing(player))
                 {
@@ -42,7 +41,6 @@ public class SleepingAndWaking : MonoBehaviour{
                 break;
 
             case SleepState.lyingAwake:
-                eyelids.OpenEyelids();
 
                 if(CheckPlayerFacing(player))
                 {
@@ -51,7 +49,6 @@ public class SleepingAndWaking : MonoBehaviour{
                 break;
 
             case SleepState.goingUp:
-                eyelids.OpenEyelids();
 
                 if (PlayerLerp(player,fpsController,standUpPosition,standUpRotation))
                 {
