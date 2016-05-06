@@ -82,7 +82,7 @@ public class Eyelids : MonoBehaviour {
                 break;
 
             case Lid.open:
-                if (sleepState == SleepState.sleeping && !blurIsOn)
+                if (sleepState == SleepState.lyingGoingToSleep && !blurIsOn)
                     eye = Lid.sleepBlink;
                 break;
 
@@ -92,7 +92,7 @@ public class Eyelids : MonoBehaviour {
                 break;
 
             case Lid.closing:
-                if(sleepState != SleepState.sleeping)
+                if(sleepState != SleepState.lyingGoingToSleep)
                 {
                     eye = Lid.opening;
                 }
@@ -106,11 +106,16 @@ public class Eyelids : MonoBehaviour {
                 else
                 {
                     eye = Lid.closed;
-                    sleepingScript.StartDream();
+
+                    //CLOSED EYELIDS POINT
+                    //the PC is asleep. I need to send a message out.
+
+                    sleepingScript.Sleep();
                 }
                 break;
 
             case Lid.closed:
+                //this causes it to wait for sleeping script
                 if (sleepState == SleepState.lyingAwake)
                     eye = Lid.opening;
                 break;

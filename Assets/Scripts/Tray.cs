@@ -14,6 +14,8 @@ public class Tray : Interactable {
 
     ItemLocation[] foodSpaces;
 
+    bool hasItemsOnTray = false;
+
     public override void Awake()
     {
         base.Awake();
@@ -34,6 +36,20 @@ public class Tray : Interactable {
 	
 	// Update is called once per frame
 	void Update () {
+        hasItemsOnTray = false;
+        for (int i = 0; i < foodSpaces.Length; i++)
+        {
+            if (foodSpaces[i].itemAtLocation)
+            {
+                hasItemsOnTray = true;
+
+            }
+        }
+
+        if (hasItemsOnTray)
+            gameObject.tag = "Untagged";
+        else
+            gameObject.tag = "Interactable";
 
         if (inside)
         {
@@ -55,17 +71,20 @@ public class Tray : Interactable {
 
     public void PushInside()
     {
-        inside = true;
+        if (inside == false)
+        {
+            inside = true;
 
-        for (int i = 0; i < foodSpaces.Length; i++)
-        {   
-            if (foodSpaces[i].locationSize == Size.large)
+            for (int i = 0; i < foodSpaces.Length; i++)
             {
-                SpawnFood(foodSpaces[i], _menu.mains);
-            }
-            else
-            {
-                SpawnFood(foodSpaces[i], _menu.sides);
+                if (foodSpaces[i].locationSize == Size.large)
+                {
+                    SpawnFood(foodSpaces[i], _menu.mains);
+                }
+                else
+                {
+                    SpawnFood(foodSpaces[i], _menu.sides);
+                }
             }
         }
     }
@@ -73,7 +92,6 @@ public class Tray : Interactable {
     public void PushOutside()
     {
         inside = false;
-        _door.CloseTraySlot();
     }
 
     void SpawnFood(ItemLocation location, GameObject[] mainsOrSides)
@@ -83,5 +101,6 @@ public class Tray : Interactable {
         GameObject temp = Instantiate(mainsOrSides[x]);
         temp.transform.SetParent(location.transform);
         temp.transform.localPosition = location.placedPosition;
+        location.itemAtLocation = temp;
     }
 }

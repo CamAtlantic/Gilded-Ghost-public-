@@ -4,14 +4,14 @@ using System.Collections;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityEngine.SceneManagement;
 
-public enum SleepState { sleeping, lyingAwake, goingUp, standing, goingDown, dream };
+public enum SleepState { lyingGoingToSleep, lyingAwake, goingUp, standing, goingDown, asleep };
 
 [Serializable]
 public class SleepingAndWaking : MonoBehaviour{
-    DreamController _sceneControl;
+    DreamController _dreamController;
     CharacterController _controller;
     Eyelids _eyelids;
-    DreamText _dreamText;
+    
     MainGUI _mainGui;
 
     public SleepState sleepState;
@@ -27,10 +27,9 @@ public class SleepingAndWaking : MonoBehaviour{
 
     void Awake()
     {
-        _sceneControl = GameObject.Find("MainController").GetComponent<DreamController>();
+        _dreamController = GameObject.Find("MainController").GetComponent<DreamController>();
         _controller = GetComponent<CharacterController>();
         _eyelids = GameObject.Find("Eyelids").GetComponent<Eyelids>();
-        _dreamText = GameObject.Find("Dream").GetComponent<DreamText>();
         _mainGui = GameObject.Find("Main GUI").GetComponent<MainGUI>();
     }
 
@@ -38,7 +37,7 @@ public class SleepingAndWaking : MonoBehaviour{
     {
         switch (sleepState)
         {
-            case SleepState.sleeping:
+            case SleepState.lyingGoingToSleep:
 
                 if (CheckPlayerFacing(player))
                 {
@@ -47,7 +46,7 @@ public class SleepingAndWaking : MonoBehaviour{
                 break;
 
             case SleepState.lyingAwake:
-                _sceneControl.SetActiveScene();
+                _dreamController.SetActiveScene();
 
                 if (CheckPlayerFacing(player))
                 {
@@ -76,46 +75,25 @@ public class SleepingAndWaking : MonoBehaviour{
             case SleepState.goingDown:
                 if (PlayerLerp(player, fpsController, sleepingPosition, sleepingRotation))
                 {
-                    sleepState = SleepState.sleeping;
+                    sleepState = SleepState.lyingGoingToSleep;
                     fpsController.ResetMouseLook();
                 }
                 return true;
 
-            case SleepState.dream:
-                Dream();
+            case SleepState.asleep:
+                //wait for a trigger from another script, such as text finishing on DreamController
                 break;
         }
 
         return false;
     }
-    bool dreamHasLoaded = false;
 
     //should probably be its own class as it will need to also return player to sleep
-    private void Dream()
-    {
-        if (!dreamHasLoaded)
-        {
-            _sceneControl.LoadMountainDream();
-
-            dreamHasLoaded = true;
-        }
-        //else
-        {
-          //  _sceneControl.LoadCell();
-           // dreamHasLoaded = false;
-        }
-
-        //needed for mountain dream at least
-        QualitySettings.shadowDistance = 50;
-
-        if (_dreamText.DisplayText())
-            sleepState = SleepState.lyingAwake;
-    }
-
+    
     /// <summary>
     /// public function for triggering SleepState.goingDown.
     /// </summary>
-    public void GoToSleep()
+    public void LieDown()
     {
         sleepState = SleepState.goingDown;
     }
@@ -123,9 +101,19 @@ public class SleepingAndWaking : MonoBehaviour{
     /// <summary>
     /// public function for triggering SleepState.dream.
     /// </summary>
-    public void StartDream()
+    public void Sleep()
     {
-        sleepState = SleepState.dream;
+        sleepState = SleepState.asleep;
+
+        if (_dreamController.loadedScene == Scenes.Cell)
+            _dreamController.StartDream();
+        else
+            _dreamController.EndDream();
+    }
+
+    public void WakeUp()
+    {
+        sleepState = SleepState.lyingAwake;
     }
 
     /// <summary>

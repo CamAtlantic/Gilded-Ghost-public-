@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Door : MonoBehaviour {
 
+    Tray _tray;
+
     Transform traySlot;
     Transform eyeSlot;
 
@@ -23,7 +25,11 @@ public class Door : MonoBehaviour {
     {
         traySlot = transform.FindChild("TraySlot");
         eyeSlot = transform.FindChild("EyeSlot");
+        _tray = GameObject.Find("Tray").GetComponent<Tray>();
+    }
 
+    void Start()
+    {
         trayClosedPosition = traySlot.localPosition;
         trayOpenPosition = new Vector3(trayClosedPosition.x, trayClosedPosition.y, trayClosedPosition.z + 0.5f);
 
@@ -33,11 +39,13 @@ public class Door : MonoBehaviour {
 
     void Update()
     {
-        
         //At the moment these lerps will run all the time
         if (traySlotOpen)
         {
             traySlot.localPosition = Vector3.Lerp(traySlot.localPosition, trayOpenPosition, openCloseSpeed);
+
+            if (!_tray.inside)
+                CloseTraySlot();
         }
         else
         {
