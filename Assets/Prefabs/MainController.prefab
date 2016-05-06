@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 445602}
   - 114: {fileID: 11446628}
+  - 114: {fileID: 11439386}
   m_Layer: 0
   m_Name: MainController
   m_TagString: Untagged
@@ -28,6 +29,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11439386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886d1908dd3387d4593f2924c099a06f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11446628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -39,9 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c50b3895e9b3da1499635a722201a64a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFeedingTime: 0
-  maxFeedingTimer: 10
-  trayPushTime: 1
+  secondsInDay: 300
+  currentSeconds: 0
+  percentageOfDay: 0
+  feedingTime: 0.1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum Size { large, small};
 public class ItemLocation : MonoBehaviour {
 
     public Vector3 placedPosition;
     public GameObject itemAtLocation;
+
+    public Size locationSize = Size.large;
 
     void Awake ()
     {

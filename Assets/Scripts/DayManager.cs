@@ -3,8 +3,8 @@ using System.Collections;
 
 public class DayManager : MonoBehaviour {
 
-    Door doorScript;
-    Tray trayScript;
+    Door _door;
+    Tray _tray;
 
     int dayCount;
     [Space(10)]
@@ -20,14 +20,13 @@ public class DayManager : MonoBehaviour {
     float feedingTimer = 0;
     float maxFeedingTimer = 10;
     float trayPushTime = 1;
-
-    public bool daytimeDebug = false;
-
+    
     // Use this for initialization
     void Start ()
     {
-        doorScript = GameObject.Find("Door").GetComponent<Door>();
-        trayScript = GameObject.Find("Tray").GetComponent<Tray>();
+        //going to need to make sure these don't break when cell is unloaded
+        _door = GameObject.Find("Door").GetComponent<Door>();
+        _tray = GameObject.Find("Tray").GetComponent<Tray>();
     }
 	
 	// Update is called once per frame
@@ -42,30 +41,28 @@ public class DayManager : MonoBehaviour {
         {
             FeedingTime();
         }
-
-        if(daytimeDebug)
-        {
-            if (percentageOfDay > 0.5f)
-                secondsInDay = 10;
-            else
-                secondsInDay = 300;
-        }
     }
-
+    bool foodBeenServed = false;
     void FeedingTime()
     {
+        //this script is a bit shit, it shoudl just bbe a trigger and then it's handled by everything else
         feedingTimer += Time.deltaTime;
 
-        doorScript.OpenEyeSlot();
-        doorScript.OpenTraySlot();
+        _door.OpenEyeSlot();
+        _door.OpenTraySlot();
 
-        trayScript.PushInside();
+        if (feedingTimer > trayPushTime && !foodBeenServed)
+        {
+            foodBeenServed = true;
+            _tray.PushInside();
+        }
 
         if (feedingTimer > maxFeedingTimer)
         {
             feedingTimer = 0;
             hasBeenFed = true;
-            doorScript.CloseEyeSlot();
+            foodBeenServed = false;
+            _door.CloseEyeSlot();
         }
     }
 

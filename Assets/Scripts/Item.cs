@@ -5,6 +5,7 @@ public class Item : MonoBehaviour {
     public enum State{ Held, LerpToLocation, AtLocation }
     State itemState;
 
+    GameObject player;
     public Camera cam;
     Collider collide;
 
@@ -25,7 +26,8 @@ public class Item : MonoBehaviour {
     void Awake()
     {
         tag = "Item";
-        speed = GameObject.Find("Player").GetComponent<PickUpItem>().speed;
+        player = GameObject.Find("Player");
+        
         cam = Camera.main;
         collide = GetComponent<MeshCollider>();
 
@@ -34,8 +36,9 @@ public class Item : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
-	}
+        //if (player != null)
+            speed = player.GetComponent<PickUpItem>().speed;
+    }
 
     // Update is called once per frame
     void Update () {

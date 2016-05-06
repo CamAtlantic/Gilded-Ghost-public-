@@ -10,8 +10,15 @@ public class PickUpItem : MonoBehaviour {
 
     public GameObject heldItem;
     private Item heldItemScript;
+    Needs _needs;
 
     public float speed = 10;
+
+
+    /// <summary>
+    /// this really should be coming from the Item script
+    /// </summary>
+    public float foodHungerValue = 75;
     
     //---------------------------------
     //FUNCTIONS------------------------
@@ -22,8 +29,7 @@ public class PickUpItem : MonoBehaviour {
         heldItem = item;
         heldItemScript = heldItem.GetComponent<Item>();
         heldItemScript.PickUp();
-
-        
+        _needs = GetComponent<Needs>();
     }
 
     public void PutDownOn(GameObject itemLocation)
@@ -39,6 +45,7 @@ public class PickUpItem : MonoBehaviour {
     {
         if (heldItem)
         {
+            _needs.EatFood(foodHungerValue);
             Destroy(heldItem);
             Reset();
         }

@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 491220}
   - 33: {fileID: 3322524}
   - 23: {fileID: 2363408}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: TraySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   - 4: {fileID: 474450}
   - 33: {fileID: 3333622}
   - 23: {fileID: 2303344}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: EyeSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &416800
 Transform:
@@ -124,7 +124,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119334}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: 65788511650e73e4fae8791e80e5d802, type: 2}
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 119334}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e8860f3d51220b439f15ccc23fc0057, type: 3}
+  m_Script: {fileID: 11500000, guid: e139eaddd761918429317f98fa2cdcef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   openCloseSpeed: 0.2

@@ -9,15 +9,17 @@ public class Needs : MonoBehaviour {
     VignetteAndChromaticAberration _chromAb;
     NoiseAndGrain _noiseAndGrain;
 
-    public float hunger = 0;
-    public float hungerThreshold = 60;
+    public float hunger;
+    public float hungerThreshold = 150;
     public float starvingThreshold;
     public float hungerMax;
 
     public bool hungry;
     public bool starving;
 
-    void Start()
+    public float digestionSpeed = 3;
+
+    void Awake()
     {
         _dayManager = GameObject.Find("MainController").GetComponent<DayManager>();
         _camObject = Camera.main.gameObject;
@@ -25,12 +27,23 @@ public class Needs : MonoBehaviour {
         _noiseAndGrain = _camObject.GetComponent<NoiseAndGrain>();
     }
 
-    void Update()
+    void Start()
     {
-        hunger += Time.deltaTime;
         hungerThreshold = _dayManager.secondsInDay * 0.5f;
         hungerMax = hungerThreshold * 10;
         starvingThreshold = hungerThreshold * 2;
+
+        hunger = hungerThreshold * 0.5f;
+    }
+
+    void Update()
+    {
+        hunger += Time.deltaTime;
+        if(valueOfEatenFood > 0)
+        {
+            valueOfEatenFood -= Time.deltaTime * digestionSpeed;
+            hunger -= Time.deltaTime * digestionSpeed;
+        }
 
         float amountPastHungerThreshold = (hunger - hungerThreshold) / (starvingThreshold - hungerThreshold);
         if (amountPastHungerThreshold > 0)
@@ -60,9 +73,16 @@ public class Needs : MonoBehaviour {
             HungerPulse(amountPastStarvingThreshold,5);
     }
 
+    public float valueOfEatenFood = 0;
+    public void EatFood(float value)
+    {
+        valueOfEatenFood += value;
+    }
+
+    //Hunger Pulse----------------------------------------
+
     bool isHungerPulse = false;
     bool isStarvingPulse = false;
-
     public AnimationCurve hungerPulseCurve;
     float pulseTimer = 0;
 

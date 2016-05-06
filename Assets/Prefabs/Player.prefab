@@ -309,6 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heldItem: {fileID: 0}
   speed: 10
+  foodHungerValue: 75
 --- !u!114 &11420530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,7 +327,7 @@ MonoBehaviour:
   whiteIntensity: 1
   midGrey: 0.2
   dx11Grain: 0
-  softness: 0
+  softness: 0.418
   monochrome: 0
   intensities: {x: 1, y: 0.866, z: 0.378}
   tiling: {x: 43, y: 75.8, z: 94.1}
@@ -379,11 +380,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hunger: 0
-  hungerThreshold: 60
+  hungerThreshold: 150
   starvingThreshold: 0
   hungerMax: 0
   hungry: 0
   starving: 0
+  digestionSpeed: 7.5
+  valueOfEatenFood: 0
   hungerPulseCurve:
     serializedVersion: 2
     m_Curve:
@@ -464,7 +467,7 @@ MonoBehaviour:
   focalSize: 0.05
   aperture: 0.5
   focalTransform: {fileID: 0}
-  maxBlurSize: 2
+  maxBlurSize: 1
   highResolution: 0
   blurType: 0
   blurSampleCount: 2
