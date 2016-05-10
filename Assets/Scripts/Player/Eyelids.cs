@@ -93,9 +93,8 @@ public class Eyelids : MonoBehaviour {
 
             case Lid.closing:
                 if(sleepState != SleepState.lyingGoingToSleep)
-                {
                     eye = Lid.opening;
-                }
+
                 if (progress > 0.2f)
                 {
                     MoveEyelid(topEyelid_Rect, -eyeOpenSpeed * 1.5f);

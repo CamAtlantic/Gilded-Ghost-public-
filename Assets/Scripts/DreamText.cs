@@ -34,6 +34,6 @@ public class DreamText : MonoBehaviour {
         displayTimer += Time.deltaTime;
         dreamText.color = new Color(dreamText.color.r, dreamText.color.g, dreamText.color.b, alphaCurve.Evaluate(displayTimer / displayTimerMax));
 
-            return false;
+        return false;
     }
 }

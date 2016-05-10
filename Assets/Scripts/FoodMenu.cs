@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Menu : MonoBehaviour {
+public class FoodMenu : MonoBehaviour {
     [Header("Mains")]
     public GameObject[] mains;
 

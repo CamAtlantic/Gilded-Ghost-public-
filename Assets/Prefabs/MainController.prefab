@@ -40,6 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886d1908dd3387d4593f2924c099a06f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadedScene: 1
 --- !u!114 &11446628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,10 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c50b3895e9b3da1499635a722201a64a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secondsInDay: 300
+  dayLengthSeconds: 300
   currentSeconds: 0
   percentageOfDay: 0
-  feedingTime: 0.1
+  sleepLengthSeconds: 0
+  feedingTime: 0.05
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -19,6 +19,8 @@ public class SleepingAndWaking : MonoBehaviour{
     public int facingTriggerDegree = 70;
     public float standingSleepingSpeed = 0.2f;
 
+
+    Vector3 CellStandUpPosition = new Vector3(-0.2f, 0.921f, -0.65f);
     Vector3 standUpPosition = new Vector3(-0.2f, 0.921f, -0.65f);
     Vector3 standUpRotation = new Vector3(0, -90, 0);
 
@@ -56,11 +58,12 @@ public class SleepingAndWaking : MonoBehaviour{
 
             case SleepState.goingUp:
 
-                if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Mountain Dream"))
+                if (_dreamController.loadedScene != Scenes.Cell)
                     standUpPosition = transform.position;
-                
+                else
+                    standUpPosition = CellStandUpPosition;
 
-                    if (PlayerLerp(player,fpsController,standUpPosition,standUpRotation))
+                if (PlayerLerp(player, fpsController, standUpPosition, standUpRotation))
                 {
                     sleepState = SleepState.standing;
                     fpsController.ResetMouseLook();

@@ -4,7 +4,7 @@ using System.Collections;
 public class Tray : Interactable {
 
     Door _door;
-    Menu _menu;
+    FoodMenu _foodMenu;
 
     Vector3 corridorPosition;
     Vector3 insidePosition;
@@ -20,7 +20,7 @@ public class Tray : Interactable {
     {
         base.Awake();
         _door = GameObject.Find("Door").GetComponent<Door>();
-        _menu = GetComponent<Menu>();
+        _foodMenu = GetComponent<FoodMenu>();
 
         foodSpaces = transform.GetComponentsInChildren<ItemLocation>();
         
@@ -40,10 +40,7 @@ public class Tray : Interactable {
         for (int i = 0; i < foodSpaces.Length; i++)
         {
             if (foodSpaces[i].itemAtLocation)
-            {
                 hasItemsOnTray = true;
-
-            }
         }
 
         if (hasItemsOnTray)
@@ -52,20 +49,14 @@ public class Tray : Interactable {
             gameObject.tag = "Interactable";
 
         if (inside)
-        {
             transform.localPosition = Vector3.Lerp(transform.localPosition, insidePosition, pushSpeed);
-        }
         else
-        {
             transform.localPosition = Vector3.Lerp(transform.localPosition, corridorPosition, pushSpeed);
-        }
-
 	}
 
     public override void InteractTrigger()
     {
         base.InteractTrigger();
-
         PushOutside();
     }
 
@@ -78,13 +69,9 @@ public class Tray : Interactable {
             for (int i = 0; i < foodSpaces.Length; i++)
             {
                 if (foodSpaces[i].locationSize == Size.large)
-                {
-                    SpawnFood(foodSpaces[i], _menu.mains);
-                }
+                    SpawnFood(foodSpaces[i], _foodMenu.mains);
                 else
-                {
-                    SpawnFood(foodSpaces[i], _menu.sides);
-                }
+                    SpawnFood(foodSpaces[i], _foodMenu.sides);
             }
         }
     }
@@ -96,7 +83,7 @@ public class Tray : Interactable {
 
     void SpawnFood(ItemLocation location, GameObject[] mainsOrSides)
     {
-        int x = (int)(Random.value * _menu.sides.Length);
+        int x = (int)(Random.value * _foodMenu.sides.Length);
 
         GameObject temp = Instantiate(mainsOrSides[x]);
         temp.transform.SetParent(location.transform);

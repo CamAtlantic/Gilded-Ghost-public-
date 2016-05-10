@@ -4,7 +4,7 @@ using System.Collections;
 public class Sun : MonoBehaviour
 {
     DayManager _dayManager;
-    private float secondsInDay;
+    DreamController _dreamController;
 
     public Gradient nightDayColor;
 
@@ -32,17 +32,27 @@ public class Sun : MonoBehaviour
     void Start()
     {
         _dayManager = GameObject.Find("MainController").GetComponent<DayManager>();
+        _dreamController = GameObject.Find("MainController").GetComponent<DreamController>();
         mainLight = GetComponent<Light>();
         skyMat = RenderSettings.skybox;
     }
 
     void Update()
     {
-        secondsInDay = _dayManager.secondsInDay;
-        turnSpeed = 360 / secondsInDay * Time.deltaTime;
-        transform.RotateAround(transform.position, transform.right, turnSpeed);
+        if (_dreamController.loadedScene == Scenes.Cell)
+        {
+            turnSpeed = 360 / _dayManager.dayLengthSeconds * Time.deltaTime;
+            transform.RotateAround(transform.position, transform.right, turnSpeed);
 
-        ColorAndIntensity();
+            ColorAndIntensity();
+        }
+
+
+    }
+
+    public void UpdateSunWhileSleeping()
+    {
+        transform.RotateAround(transform.position, transform.right, 360 / _dayManager.dayLengthSeconds * _dayManager.sleepLengthSeconds);
     }
 
     void ColorAndIntensity()

@@ -1,16 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(DreamController))]
 public class DayManager : MonoBehaviour {
+
+    DreamController _dreamController;
 
     Door _door;
     Tray _tray;
 
     int dayCount;
     [Space(10)]
-    public float secondsInDay = 60;
+    public float dayLengthSeconds = 60;
     public float currentSeconds = 0;
     public float percentageOfDay;
+    public float sleepLengthSeconds;
     [Space(10)]
     [Header("Event Trigger Times")]
     public float feedingTime = 0.15f;
@@ -21,27 +25,44 @@ public class DayManager : MonoBehaviour {
     float maxFeedingTimer = 10;
     float trayPushTime = 1;
     
+    void Awake()
+    {
+        _dreamController = GetComponent<DreamController>();
+    }
+    
     // Use this for initialization
     void Start ()
     {
         //going to need to make sure these don't break when cell is unloaded
+        //perhaps it should be on CellManager?
         _door = GameObject.Find("Door").GetComponent<Door>();
         _tray = GameObject.Find("Tray").GetComponent<Tray>();
+
+        sleepLengthSeconds = dayLengthSeconds / 3;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        CheckTime();
-
-        //INPUT
-        if (Input.GetKeyDown(KeyCode.Minus)) secondsInDay *= 2;
-        if (Input.GetKeyDown(KeyCode.Equals)) secondsInDay *= 0.5f;
+        if (_dreamController.loadedScene == Scenes.Cell)
+            UpdateTime();
         
         if(percentageOfDay > feedingTime && !hasBeenFed)
         {
             FeedingTime();
         }
+
+        if (currentSeconds > dayLengthSeconds)
+        {
+            EndOfDay();
+        }
+
+        //HERE IS INPUT
+        #region input
+        if (Input.GetKeyDown(KeyCode.Minus)) dayLengthSeconds *= 2;
+        if (Input.GetKeyDown(KeyCode.Equals)) dayLengthSeconds *= 0.5f;
+        #endregion
     }
+
     bool foodBeenServed = false;
     void FeedingTime()
     {
@@ -66,14 +87,18 @@ public class DayManager : MonoBehaviour {
         }
     }
 
-    void CheckTime()
+    void UpdateTime()
     {
         currentSeconds += Time.deltaTime;
-        percentageOfDay = currentSeconds / secondsInDay;
-        if (currentSeconds > secondsInDay)
-        {
-            EndOfDay();
-        }
+        percentageOfDay = currentSeconds / dayLengthSeconds;
+        
+    }
+
+
+    public void UpdateTimeWhileSleeping()
+    {
+
+        currentSeconds += sleepLengthSeconds;
     }
 
     void EndOfDay()
