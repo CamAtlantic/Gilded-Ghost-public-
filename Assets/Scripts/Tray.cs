@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(FoodMenu))]
 public class Tray : Interactable {
 
-    Door _door;
+//    Door _door;
     FoodMenu _foodMenu;
 
     Vector3 corridorPosition;
@@ -19,11 +20,10 @@ public class Tray : Interactable {
     public override void Awake()
     {
         base.Awake();
-        _door = GameObject.Find("Door").GetComponent<Door>();
+        //_door = GameObject.Find("Door").GetComponent<Door>();
         _foodMenu = GetComponent<FoodMenu>();
 
-        foodSpaces = transform.GetComponentsInChildren<ItemLocation>();
-        
+        foodSpaces = transform.GetComponentsInChildren<ItemLocation>();   
     }
 
 	// Use this for initialization
@@ -31,7 +31,6 @@ public class Tray : Interactable {
         
         corridorPosition = transform.localPosition;
         insidePosition = new Vector3(corridorPosition.x, corridorPosition.y, 1.5f);
-
 	}
 	
 	// Update is called once per frame

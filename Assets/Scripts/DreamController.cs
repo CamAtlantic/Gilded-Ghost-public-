@@ -19,10 +19,10 @@ public class DreamController : MonoBehaviour {
     DayManager _dayManager;
     #endregion
 
-    Scene cell;
+//    Scene cell;
 
     public Scenes loadedScene = Scenes.Cell;
-    bool sceneHasLoaded = false;
+//    bool sceneHasLoaded = false;
 
     void Awake()
     {
@@ -32,7 +32,7 @@ public class DreamController : MonoBehaviour {
         _dayManager = GetComponent<DayManager>();
 
         LoadScene(Scenes.Cell);
-        cell = SceneManager.GetSceneAt(1);
+        //cell = SceneManager.GetSceneAt(1);
     }
 
 	// Use this for initialization

@@ -6,7 +6,7 @@ public class SetSunLight : MonoBehaviour
 
     //public Renderer lightwall;
 
-    Material sky;
+//    Material sky;
 
     //public Renderer water;
 
@@ -17,7 +17,7 @@ public class SetSunLight : MonoBehaviour
     void Start()
     {
 
-        sky = RenderSettings.skybox;
+       // sky = RenderSettings.skybox;
 
     }
 

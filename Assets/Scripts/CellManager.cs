@@ -7,16 +7,16 @@ public class CellManager : MonoBehaviour {
     //Holds all data pertaining to the Cell
     //which is to be persistent.
 
-    Sun _sun;
-    Tray _tray;
-    ItemLocation[] itemLocations;
+    //Sun _sun;
+    //Tray _tray;
+    //ItemLocation[] itemLocations;
 
 
     void Awake()
     { 
-        _sun = GameObject.Find("Sun").GetComponent<Sun>();
-        _tray = GameObject.Find("Tray").GetComponent<Tray>();
-        itemLocations = FindObjectsOfType<ItemLocation>();
+      //  _sun = GameObject.Find("Sun").GetComponent<Sun>();
+       // _tray = GameObject.Find("Tray").GetComponent<Tray>();
+       // itemLocations = FindObjectsOfType<ItemLocation>();
     }
 
     /// <summary>

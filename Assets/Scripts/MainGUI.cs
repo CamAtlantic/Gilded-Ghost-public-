@@ -7,7 +7,7 @@ public class MainGUI : MonoBehaviour {
     Interaction interactionScript;
 
     GameObject selector;
-    RectTransform selector_Rect;
+//    RectTransform selector_Rect;
     RawImage selector_Image;
 
     GameObject selectRing;
@@ -35,7 +35,7 @@ public class MainGUI : MonoBehaviour {
         selectRing_Rect = selectRing.GetComponent<RectTransform>();
         selectRing_Image = selectRing.GetComponent<RawImage>();
         selector = GameObject.Find("Selector");
-        selector_Rect = selector.GetComponent<RectTransform>();
+        //selector_Rect = selector.GetComponent<RectTransform>();
         selector_Image = selector.GetComponent<RawImage>();
     }
 	
@@ -54,7 +54,18 @@ public class MainGUI : MonoBehaviour {
                 break;
 
             case LookingAt.interactable:
-                SelectRingLerp(bigScale_SelectRing, interactable_Color);
+
+                //expandable to any interactable but only for trunk lid right now
+                #region chooseColorFromObject
+                Color tempColor = interactable_Color;
+                if (interactionScript.objectHit)
+                {
+                    if (interactionScript.objectHit.GetComponent<TrunkLid>())
+                        tempColor = interactionScript.objectHit.GetComponent<Interactable>().guiColor;
+                }
+                #endregion
+
+                SelectRingLerp(bigScale_SelectRing, tempColor);
                 break;
 
             case LookingAt.none:

@@ -5,7 +5,6 @@ using System.Collections;
 public class DayManager : MonoBehaviour {
 
     DreamController _dreamController;
-
     Door _door;
     Tray _tray;
 
@@ -33,8 +32,6 @@ public class DayManager : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        //going to need to make sure these don't break when cell is unloaded
-        //perhaps it should be on CellManager?
         _door = GameObject.Find("Door").GetComponent<Door>();
         _tray = GameObject.Find("Tray").GetComponent<Tray>();
 

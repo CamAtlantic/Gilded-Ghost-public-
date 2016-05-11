@@ -16,23 +16,25 @@ public class Interaction : MonoBehaviour
     //------------------------------------------------
 
     Camera cam;
-    MainGUI mainGUI;
+//    MainGUI mainGUI;
     PickUpItem pickUpScript;
-    Door doorScript;
+    //Door doorScript;
 
-    Transform objectHit;
+    public Transform objectHit;
 
     public LookingAt reticule = LookingAt.none;
 
     public LayerMask noItem_LayerMask;
     public LayerMask item_LayerMask;
 
+    public float interactDist;
+
     void Start()
     {
         cam = Camera.main;
-        mainGUI = GameObject.Find("Main GUI").GetComponent<MainGUI>();
+       // mainGUI = GameObject.Find("Main GUI").GetComponent<MainGUI>();
         pickUpScript = GetComponent<PickUpItem>();
-        doorScript = GameObject.Find("Door").GetComponent<Door>();
+        //doorScript = GameObject.Find("Door").GetComponent<Door>();
     }
     
     void Update()
@@ -53,7 +55,7 @@ public class Interaction : MonoBehaviour
             layerMask = item_LayerMask;
         }
         
-        if (Physics.Raycast(ray, out hit, 500,layerMask))
+        if (Physics.Raycast(ray, out hit, interactDist,layerMask))
         {
             objectHit = hit.transform;
             reticule = LookingAt.none;

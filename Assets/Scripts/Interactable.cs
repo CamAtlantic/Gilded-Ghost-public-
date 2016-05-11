@@ -5,6 +5,7 @@ public class Interactable : MonoBehaviour {
 
     [HideInInspector]
     public GameObject player;
+    public Color guiColor;
 
     public virtual void Awake()
     {

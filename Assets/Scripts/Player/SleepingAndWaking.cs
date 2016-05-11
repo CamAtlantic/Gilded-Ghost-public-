@@ -10,9 +10,9 @@ public enum SleepState { lyingGoingToSleep, lyingAwake, goingUp, standing, going
 public class SleepingAndWaking : MonoBehaviour{
     DreamController _dreamController;
     CharacterController _controller;
-    Eyelids _eyelids;
+//    Eyelids _eyelids;
     
-    MainGUI _mainGui;
+//    MainGUI _mainGui;
 
     public SleepState sleepState;
 
@@ -31,8 +31,8 @@ public class SleepingAndWaking : MonoBehaviour{
     {
         _dreamController = GameObject.Find("MainController").GetComponent<DreamController>();
         _controller = GetComponent<CharacterController>();
-        _eyelids = GameObject.Find("Eyelids").GetComponent<Eyelids>();
-        _mainGui = GameObject.Find("Main GUI").GetComponent<MainGUI>();
+       // _eyelids = GameObject.Find("Eyelids").GetComponent<Eyelids>();
+       // _mainGui = GameObject.Find("Main GUI").GetComponent<MainGUI>();
     }
 
     public bool UpdateSleepState(Transform player, FirstPersonController fpsController)
@@ -94,7 +94,7 @@ public class SleepingAndWaking : MonoBehaviour{
     //should probably be its own class as it will need to also return player to sleep
     
     /// <summary>
-    /// public function for triggering SleepState.goingDown.
+    /// public function for sending the player to sleep.
     /// </summary>
     public void LieDown()
     {
@@ -102,7 +102,7 @@ public class SleepingAndWaking : MonoBehaviour{
     }
 
     /// <summary>
-    /// public function for triggering SleepState.dream.
+    /// public function for triggering dreams on eye close.
     /// </summary>
     public void Sleep()
     {

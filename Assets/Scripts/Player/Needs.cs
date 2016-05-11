@@ -46,25 +46,19 @@ public class Needs : MonoBehaviour {
 
             if (valueOfEatenFood > 0)
             {
-                valueOfEatenFood -= Time.deltaTime * digestionSpeed;
-                hunger -= Time.deltaTime * digestionSpeed;
+                float amount = Time.deltaTime * digestionSpeed;
+                valueOfEatenFood -= amount;
+                hunger -= amount;
             }
 
             float amountPastHungerThreshold = (hunger - hungryThreshold) / (starvingThreshold - hungryThreshold);
-
             if (amountPastHungerThreshold > 0)
             {
                 hungry = true;
                 _noiseAndGrain.intensityMultiplier = amountPastHungerThreshold * 10;
                 _noiseAndGrain.generalIntensity = amountPastHungerThreshold;
-
-                float rnd = Random.value;
-                if (rnd < 0.001f)
-                    if (!starving)
-                        isHungerPulse = true;
-                    else
-                        isStarvingPulse = true;
             }
+            else hungry = false;
 
             float amountPastStarvingThreshold = (hunger - starvingThreshold) / (hungerMax - starvingThreshold);
             if (amountPastStarvingThreshold > 0)
@@ -72,11 +66,25 @@ public class Needs : MonoBehaviour {
                 starving = true;
                 _chromAb.chromaticAberration = amountPastStarvingThreshold * 150;
             }
+            else
+            {
+                starving = false;
+                _chromAb.chromaticAberration = Mathf.Lerp(_chromAb.chromaticAberration, 0, 0.2f);
+            }
+
+            #region Hunger Pulse
+            float rnd = Random.value;
+            if (rnd < 0.001f)
+                if (!starving)
+                    isHungerPulse = true;
+                else
+                    isStarvingPulse = true;
 
             if (isHungerPulse)
                 HungerPulse(amountPastHungerThreshold, 10);
             if (isStarvingPulse)
                 HungerPulse(amountPastStarvingThreshold, 5);
+            #endregion
         }
     }
 
@@ -104,10 +112,12 @@ public class Needs : MonoBehaviour {
         if (curveEvaluation < baseAmount)
             curveEvaluation = baseAmount;
 
-        _noiseAndGrain.intensityMultiplier = curveEvaluation * 10;
-        _noiseAndGrain.generalIntensity = curveEvaluation;
-
-        if(starving)
+        if (!starving)
+        {
+            _noiseAndGrain.intensityMultiplier = curveEvaluation * 10;
+            _noiseAndGrain.generalIntensity = curveEvaluation;
+        }
+        else
             _chromAb.chromaticAberration = curveEvaluation * 50;
 
         if (pulseTimer > pulseTimerMax)
@@ -116,6 +126,7 @@ public class Needs : MonoBehaviour {
             isHungerPulse = false;
             isStarvingPulse = false;
         }
+
         pulseTimer += Time.deltaTime;
     }
 }
