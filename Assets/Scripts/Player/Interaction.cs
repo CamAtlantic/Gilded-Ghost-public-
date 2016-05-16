@@ -16,9 +16,7 @@ public class Interaction : MonoBehaviour
     //------------------------------------------------
 
     Camera cam;
-//    MainGUI mainGUI;
     PickUpItem pickUpScript;
-    //Door doorScript;
 
     public Transform objectHit;
 
@@ -32,9 +30,7 @@ public class Interaction : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-       // mainGUI = GameObject.Find("Main GUI").GetComponent<MainGUI>();
         pickUpScript = GetComponent<PickUpItem>();
-        //doorScript = GameObject.Find("Door").GetComponent<Door>();
     }
     
     void Update()
@@ -55,31 +51,33 @@ public class Interaction : MonoBehaviour
             layerMask = item_LayerMask;
         }
         
-        if (Physics.Raycast(ray, out hit, interactDist,layerMask))
+        if (Physics.Raycast(ray, out hit, 10,layerMask))
         {
             objectHit = hit.transform;
             reticule = LookingAt.none;
-
-            //Identify type of object------------------------
-
-            //interactable is less important than location.
-            //It should be overwritten by location if both are true
-            if (objectHit.CompareTag("Interactable"))
+            if (Vector3.Distance(cam.transform.position, objectHit.transform.position) < interactDist)
             {
-                reticule = LookingAt.interactable;
-            }
+                //Identify type of object------------------------
 
-            //if not holding item, looking at item is valid
-            if (!pickUpScript.heldItem && objectHit.CompareTag("Item"))
-            {
-                //playerFPS.mouseLookSlow = true;
-                reticule = LookingAt.item;
-            }
+                //interactable is less important than location.
+                //It should be overwritten by location if both are true
+                if (objectHit.CompareTag("Interactable"))
+                {
+                    reticule = LookingAt.interactable;
+                }
 
-            //if holding item, looking at location is valid
-            if (pickUpScript.heldItem && objectHit.CompareTag("ItemLocation"))
-            {
-                reticule = LookingAt.itemLocation;
+                //if not holding item, looking at item is valid
+                if (!pickUpScript.heldItem && objectHit.CompareTag("Item"))
+                {
+                    //playerFPS.mouseLookSlow = true;
+                    reticule = LookingAt.item;
+                }
+
+                //if holding item, looking at location is valid
+                if (pickUpScript.heldItem && objectHit.CompareTag("ItemLocation"))
+                {
+                    reticule = LookingAt.itemLocation;
+                }
             }
 
             GetInput();
@@ -93,7 +91,7 @@ public class Interaction : MonoBehaviour
         {
             // Do something with the object that was hit by the raycast.
 
-            //Should I change item and itemLocation to also have InteractTrigger() functions.
+            //Should I change item and itemLocation to also have InteractTrigger() functions?
 
             if (reticule == LookingAt.item)
             {

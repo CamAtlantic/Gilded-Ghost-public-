@@ -19,13 +19,15 @@ public class SleepingAndWaking : MonoBehaviour{
     public int facingTriggerDegree = 70;
     public float standingSleepingSpeed = 0.2f;
 
+    
+    
 
-    Vector3 CellStandUpPosition = new Vector3(-0.2f, 0.921f, -0.65f);
-    Vector3 standUpPosition = new Vector3(-0.2f, 0.921f, -0.65f);
-    Vector3 standUpRotation = new Vector3(0, -90, 0);
+    
 
-    Vector3 sleepingPosition = new Vector3(0.82f, 0.75f, -0.67f);
-    Vector3 sleepingRotation = new Vector3(275, 0, 0);
+    Transform cellSleepTransform;
+    Transform cellStandingTransform;
+
+    Transform mountainStandingTransform;
 
     void Awake()
     {
@@ -33,6 +35,12 @@ public class SleepingAndWaking : MonoBehaviour{
         _controller = GetComponent<CharacterController>();
        // _eyelids = GameObject.Find("Eyelids").GetComponent<Eyelids>();
        // _mainGui = GameObject.Find("Main GUI").GetComponent<MainGUI>();
+    }
+
+    void Start()
+    {
+        cellSleepTransform = GameObject.Find("CellSleepTransform").transform;
+        cellStandingTransform = GameObject.Find("CellStandingTransform").transform;
     }
 
     public bool UpdateSleepState(Transform player, FirstPersonController fpsController)
@@ -57,11 +65,24 @@ public class SleepingAndWaking : MonoBehaviour{
                 break;
 
             case SleepState.goingUp:
+                Vector3 standUpPosition;
+                Vector3 standUpRotation;
 
-                if (_dreamController.loadedScene != Scenes.Cell)
-                    standUpPosition = transform.position;
+                if (_dreamController.loadedScene == Scenes.Cell)
+                {
+                    standUpPosition = cellStandingTransform.position;
+                    standUpRotation = cellStandingTransform.rotation.eulerAngles;
+                }
+                else if (_dreamController.loadedScene == Scenes.Mountain)
+                {
+                    standUpPosition = mountainStandingTransform.position;
+                    standUpRotation = mountainStandingTransform.rotation.eulerAngles;
+                }
                 else
-                    standUpPosition = CellStandUpPosition;
+                {
+                    standUpPosition = transform.position;
+                    standUpRotation = Vector3.zero;
+                }
 
                 if (PlayerLerp(player, fpsController, standUpPosition, standUpRotation))
                 {
@@ -76,6 +97,19 @@ public class SleepingAndWaking : MonoBehaviour{
                 break;
 
             case SleepState.goingDown:
+                Vector3 sleepingPosition;
+                Vector3 sleepingRotation;
+                if (_dreamController.loadedScene == Scenes.Cell)
+                {
+                    sleepingPosition = cellSleepTransform.position;
+                    sleepingRotation = cellSleepTransform.rotation.eulerAngles;
+                }
+                else
+                {
+                    sleepingPosition = transform.position;
+                    sleepingRotation = Vector3.right * 275;
+                }
+
                 if (PlayerLerp(player, fpsController, sleepingPosition, sleepingRotation))
                 {
                     sleepState = SleepState.lyingGoingToSleep;
@@ -90,8 +124,6 @@ public class SleepingAndWaking : MonoBehaviour{
 
         return false;
     }
-
-    //should probably be its own class as it will need to also return player to sleep
     
     /// <summary>
     /// public function for sending the player to sleep.
@@ -117,6 +149,13 @@ public class SleepingAndWaking : MonoBehaviour{
     public void WakeUp()
     {
         sleepState = SleepState.lyingAwake;
+        if (_dreamController.loadedScene == Scenes.Mountain)
+            mountainStandingTransform = GameObject.Find("MountainStandingTransform").transform;
+    }
+
+    public void ResetPosition()
+    {
+        transform.position = cellSleepTransform.position;
     }
 
     /// <summary>

@@ -10,7 +10,7 @@ Material:
   m_Shader: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 5
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 1000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -106,7 +106,7 @@ Material:
       data:
         first:
           name: _AtmosphereThickness
-        second: 1.18
+        second: 0.96661276
       data:
         first:
           name: _Parallax
@@ -143,6 +143,18 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: _SkyExponent1
+        second: 2
+      data:
+        first:
+          name: _SkyIntensity
+        second: 1.16
+      data:
+        first:
+          name: _SunIntensity
+        second: 10
     m_Colors:
       data:
         first:
@@ -160,3 +172,19 @@ Material:
         first:
           name: _GroundColor
         second: {r: 0, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _SkyColor1
+        second: {r: 0.36999997, g: 0.52, b: 0.73, a: 0}
+      data:
+        first:
+          name: _SkyColor2
+        second: {r: 0.89, g: 0.96, b: 1, a: 0}
+      data:
+        first:
+          name: _MoonVector
+        second: {r: 0.269, g: 0.615, b: 0.74, a: 0}
+      data:
+        first:
+          name: _SunColor
+        second: {r: 1, g: 0.98999995, b: 0.87, a: 1}

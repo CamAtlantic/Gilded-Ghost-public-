@@ -66,10 +66,12 @@ public class MainGUI : MonoBehaviour {
                 #endregion
 
                 SelectRingLerp(bigScale_SelectRing, tempColor);
+                
                 break;
 
             case LookingAt.none:
                 SelectRingLerp(normalScale_SelectRing, normal_Color);
+                
                 break;
         }
 	}

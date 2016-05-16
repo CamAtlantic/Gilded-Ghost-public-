@@ -13,6 +13,7 @@ public class Eyelids : MonoBehaviour {
 
     Camera cam;
     BlurOptimized blur;
+
     SleepingAndWaking sleepingScript;
 
     public Lid eye = Lid.opening;
@@ -49,6 +50,7 @@ public class Eyelids : MonoBehaviour {
 
         cam = Camera.main;
         blur = cam.GetComponent<BlurOptimized>();
+        
         sleepingScript = GameObject.Find("Player").GetComponent<SleepingAndWaking>();
 
 

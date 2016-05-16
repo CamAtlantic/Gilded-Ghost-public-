@@ -118,6 +118,7 @@ public class Needs : MonoBehaviour {
             _noiseAndGrain.generalIntensity = curveEvaluation;
         }
         else
+            //this is why there are hunger pulse bugs, because its lowest number is 50x the base amount
             _chromAb.chromaticAberration = curveEvaluation * 50;
 
         if (pulseTimer > pulseTimerMax)
@@ -129,4 +130,10 @@ public class Needs : MonoBehaviour {
 
         pulseTimer += Time.deltaTime;
     }
+
+    public void ToggleHungerEffects(bool onOff)
+    {
+        _chromAb.enabled = _noiseAndGrain.enabled = onOff;
+    }
+
 }

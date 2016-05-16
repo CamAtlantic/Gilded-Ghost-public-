@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6450346147770b2429cf4cd7766575e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectHit: {fileID: 0}
   reticule: 0
   noItem_LayerMask:
     serializedVersion: 2
@@ -368,7 +369,7 @@ MonoBehaviour:
   item_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967291
-  interactDist: 0.5
+  interactDist: 3
 --- !u!114 &11431206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -531,9 +532,9 @@ CharacterController:
   m_Enabled: 0
   serializedVersion: 2
   m_Height: 1.8
-  m_Radius: 0.4
-  m_SlopeLimit: 45
-  m_StepOffset: 0.05
+  m_Radius: 0.25
+  m_SlopeLimit: 90
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}

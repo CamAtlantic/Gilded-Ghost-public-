@@ -45,6 +45,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [HideInInspector] public bool mouseLookSlow = false;
 
         SleepingAndWaking m_SleepingAndWaking;
+        DreamController m_DreamController;
 
         // Use this for initialization
         private void Start()
@@ -63,6 +64,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			m_MouseLook.Init(transform , m_Camera.transform);
 
             m_SleepingAndWaking = GetComponent<SleepingAndWaking>();
+            m_DreamController = GameObject.Find("MainController").GetComponent<DreamController>();
         }
 
 
@@ -104,6 +106,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MouseLook.Init(transform, m_Camera.transform);
         }
 
+        public void SetWalkSpeed(float newWalkSpeed)
+        {
+            m_WalkSpeed = newWalkSpeed;
+        }
 
         private void PlayLandingSound()
         {
@@ -235,7 +241,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #if !MOBILE_INPUT
             // On standalone builds, walk/run speed is modified by a key press.
             // keep track of whether or not the character is walking or running
-            m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+            if (m_DreamController.loadedScene != Scenes.Cell)
+                m_IsWalking = !Input.GetKey(KeyCode.LeftShift);
+            else
+                m_IsWalking = true;
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
