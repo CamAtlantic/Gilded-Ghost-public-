@@ -7,7 +7,7 @@ public enum SleepState { lyingGoingToSleep, lyingAwake, goingUp, standing, going
 
 [Serializable]
 public class SleepingAndWaking : MonoBehaviour{
-    DreamController _dreamController;
+    DreamController r_dreamController;
     CharacterController _controller;
 
     public SleepState sleepState;
@@ -22,7 +22,7 @@ public class SleepingAndWaking : MonoBehaviour{
 
     void Awake()
     {
-        _dreamController = GameObject.Find("MainController").GetComponent<DreamController>();
+        r_dreamController = GameObject.Find("MainController").GetComponent<DreamController>();
         _controller = GetComponent<CharacterController>();
     }
 
@@ -38,14 +38,14 @@ public class SleepingAndWaking : MonoBehaviour{
         {
             case SleepState.lyingGoingToSleep:
 
-                if (CheckPlayerFacing(player))
+                if (r_dreamController.loadedScene == Scenes.Cell && CheckPlayerFacing(player) )
                 {
                     sleepState = SleepState.goingUp;
                 }
                 break;
 
             case SleepState.lyingAwake:
-                _dreamController.SetActiveScene();
+                r_dreamController.SetActiveScene();
 
                 if (CheckPlayerFacing(player))
                 {
@@ -57,12 +57,12 @@ public class SleepingAndWaking : MonoBehaviour{
                 Vector3 standUpPosition;
                 Vector3 standUpRotation;
 
-                if (_dreamController.loadedScene == Scenes.Cell)
+                if (r_dreamController.loadedScene == Scenes.Cell)
                 {
                     standUpPosition = cellStandingTransform.position;
                     standUpRotation = cellStandingTransform.rotation.eulerAngles;
                 }
-                else if (_dreamController.loadedScene == Scenes.Mountain)
+                else if (r_dreamController.loadedScene == Scenes.Mountain)
                 {
                     standUpPosition = mountainStandingTransform.position;
                     standUpRotation = mountainStandingTransform.rotation.eulerAngles;
@@ -88,7 +88,7 @@ public class SleepingAndWaking : MonoBehaviour{
             case SleepState.goingDown:
                 Vector3 sleepingPosition;
                 Vector3 sleepingRotation;
-                if (_dreamController.loadedScene == Scenes.Cell)
+                if (r_dreamController.loadedScene == Scenes.Cell)
                 {
                     sleepingPosition = cellSleepTransform.position;
                     sleepingRotation = cellSleepTransform.rotation.eulerAngles;
@@ -129,19 +129,18 @@ public class SleepingAndWaking : MonoBehaviour{
     {
         sleepState = SleepState.asleep;
 
-        if (_dreamController.loadedScene == Scenes.Cell)
-            _dreamController.StartDream();
+        if (r_dreamController.loadedScene == Scenes.Cell)
+            r_dreamController.StartDream();
         else
-            _dreamController.EndDream();
+            r_dreamController.EndDream();
     }
 
     public void WakeUp()
     {
         sleepState = SleepState.lyingAwake;
-        if (_dreamController.loadedScene == Scenes.Mountain)
+        if (r_dreamController.loadedScene == Scenes.Mountain)
         {
             mountainStandingTransform = GameObject.Find("MountainStandingTransform").transform;
-          //  print(mountainStandingTransform.position);
            SetPosition(mountainStandingTransform);
         }
     }

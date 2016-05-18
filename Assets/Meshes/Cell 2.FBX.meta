@@ -46,6 +46,19 @@ ModelImporter:
     100076: TrunkLid
     100078: Water
     100080: WindowSill
+    100082: Antenna
+    100084: AntennaRail
+    100086: AntennaVanes
+    100088: Box001
+    100090: Box002
+    100092: Box003
+    100094: buildingFront
+    100096: buildingRight
+    100098: Leaf
+    100100: Plant
+    100102: Posts
+    100104: Railing
+    100106: Tower
     400000: Bars
     400002: Bed
     400004: Cell
@@ -87,6 +100,19 @@ ModelImporter:
     400076: TrunkLid
     400078: Water
     400080: WindowSill
+    400082: Antenna
+    400084: AntennaRail
+    400086: AntennaVanes
+    400088: Box001
+    400090: Box002
+    400092: Box003
+    400094: buildingFront
+    400096: buildingRight
+    400098: Leaf
+    400100: Plant
+    400102: Posts
+    400104: Railing
+    400106: Tower
     2300000: Bars
     2300002: Bed
     2300004: Cell
@@ -128,6 +154,19 @@ ModelImporter:
     2300076: Water
     2300078: WindowSill
     2300080: //RootNode
+    2300082: Antenna
+    2300084: AntennaRail
+    2300086: AntennaVanes
+    2300088: Box001
+    2300090: Box002
+    2300092: Box003
+    2300094: buildingFront
+    2300096: buildingRight
+    2300098: Leaf
+    2300100: Plant
+    2300102: Posts
+    2300104: Railing
+    2300106: Tower
     3300000: Bars
     3300002: Bed
     3300004: Cell
@@ -169,6 +208,19 @@ ModelImporter:
     3300076: Water
     3300078: WindowSill
     3300080: //RootNode
+    3300082: Antenna
+    3300084: AntennaRail
+    3300086: AntennaVanes
+    3300088: Box001
+    3300090: Box002
+    3300092: Box003
+    3300094: buildingFront
+    3300096: buildingRight
+    3300098: Leaf
+    3300100: Plant
+    3300102: Posts
+    3300104: Railing
+    3300106: Tower
     4300000: Tray
     4300002: Main
     4300004: Side
@@ -209,6 +261,19 @@ ModelImporter:
     4300074: Location03
     4300076: Location
     4300078: Water
+    4300080: buildingRight
+    4300082: buildingFront
+    4300084: Box001
+    4300086: Box002
+    4300088: Box003
+    4300090: Tower
+    4300092: Railing
+    4300094: Posts
+    4300096: Antenna
+    4300098: AntennaRail
+    4300100: AntennaVanes
+    4300102: Plant
+    4300104: Leaf
   materials:
     importMaterials: 1
     materialName: 0

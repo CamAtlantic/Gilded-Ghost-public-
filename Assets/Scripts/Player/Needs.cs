@@ -73,12 +73,15 @@ public class Needs : MonoBehaviour {
             }
 
             #region Hunger Pulse
-            float rnd = Random.value;
-            if (rnd < 0.001f)
-                if (!starving)
-                    isHungerPulse = true;
-                else
-                    isStarvingPulse = true;
+            if (hungry || starving)
+            {
+                float rnd = Random.value;
+                if (rnd < 0.001f)
+                    if (!starving)
+                        isHungerPulse = true;
+                    else
+                        isStarvingPulse = true;
+            }
 
             if (isHungerPulse)
                 HungerPulse(amountPastHungerThreshold, 10);

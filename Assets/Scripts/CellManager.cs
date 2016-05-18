@@ -4,19 +4,23 @@ using System.Collections.Generic;
 
 public class CellManager : MonoBehaviour {
 
-    //Holds all data pertaining to the Cell
-    //which is to be persistent.
+    public GameObject plantPrefab;
 
-    //Sun _sun;
-    //Tray _tray;
-    //ItemLocation[] itemLocations;
-
+    bool plantHasSpawned = false;
 
     void Awake()
     { 
-      //  _sun = GameObject.Find("Sun").GetComponent<Sun>();
-       // _tray = GameObject.Find("Tray").GetComponent<Tray>();
-       // itemLocations = FindObjectsOfType<ItemLocation>();
+   
+    }
+
+    public void SpawnPlant()
+    {
+        if(!plantHasSpawned)
+        {
+            GameObject plant;
+            plant = Instantiate(plantPrefab);
+            plant.transform.SetParent(GameObject.Find("Cell").transform);
+        }
     }
 
     /// <summary>
