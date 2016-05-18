@@ -2,7 +2,6 @@
 using UnityEngine;
 using System.Collections;
 using UnityStandardAssets.Characters.FirstPerson;
-using UnityEngine.SceneManagement;
 
 public enum SleepState { lyingGoingToSleep, lyingAwake, goingUp, standing, goingDown, asleep };
 
@@ -10,19 +9,11 @@ public enum SleepState { lyingGoingToSleep, lyingAwake, goingUp, standing, going
 public class SleepingAndWaking : MonoBehaviour{
     DreamController _dreamController;
     CharacterController _controller;
-//    Eyelids _eyelids;
-    
-//    MainGUI _mainGui;
 
     public SleepState sleepState;
 
     public int facingTriggerDegree = 70;
     public float standingSleepingSpeed = 0.2f;
-
-    
-    
-
-    
 
     Transform cellSleepTransform;
     Transform cellStandingTransform;
@@ -33,8 +24,6 @@ public class SleepingAndWaking : MonoBehaviour{
     {
         _dreamController = GameObject.Find("MainController").GetComponent<DreamController>();
         _controller = GetComponent<CharacterController>();
-       // _eyelids = GameObject.Find("Eyelids").GetComponent<Eyelids>();
-       // _mainGui = GameObject.Find("Main GUI").GetComponent<MainGUI>();
     }
 
     void Start()
@@ -150,12 +139,16 @@ public class SleepingAndWaking : MonoBehaviour{
     {
         sleepState = SleepState.lyingAwake;
         if (_dreamController.loadedScene == Scenes.Mountain)
+        {
             mountainStandingTransform = GameObject.Find("MountainStandingTransform").transform;
+          //  print(mountainStandingTransform.position);
+           SetPosition(mountainStandingTransform);
+        }
     }
 
-    public void ResetPosition()
+    public void SetPosition(Transform newTransform)
     {
-        transform.position = cellSleepTransform.position;
+        transform.position = newTransform.position;
     }
 
     /// <summary>

@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -1433,6 +1433,34 @@ Prefab:
     - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
       propertyPath: nightDayFogColor.key3.rgba
       value: 12379370
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
+      propertyPath: nightDayColor.key5.rgba
+      value: 14348031
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
+      propertyPath: nightDayColor.ctime5
+      value: 51272
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
+      propertyPath: nightDayColor.ctime3
+      value: 20624
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
+      propertyPath: nightDayColor.key3.rgba
+      value: 8113149
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
+      propertyPath: nightDayColor.key4.rgba
+      value: 14348031
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
+      propertyPath: nightDayColor.ctime4
+      value: 51272
+      objectReference: {fileID: 0}
+    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
+      propertyPath: nightDayColor.m_NumColorKeys
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}

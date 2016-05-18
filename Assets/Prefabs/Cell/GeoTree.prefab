@@ -15,7 +15,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &186208
 GameObject:
@@ -28,11 +28,11 @@ GameObject:
   - 33: {fileID: 3351878}
   - 23: {fileID: 2335010}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Leaves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &427002
 Transform:
@@ -52,9 +52,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127398}
-  m_LocalRotation: {x: 0.6250653, y: 0.33059675, z: 0.3305975, w: -0.62506354}
-  m_LocalPosition: {x: -17.562601, y: -4.69, z: -31.615162}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.015999688, y: -0.22249417, z: 0.8430239, w: -0.48943964}
+  m_LocalPosition: {x: -18.165, y: 16.485006, z: 1.9300025}
+  m_LocalScale: {x: 0.50000024, y: 0.50000024, z: 0.49999988}
   m_Children:
   - {fileID: 427002}
   m_Father: {fileID: 0}
@@ -69,7 +69,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 421dac5e2a7f53344b105caf59b59291, type: 2}
+  - {fileID: 2100000, guid: 5ba8ccf5fb35e2743b25193fdc730039, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -95,7 +95,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 8e99fff1be09d3b469f9006e8412f34f, type: 2}
+  - {fileID: 2100000, guid: 01dad1237a6823041b06dc5bf90ee9b0, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1

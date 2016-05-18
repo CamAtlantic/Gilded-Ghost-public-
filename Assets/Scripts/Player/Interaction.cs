@@ -51,7 +51,7 @@ public class Interaction : MonoBehaviour
             layerMask = item_LayerMask;
         }
         
-        if (Physics.Raycast(ray, out hit, 10,layerMask))
+        if (Physics.Raycast(ray, out hit, 100,layerMask))
         {
             objectHit = hit.transform;
             reticule = LookingAt.none;

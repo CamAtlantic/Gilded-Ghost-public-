@@ -20,18 +20,22 @@ public class DreamController : MonoBehaviour {
     DayManager _dayManager;
     GameObject player;
     FirstPersonController _FPSController;
+    CamBackgroundColor m_CamBackground;
+    Transform cellSleepingTransform;
+    Transform mountainTransform;
     #endregion
 
     public Scenes loadedScene = Scenes.Cell;
 
     void Awake()
     {
-        _dreamText = GameObject.Find("Dream Canvas").GetComponent<DreamText>();
-        _sleepingAndWaking = GameObject.Find("Player").GetComponent<SleepingAndWaking>();
-        _needs = GameObject.Find("Player").GetComponent<Needs>();
-        _dayManager = GetComponent<DayManager>();
         player = GameObject.Find("Player");
+        _sleepingAndWaking = player.GetComponent<SleepingAndWaking>();
+        _needs = player.GetComponent<Needs>();
         _FPSController = player.GetComponent<FirstPersonController>();
+        _dreamText = GameObject.Find("Dream Canvas").GetComponent<DreamText>();
+        _dayManager = GetComponent<DayManager>();
+        m_CamBackground = Camera.main.gameObject.GetComponent<CamBackgroundColor>();
         LoadScene(Scenes.Cell);
     }
 
@@ -39,6 +43,7 @@ public class DreamController : MonoBehaviour {
 	void Start () {
         _sun = GameObject.Find("Sun").GetComponent<Sun>();
         _cellManager = GameObject.Find("CellManager").GetComponent<CellManager>();
+        cellSleepingTransform = GameObject.Find("CellSleepTransform").transform;
         SetActiveScene();
     }
 	
@@ -65,8 +70,13 @@ public class DreamController : MonoBehaviour {
         _dayManager.UpdateTimeWhileSleeping();
 
         //Determines which dream to start, then starts it.
+        //this section is only for the mountain
         LoadScene(Scenes.Mountain);
+        Color dreamSkyColor;
+        ColorUtility.TryParseHtmlString("#CDA393FF", out dreamSkyColor);
+        m_CamBackground.SetBackgroundColor(dreamSkyColor);
 
+        //_sleepingAndWaking.SetPosition(mountainTransform);
         _needs.ToggleHungerEffects(false);
         _cellManager.ShowHideCell(false);
         QualitySettings.shadowDistance = 50;
@@ -75,10 +85,14 @@ public class DreamController : MonoBehaviour {
     
     public void EndDream()
     {
-        _sleepingAndWaking.ResetPosition();
+        
+
         Unload();
         loadedScene = Scenes.Cell;
 
+        m_CamBackground.SetSkyBox();
+
+        _sleepingAndWaking.SetPosition(cellSleepingTransform);
         _needs.ToggleHungerEffects(true);
         _cellManager.ShowHideCell(true);
         QualitySettings.shadowDistance = 10;

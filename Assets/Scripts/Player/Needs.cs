@@ -35,7 +35,7 @@ public class Needs : MonoBehaviour {
         hungerMax = hungryThreshold * 10;
         starvingThreshold = hungryThreshold * 2;
 
-        hunger = hungryThreshold * 0.5f;
+        //hunger = hungryThreshold * 0.5f;
     }
 
     void Update()

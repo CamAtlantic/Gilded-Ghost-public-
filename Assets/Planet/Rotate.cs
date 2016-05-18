@@ -2,14 +2,13 @@
 using System.Collections;
 
 public class Rotate : MonoBehaviour {
-    //public float amplitudeX = 10.0f;
+
     public float amplitudeY = 5.0f;
-    //public float omegaX = 1.0f;
     public float omegaY = 5.0f;
     public float index;
 
     public float speed = 0.1f;
-
+    public Vector3 angle;
     float startHeight;
 
 	// Use this for initialization
@@ -19,7 +18,7 @@ public class Rotate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(0, speed, 0);
+        transform.Rotate(angle * speed);
 
         index += Time.deltaTime;
 
