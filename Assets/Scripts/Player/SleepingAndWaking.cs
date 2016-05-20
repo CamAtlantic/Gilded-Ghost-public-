@@ -18,7 +18,7 @@ public class SleepingAndWaking : MonoBehaviour{
     Transform cellSleepTransform;
     Transform cellStandingTransform;
 
-    Transform mountainStandingTransform;
+    Transform dreamTransform;
 
     void Awake()
     {
@@ -62,10 +62,10 @@ public class SleepingAndWaking : MonoBehaviour{
                     standUpPosition = cellStandingTransform.position;
                     standUpRotation = cellStandingTransform.rotation.eulerAngles;
                 }
-                else if (r_dreamController.loadedScene == Scenes.Mountain)
+                else if (r_dreamController.loadedScene != Scenes.Cell)
                 {
-                    standUpPosition = mountainStandingTransform.position;
-                    standUpRotation = mountainStandingTransform.rotation.eulerAngles;
+                    standUpPosition = dreamTransform.position;
+                    standUpRotation = dreamTransform.rotation.eulerAngles;
                 }
                 else
                 {
@@ -140,8 +140,13 @@ public class SleepingAndWaking : MonoBehaviour{
         sleepState = SleepState.lyingAwake;
         if (r_dreamController.loadedScene == Scenes.Mountain)
         {
-            mountainStandingTransform = GameObject.Find("MountainStandingTransform").transform;
-           SetPosition(mountainStandingTransform);
+           dreamTransform = GameObject.Find("MountainStandingTransform").transform;
+           SetPosition(dreamTransform);
+        }
+        else if(r_dreamController.loadedScene == Scenes.Columns)
+        {
+            dreamTransform = GameObject.Find("ColumnStandingTransform").transform;
+            SetPosition(dreamTransform);
         }
     }
 

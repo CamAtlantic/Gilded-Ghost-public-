@@ -62,7 +62,9 @@ public class Item : MonoBehaviour {
 
     public void PickUp()
     {
-        transform.parent.GetComponent<ItemLocation>().Reset();
+        if (transform.parent && transform.parent.GetComponent<ItemLocation>())
+            transform.parent.GetComponent<ItemLocation>().Reset();
+
         transform.parent = cam.transform;
         itemState = State.Held;
         collide.enabled = false;

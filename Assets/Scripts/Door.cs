@@ -31,10 +31,10 @@ public class Door : MonoBehaviour {
     void Start()
     {
         trayClosedPosition = traySlot.localPosition;
-        trayOpenPosition = new Vector3(trayClosedPosition.x, trayClosedPosition.y, trayClosedPosition.z + 15);
+        trayOpenPosition = new Vector3(trayClosedPosition.x, trayClosedPosition.y, trayClosedPosition.z + 0.25f);
 
         eyeClosedPosition = eyeSlot.localPosition;
-        eyeOpenPosition = new Vector3(eyeClosedPosition.x - 50, eyeClosedPosition.y, eyeClosedPosition.z);
+        eyeOpenPosition = new Vector3(eyeClosedPosition.x - 0.5f, eyeClosedPosition.y, eyeClosedPosition.z);
     }
 
     void Update()

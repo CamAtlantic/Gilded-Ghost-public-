@@ -18,10 +18,5 @@ public class Interactable : MonoBehaviour {
     {
         //do something when clicked on
     }
-
-    public virtual void Update()
-    {
-
-    }
-
+    
 }

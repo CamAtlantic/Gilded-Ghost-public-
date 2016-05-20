@@ -6,14 +6,11 @@ public class CamBackgroundColor : MonoBehaviour {
     public Gradient gradient;
 
     private Camera cam;
-    DayManager _dayManager;
-    DreamController _dreamController;
+
 
     void Awake()
     {
         cam = GetComponent<Camera>();
-        _dayManager = GameObject.Find("MainController").GetComponent<DayManager>();
-        _dreamController = _dayManager.gameObject.GetComponent<DreamController>();
     }
     
 	// Update is called once per frame

@@ -4,7 +4,6 @@ using System.Collections;
 [RequireComponent(typeof(FoodMenu))]
 public class Tray : Interactable {
 
-//    Door _door;
     FoodMenu _foodMenu;
 
     Vector3 corridorPosition;
@@ -20,7 +19,6 @@ public class Tray : Interactable {
     public override void Awake()
     {
         base.Awake();
-        //_door = GameObject.Find("Door").GetComponent<Door>();
         _foodMenu = GetComponent<FoodMenu>();
 
         foodSpaces = transform.GetComponentsInChildren<ItemLocation>();   
@@ -85,7 +83,7 @@ public class Tray : Interactable {
         int x = (int)(Random.value * _foodMenu.sides.Length);
 
         GameObject temp = Instantiate(mainsOrSides[x]);
-        temp.transform.SetParent(location.transform);
+        location.ReceiveItem(temp);
         temp.transform.localPosition = location.placedPosition;
         location.itemAtLocation = temp;
     }

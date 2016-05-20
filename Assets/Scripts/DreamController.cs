@@ -6,7 +6,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 /// <summary>
 /// DO NOT choose System. That's a bad one.
 /// </summary>
-public enum Scenes { System,Cell,Mountain};
+public enum Scenes { System,Cell,Mountain,Columns};
 //Make sure this enum has the scenes listed in the correct order.
 
 public class DreamController : MonoBehaviour {
@@ -24,6 +24,25 @@ public class DreamController : MonoBehaviour {
     Transform cellSleepingTransform;
     Transform mountainTransform;
     #endregion
+
+    #region Dream Variables
+    [Header("Mountain")]
+    public bool mountain_door = false;
+    /// <summary>
+    /// Triggered when player chooses the plant in the mountain dream.
+    /// </summary>
+    public bool mountain_plant = false;
+    [Header("Columns")]
+    public bool columns_water = false;
+    public bool columns_orb = false;
+    [Header("Fire")]
+    public bool fire_fire = false;
+    public bool fire_altar = false;
+    [Space(10)]
+    #endregion
+
+    public Color mountainSkyColor;
+    public Color columnSkyColor;
 
     public Scenes loadedScene = Scenes.Cell;
 
@@ -55,7 +74,7 @@ public class DreamController : MonoBehaviour {
 
         if (_sleepingAndWaking.sleepState == SleepState.asleep)
         {
-            if (loadedScene == Scenes.Mountain && _dreamText.DisplayText())
+            if (loadedScene != Scenes.Cell && _dreamText.DisplayText())
                 _sleepingAndWaking.WakeUp();
 
             if (loadedScene == Scenes.Cell)
@@ -70,13 +89,17 @@ public class DreamController : MonoBehaviour {
         _dayManager.UpdateTimeWhileSleeping();
 
         //Determines which dream to start, then starts it.
-        //this section is only for the mountain
-        LoadScene(Scenes.Mountain);
-        Color dreamSkyColor;
-        ColorUtility.TryParseHtmlString("#CDA393FF", out dreamSkyColor);
-        m_CamBackground.SetBackgroundColor(dreamSkyColor);
+        if (!mountain_door && !mountain_plant)
+        {
+            LoadScene(Scenes.Mountain);
+            m_CamBackground.SetBackgroundColor(mountainSkyColor);
+        }
+        else
+        {
+            LoadScene(Scenes.Columns);
+            m_CamBackground.SetBackgroundColor(columnSkyColor);
+        }
 
-        //_sleepingAndWaking.SetPosition(mountainTransform);
         _needs.ToggleHungerEffects(false);
         _cellManager.ShowHideCell(false);
         QualitySettings.shadowDistance = 50;
@@ -85,8 +108,6 @@ public class DreamController : MonoBehaviour {
     
     public void EndDream()
     {
-        
-
         Unload();
         loadedScene = Scenes.Cell;
 
@@ -97,8 +118,6 @@ public class DreamController : MonoBehaviour {
         _cellManager.ShowHideCell(true);
         QualitySettings.shadowDistance = 10;
         _FPSController.SetWalkSpeed(1);
-
-        
     }
     
     private void LoadScene(Scenes scene)

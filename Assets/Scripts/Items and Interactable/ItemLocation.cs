@@ -23,6 +23,7 @@ public class ItemLocation : MonoBehaviour {
     public void ReceiveItem(GameObject item)
     {
         itemAtLocation = item;
+        item.transform.SetParent(transform);
         gameObject.layer = 2; //ignore raycast layer
     }
 

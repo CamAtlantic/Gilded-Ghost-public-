@@ -59,6 +59,7 @@ ModelImporter:
     100102: Posts
     100104: Railing
     100106: Tower
+    100108: WallChunk
     400000: Bars
     400002: Bed
     400004: Cell
@@ -113,6 +114,7 @@ ModelImporter:
     400102: Posts
     400104: Railing
     400106: Tower
+    400108: WallChunk
     2300000: Bars
     2300002: Bed
     2300004: Cell
@@ -167,6 +169,7 @@ ModelImporter:
     2300102: Posts
     2300104: Railing
     2300106: Tower
+    2300108: WallChunk
     3300000: Bars
     3300002: Bed
     3300004: Cell
@@ -221,6 +224,7 @@ ModelImporter:
     3300102: Posts
     3300104: Railing
     3300106: Tower
+    3300108: WallChunk
     4300000: Tray
     4300002: Main
     4300004: Side
@@ -274,6 +278,7 @@ ModelImporter:
     4300100: AntennaVanes
     4300102: Plant
     4300104: Leaf
+    4300106: WallChunk
   materials:
     importMaterials: 1
     materialName: 0
