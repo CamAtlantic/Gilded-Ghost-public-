@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class MainGUI : MonoBehaviour {
 
     Interaction interactionScript;
+    DreamController r_dreamController;
 
     GameObject selector;
-//    RectTransform selector_Rect;
     RawImage selector_Image;
 
     GameObject selectRing;
@@ -27,15 +27,20 @@ public class MainGUI : MonoBehaviour {
 
     private LookingAt reticule = LookingAt.none;
 
+
+    DontLookAtFire r_fireScript;
+    public float fireReticleSize;
+
 	// Use this for initialization
 	void Start () {
         interactionScript = GameObject.Find("Player").GetComponent<Interaction>();
+        r_dreamController = GameObject.Find("MainController").GetComponent<DreamController>();
+        
 
         selectRing = GameObject.Find("SelectRing");
         selectRing_Rect = selectRing.GetComponent<RectTransform>();
         selectRing_Image = selectRing.GetComponent<RawImage>();
         selector = GameObject.Find("Selector");
-        //selector_Rect = selector.GetComponent<RectTransform>();
         selector_Image = selector.GetComponent<RawImage>();
     }
 	
@@ -73,6 +78,23 @@ public class MainGUI : MonoBehaviour {
                 SelectRingLerp(normalScale_SelectRing, normal_Color);
                 
                 break;
+        }
+
+        if(r_dreamController.loadedScene == Scenes.Fire)
+        {
+            if (r_fireScript == null && GameObject.Find("Fire").GetComponent<DontLookAtFire>())
+            {
+                r_fireScript = GameObject.Find("Fire").GetComponent<DontLookAtFire>();
+            }
+            if (r_fireScript != null)
+            {
+                float ringScale = normalScale_SelectRing + (1 / r_fireScript.abs_Sum) * 10;
+                ringScale = Mathf.Clamp(ringScale, 0, 1f);
+                Color ringColor = normal_Color;
+                if (r_fireScript.lookingAtFire)
+                    ringColor = Color.red;
+                SelectRingLerp(ringScale, ringColor);
+            }
         }
 	}
 

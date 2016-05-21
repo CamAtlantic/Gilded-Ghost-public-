@@ -6,7 +6,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 /// <summary>
 /// DO NOT choose System. That's a bad one.
 /// </summary>
-public enum Scenes { System,Cell,Mountain,Columns};
+public enum Scenes { System,Cell,Mountain,Columns,Fire};
 //Make sure this enum has the scenes listed in the correct order.
 
 public class DreamController : MonoBehaviour {
@@ -37,12 +37,13 @@ public class DreamController : MonoBehaviour {
     public bool columns_orb = false;
     [Header("Fire")]
     public bool fire_fire = false;
-    public bool fire_altar = false;
+    public bool fire_thrones = false;
     [Space(10)]
     #endregion
 
     public Color mountainSkyColor;
     public Color columnSkyColor;
+    public Color fireSkyColor;
 
     public Scenes loadedScene = Scenes.Cell;
 
@@ -94,10 +95,15 @@ public class DreamController : MonoBehaviour {
             LoadScene(Scenes.Mountain);
             m_CamBackground.SetBackgroundColor(mountainSkyColor);
         }
-        else
+        else if(mountain_plant)
         {
             LoadScene(Scenes.Columns);
             m_CamBackground.SetBackgroundColor(columnSkyColor);
+        }
+        else if(mountain_door || columns_orb || columns_water)
+        {
+            LoadScene(Scenes.Fire);
+            m_CamBackground.SetBackgroundColor(fireSkyColor);
         }
 
         _needs.ToggleHungerEffects(false);

@@ -28,8 +28,6 @@ public class DreamTrigger : Interactable
         r_dreamController = GameObject.Find("MainController").GetComponent<DreamController>();
         r_cellManager = GameObject.Find("CellManager").GetComponent<CellManager>();
         r_rotate = GetComponent<Rotate>();
-        if (r_rotate == null)
-            Debug.Log("DreamTrigger has no Rotate?!!!!");  
     }
 
     public virtual void Update()
@@ -63,6 +61,12 @@ public class DreamTrigger : Interactable
 
     public void Spin()
     {
+        if(r_rotate == null)
+        {
+            print("No rotate on this trigger.");
+            return;
+        }
+
         isSpinning = true;
     }
 

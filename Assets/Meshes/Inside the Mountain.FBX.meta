@@ -19,6 +19,7 @@ ModelImporter:
     100022: Floor
     100024: //RootNode
     100026: ParticleFlame
+    100028: Triggers
     400000: Chairs
     400002: Cone
     400004: Flame
@@ -33,6 +34,7 @@ ModelImporter:
     400022: Floor
     400024: //RootNode
     400026: ParticleFlame
+    400028: Triggers
     2300000: Chairs
     2300002: Cone
     2300004: Flame
@@ -46,6 +48,7 @@ ModelImporter:
     2300020: Flame08
     2300022: Floor
     2300024: ParticleFlame
+    2300026: Triggers
     3300000: Chairs
     3300002: Cone
     3300004: Flame
@@ -59,6 +62,7 @@ ModelImporter:
     3300020: Flame08
     3300022: Floor
     3300024: ParticleFlame
+    3300026: Triggers
     4300000: Cone
     4300002: Floor
     4300004: Chairs
@@ -72,6 +76,7 @@ ModelImporter:
     4300020: Flame08
     4300022: Flame
     4300024: ParticleFlame
+    4300026: Triggers
   materials:
     importMaterials: 1
     materialName: 0

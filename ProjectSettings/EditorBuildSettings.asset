@@ -13,5 +13,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Mountain Dream.unity
   - enabled: 1
     path: Assets/Scenes/Columns.unity
+  - enabled: 1
+    path: Assets/Scenes/Fire.unity
   - enabled: 0
     path: Assets/Scenes/OLD_CELL.unity

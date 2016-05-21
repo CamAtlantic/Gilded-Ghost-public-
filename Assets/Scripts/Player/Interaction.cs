@@ -55,6 +55,7 @@ public class Interaction : MonoBehaviour
         {
             objectHit = hit.transform;
             reticule = LookingAt.none;
+
             if (Vector3.Distance(cam.transform.position, objectHit.transform.position) < interactDist)
             {
                 //Identify type of object------------------------
@@ -69,7 +70,6 @@ public class Interaction : MonoBehaviour
                 //if not holding item, looking at item is valid
                 if (!pickUpScript.heldItem && objectHit.CompareTag("Item"))
                 {
-                    //playerFPS.mouseLookSlow = true;
                     reticule = LookingAt.item;
                 }
 

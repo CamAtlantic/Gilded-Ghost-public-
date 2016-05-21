@@ -148,6 +148,11 @@ public class SleepingAndWaking : MonoBehaviour{
             dreamTransform = GameObject.Find("ColumnStandingTransform").transform;
             SetPosition(dreamTransform);
         }
+        else if (r_dreamController.loadedScene == Scenes.Fire)
+        {
+            dreamTransform = GameObject.Find("FireStandingTransform").transform;
+            SetPosition(dreamTransform);
+        }
     }
 
     public void SetPosition(Transform newTransform)

@@ -19,6 +19,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public bool smooth;
         public float smoothTime = 5f;
 
+        private float firePlayerRotateSpeed;
+        private float fireCameraRotateSpeed;
+        private bool firePlayerRotate = false;
+        private bool fireCameraRotate = false;
 
         private Quaternion m_CharacterTargetRot;
         private Quaternion m_CameraTargetRot;
@@ -30,6 +34,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_CameraTargetRot = camera.localRotation;
         }
 
+        public void TriggerFirePlayerRotate(float speed)
+        {
+            firePlayerRotateSpeed = speed;
+            firePlayerRotate = true;
+        }
+
+        public void TriggerFireCameraRotate(float speed)
+        {
+            fireCameraRotateSpeed = speed;
+            fireCameraRotate = true;
+        }
 
         public void LookRotation(Transform character, Transform camera)
         {
@@ -50,7 +65,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_CharacterTargetRot *= Quaternion.Euler (0f, yRot, 0f);
             m_CameraTargetRot *= Quaternion.Euler (-xRot, 0f, 0f);
 
-            if(clampVerticalRotation)
+            //------this is where I'm adding the fire rotation;
+            if (firePlayerRotate)
+            {
+                firePlayerRotate = false;
+                m_CharacterTargetRot *= Quaternion.Euler(0, firePlayerRotateSpeed, 0);
+            }
+            if (fireCameraRotate)
+            {
+                fireCameraRotate = false;
+                m_CameraTargetRot *= Quaternion.Euler(fireCameraRotateSpeed, 0, 0);
+            }
+            //------------------------------------------------------------
+
+            if (clampVerticalRotation)
                 m_CameraTargetRot = ClampRotationAroundXAxis (m_CameraTargetRot);
 
             if(smooth)
