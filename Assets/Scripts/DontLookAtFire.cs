@@ -32,7 +32,7 @@ public class DontLookAtFire : DreamTrigger {
     Light fireLight;
     float lightIntensityNormal;
     public float lightIntensityModifier = 5;
-    //CharacterController charController;
+
     public override void Awake()
     {
         base.Awake();
@@ -44,7 +44,6 @@ public class DontLookAtFire : DreamTrigger {
         lightIntensityNormal = fireLight.intensity;
         flameRotateSpeedNormal = GetComponentInChildren<Rotate>().speed;
         particles = GetComponentInChildren<ParticleSystem>();
-        //charController = player.GetComponent<CharacterController>();
     }
 
     public override void Update()
@@ -88,9 +87,8 @@ public class DontLookAtFire : DreamTrigger {
         }
         #endregion
 
-        //-----------LookAt trigger
-        
-        if(abs_Sum < lookAtFireTriggerAngle)
+        #region LookAtTrigger
+        if (abs_Sum < lookAtFireTriggerAngle || Interaction.reticule == LookingAt.Fire)
         {
             lookingAtFire = true;
             lookAtFireTimer += Time.deltaTime;
@@ -102,12 +100,9 @@ public class DontLookAtFire : DreamTrigger {
             if (lookAtFireTimer < 0)
                 lookAtFireTimer = 0;
         }
+        #endregion
 
-        if(lookAtFireTimer > lookAtFireTimerMax)
-        {
-            DreamTriggerEffect();
-        }
-
+        #region fireEffects
         float fireTimerPercentage = lookAtFireTimer / lookAtFireTimerMax;
 
         foreach (Rotate rot in flameArray)
@@ -119,12 +114,17 @@ public class DontLookAtFire : DreamTrigger {
         fireLight.intensity = lightIntensityNormal + fireTimerPercentage * lightIntensityModifier;
         float newScaleNumber = 0.5f + fireTimerPercentage;
         transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, newScaleNumber, 1), 0.2f);
+        #endregion
+
+        if (lookAtFireTimer > lookAtFireTimerMax)
+            DreamTriggerEffect();
     }
 
     public override void DreamTriggerEffect()
     {
         base.DreamTriggerEffect();
         r_dreamController.fire_fire = true;
+        r_dreamText.SetDreamText(r_dreamText.fire_fire);
         TriggerLieDown();
     }
 
@@ -132,7 +132,6 @@ public class DontLookAtFire : DreamTrigger {
     void OnTriggerEnter(Collider other)
     {
         TriggerLieDown();
-        
     }
 
     float map(float s, float a1, float a2, float b1, float b2)

@@ -11,6 +11,8 @@ public class DreamTrigger : Interactable
     public DreamController r_dreamController;
     [HideInInspector]
     public Rotate r_rotate;
+    [HideInInspector]
+    public DreamText r_dreamText;
 
     public bool triggered;
 
@@ -28,6 +30,7 @@ public class DreamTrigger : Interactable
         r_dreamController = GameObject.Find("MainController").GetComponent<DreamController>();
         r_cellManager = GameObject.Find("CellManager").GetComponent<CellManager>();
         r_rotate = GetComponent<Rotate>();
+        r_dreamText = GameObject.Find("Dream Canvas").GetComponent<DreamText>();
     }
 
     public virtual void Update()
@@ -41,7 +44,7 @@ public class DreamTrigger : Interactable
                 if (spinTimer < spinTimerMax)
                 {
                     spinTimer += Time.deltaTime;
-                    r_rotate.speed += Time.deltaTime;
+                    r_rotate.speed += Time.deltaTime * 2;
                 }
                 else
                     spinFinished = true;

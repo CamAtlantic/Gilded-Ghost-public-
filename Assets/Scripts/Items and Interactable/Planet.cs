@@ -20,5 +20,6 @@ public class Planet : DreamTrigger
     {
         base.DreamTriggerEffect();
         r_dreamController.mountain_door = true;
+        r_dreamText.SetDreamText(r_dreamText.mountain_door);
     }
 }

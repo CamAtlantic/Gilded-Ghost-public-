@@ -43,5 +43,6 @@ public class TreeCube : DreamTrigger {
         base.DreamTriggerEffect();
         r_cellManager.SpawnPlant();
         r_dreamController.mountain_plant = true;
+        r_dreamText.SetDreamText(r_dreamText.mountain_plant);
     }
 }

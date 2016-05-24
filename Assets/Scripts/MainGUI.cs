@@ -14,6 +14,10 @@ public class MainGUI : MonoBehaviour {
     RectTransform selectRing_Rect;
     RawImage selectRing_Image;
 
+    GameObject selectEye;
+    RectTransform selectEye_Rect;
+    RawImage selectEye_Image;
+
     [Space(10)]
     [Header("Reticle Controls")]
     private float normalScale_SelectRing = 0.05f;
@@ -24,9 +28,10 @@ public class MainGUI : MonoBehaviour {
     public Color item_Color;
     public Color location_Color;
     public Color interactable_Color;
+    [Space(10)]
+    public Color lookingAtFireColor;
 
     private LookingAt reticule = LookingAt.none;
-
 
     DontLookAtFire r_fireScript;
     public float fireReticleSize;
@@ -35,20 +40,24 @@ public class MainGUI : MonoBehaviour {
 	void Start () {
         interactionScript = GameObject.Find("Player").GetComponent<Interaction>();
         r_dreamController = GameObject.Find("MainController").GetComponent<DreamController>();
-        
 
         selectRing = GameObject.Find("SelectRing");
         selectRing_Rect = selectRing.GetComponent<RectTransform>();
         selectRing_Image = selectRing.GetComponent<RawImage>();
+
         selector = GameObject.Find("Selector");
         selector_Image = selector.GetComponent<RawImage>();
-    }
-	
-	// Update is called once per frame
-	void Update () {
-        reticule = interactionScript.reticule;
 
-        switch (reticule)
+        selectEye = GameObject.Find("SelectEye");
+        selectEye_Rect = selectEye.GetComponent<RectTransform>();
+        selectEye_Image = selectEye.GetComponent<RawImage>();
+
+    }
+
+    // Update is called once per frame
+    void Update () {
+
+        switch (Interaction.reticule)
         {
             case LookingAt.item:
                 SelectRingLerp(bigScale_SelectRing, item_Color);
@@ -76,11 +85,12 @@ public class MainGUI : MonoBehaviour {
 
             case LookingAt.none:
                 SelectRingLerp(normalScale_SelectRing, normal_Color);
-                
+                IconLerp(selectEye, normalScale_SelectRing, normal_Color);
+
                 break;
         }
 
-        if(r_dreamController.loadedScene == Scenes.Fire)
+        if(DreamController.loadedScene == Scenes.Fire)
         {
             if (r_fireScript == null && GameObject.Find("Fire"))
             {
@@ -92,18 +102,39 @@ public class MainGUI : MonoBehaviour {
                 ringScale = Mathf.Clamp(ringScale, 0, 1f);
                 Color ringColor = normal_Color;
                 if (r_fireScript.lookingAtFire)
-                    ringColor = Color.red;
-                SelectRingLerp(ringScale, ringColor);
+                    ringColor = lookingAtFireColor;
+                IconLerp(selectEye, ringScale, ringColor);
             }
         }
 	}
 
     void SelectRingLerp(float newScale, Color newColor)
     {
-        selectRing_Rect.localScale = Vector3.Lerp(selectRing_Rect.localScale, new Vector3(newScale, newScale, newScale), speed_SelectRing);
+        IconLerp(selectRing, newScale, newColor);
+    }
+
+    void IconLerp(GameObject icon, float newScale,Color newColor)
+    {
+        RectTransform rect;
+        RawImage image;
+
+        if (icon == selectRing)
+        {
+            rect = selectRing_Rect;
+            image = selectRing_Image;
+        }
+        else
+        {
+            //this should be fine as i'm only using two different things with this function
+            rect = selectEye_Rect;
+            image = selectEye_Image;
+        }
+        
+        rect.localScale = Vector3.Lerp(rect.localScale, new Vector3(newScale, newScale, newScale), speed_SelectRing);
 
         selector_Image.color = Color.Lerp(selector_Image.color, newColor, speed_SelectRing);
-        selectRing_Image.color = Color.Lerp(selectRing_Image.color, newColor, speed_SelectRing);
+        image.color = Color.Lerp(image.color, newColor, speed_SelectRing);
+
     }
 
 }

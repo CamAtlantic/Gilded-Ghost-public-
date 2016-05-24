@@ -38,6 +38,10 @@ public class DreamController : MonoBehaviour {
     [Header("Fire")]
     public bool fire_fire = false;
     public bool fire_thrones = false;
+    [Header("HasBeenTo")]
+    public bool hasBeenToMountain = false;
+    public bool hasBeenToColumns = false;
+    public bool hasBeenToFire = false;
     [Space(10)]
     #endregion
 
@@ -45,7 +49,7 @@ public class DreamController : MonoBehaviour {
     public Color columnSkyColor;
     public Color fireSkyColor;
 
-    public Scenes loadedScene = Scenes.Cell;
+    public static Scenes loadedScene = Scenes.Cell;
 
     void Awake()
     {
@@ -79,7 +83,7 @@ public class DreamController : MonoBehaviour {
             if (loadedScene != Scenes.Cell && _dreamText.DisplayText())
                 _sleepingAndWaking.WakeUp();
 
-            if (loadedScene == Scenes.Cell)
+            if (loadedScene == Scenes.Cell && _dreamText.DisplayText())
                 _sleepingAndWaking.WakeUp();
         }
     }
@@ -90,21 +94,33 @@ public class DreamController : MonoBehaviour {
         _needs.UpdateHungerWhileSleeping();
         _dayManager.UpdateTimeWhileSleeping();
 
+        #region Update hasBeenTo bools
+        if (mountain_door || mountain_plant)
+            hasBeenToMountain = true;
+        if (columns_water || columns_orb)
+            hasBeenToColumns = true;
+        if (fire_fire || fire_thrones)
+            hasBeenToFire = true;
+        #endregion
+
         //Determines which dream to start, then starts it.
-        if (!mountain_door && !mountain_plant)
+        if (!hasBeenToMountain)
         {
             LoadScene(Scenes.Mountain);
             m_CamBackground.SetBackgroundColor(mountainSkyColor);
+            _dreamText.SetDreamText(_dreamText.mountain_intro);
         }
-        else if(mountain_plant || fire_fire || fire_thrones && !columns_orb && ! columns_water)
+        else if(!hasBeenToColumns && (mountain_plant || hasBeenToFire))
         {
             LoadScene(Scenes.Columns);
             m_CamBackground.SetBackgroundColor(columnSkyColor);
+            _dreamText.SetDreamText(_dreamText.columns_intro);
         }
-        else if(mountain_door || columns_orb || columns_water)
+        else if(!hasBeenToFire &&  (mountain_door || hasBeenToColumns) )
         {
             LoadScene(Scenes.Fire);
             m_CamBackground.SetBackgroundColor(fireSkyColor);
+            _dreamText.SetDreamText(_dreamText.fire_intro);
         }
 
         _needs.ToggleHungerEffects(false);

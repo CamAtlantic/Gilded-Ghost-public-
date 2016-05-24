@@ -40,13 +40,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886d1908dd3387d4593f2924c099a06f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mountain_door: 1
+  mountain_door: 0
   mountain_plant: 0
   columns_water: 0
   columns_orb: 0
   fire_fire: 0
-  fire_altar: 0
-  mountainSkyColor: {r: 0.8039216, g: 0.6392157, b: 0.5764706, a: 1}
+  fire_thrones: 0
+  hasBeenToMountain: 0
+  hasBeenToColumns: 0
+  hasBeenToFire: 0
+  mountainSkyColor: {r: 0.3019608, g: 0.21176471, b: 0.21176471, a: 1}
   columnSkyColor: {r: 0.78431374, g: 0.7411765, b: 0.68235296, a: 1}
   fireSkyColor: {r: 0.29514492, g: 0.3028989, b: 0.3897059, a: 0}
   loadedScene: 1

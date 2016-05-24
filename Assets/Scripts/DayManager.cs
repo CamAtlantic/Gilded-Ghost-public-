@@ -40,7 +40,7 @@ public class DayManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (_dreamController.loadedScene == Scenes.Cell)
+        if (DreamController.loadedScene == Scenes.Cell)
             UpdateTime();
         
         if(percentageOfDay > feedingTime && !hasBeenFed)

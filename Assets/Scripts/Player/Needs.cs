@@ -40,7 +40,7 @@ public class Needs : MonoBehaviour {
 
     void Update()
     {
-        if (_dreamController.loadedScene == Scenes.Cell)
+        if (DreamController.loadedScene == Scenes.Cell)
         {
             hunger += Time.deltaTime;
 

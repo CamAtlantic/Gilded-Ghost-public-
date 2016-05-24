@@ -20,5 +20,6 @@ public class ColumnsOrb : DreamTrigger
     {
         base.DreamTriggerEffect();
         r_dreamController.columns_orb = true;
+        r_dreamText.SetDreamText(r_dreamText.columns_orb);
     }
 }

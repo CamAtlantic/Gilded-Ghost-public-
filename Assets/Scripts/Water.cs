@@ -63,6 +63,6 @@ public class Water : DreamTrigger {
     {
         base.DreamTriggerEffect();
         r_dreamController.columns_water = true;
-        print("Water Triggered");
+        r_dreamText.SetDreamText(r_dreamText.columns_water);
     }
 }

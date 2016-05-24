@@ -39,7 +39,7 @@ public class Sun : MonoBehaviour
 
     void Update()
     {
-        if (_dreamController.loadedScene == Scenes.Cell)
+        if (DreamController.loadedScene == Scenes.Cell)
         {
             turnSpeed = 360 / _dayManager.dayLengthSeconds * Time.deltaTime;
             transform.RotateAround(transform.position, transform.right, turnSpeed);

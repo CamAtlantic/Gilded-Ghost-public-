@@ -4,7 +4,7 @@ using System.Collections;
 /// <summary>
 /// Holds a tag for what kind of object the player is currently looking at.
 /// </summary>
-public enum LookingAt { none, item,itemLocation,interactable};
+public enum LookingAt { none, item,itemLocation,interactable,Fire};
 
 public class Interaction : MonoBehaviour
 {
@@ -20,7 +20,7 @@ public class Interaction : MonoBehaviour
 
     public Transform objectHit;
 
-    public LookingAt reticule = LookingAt.none;
+    public static LookingAt reticule = LookingAt.none;
 
     public LayerMask noItem_LayerMask;
     public LayerMask item_LayerMask;
@@ -46,7 +46,7 @@ public class Interaction : MonoBehaviour
         objectHit = null;
 
         LayerMask layerMask = noItem_LayerMask;
-        if(pickUpScript.heldItem)
+        if(PickUpItem.heldItem)
         {
             layerMask = item_LayerMask;
         }
@@ -56,25 +56,28 @@ public class Interaction : MonoBehaviour
             objectHit = hit.transform;
             reticule = LookingAt.none;
 
-            if (Vector3.Distance(cam.transform.position, objectHit.transform.position) < interactDist)
+            //full distance for fire, if it's not fire move along
+            if (objectHit.CompareTag("Fire"))
+            {
+                reticule = LookingAt.Fire;
+            }
+
+            else if (Vector3.Distance(cam.transform.position, objectHit.transform.position) < interactDist)
             {
                 //Identify type of object------------------------
-
-                //interactable is less important than location.
-                //It should be overwritten by location if both are true
                 if (objectHit.CompareTag("Interactable"))
                 {
                     reticule = LookingAt.interactable;
                 }
-
+                
                 //if not holding item, looking at item is valid
-                if (!pickUpScript.heldItem && objectHit.CompareTag("Item"))
+                if (!PickUpItem.heldItem && objectHit.CompareTag("Item"))
                 {
                     reticule = LookingAt.item;
                 }
 
                 //if holding item, looking at location is valid
-                if (pickUpScript.heldItem && objectHit.CompareTag("ItemLocation"))
+                if (PickUpItem.heldItem && objectHit.CompareTag("ItemLocation"))
                 {
                     reticule = LookingAt.itemLocation;
                 }

@@ -41,7 +41,7 @@ public class SleepingAndWaking : MonoBehaviour{
         {
             case SleepState.lyingGoingToSleep:
 
-                if (r_dreamController.loadedScene == Scenes.Cell && CheckPlayerFacing(player) )
+                if (DreamController.loadedScene == Scenes.Cell && CheckPlayerFacing(player) )
                 {
                     sleepState = SleepState.goingUp;
                 }
@@ -60,12 +60,12 @@ public class SleepingAndWaking : MonoBehaviour{
                 Vector3 standUpPosition;
                 Vector3 standUpRotation;
 
-                if (r_dreamController.loadedScene == Scenes.Cell)
+                if (DreamController.loadedScene == Scenes.Cell)
                 {
                     standUpPosition = cellStandingTransform.position;
                     standUpRotation = cellStandingTransform.rotation.eulerAngles;
                 }
-                else if (r_dreamController.loadedScene != Scenes.Cell)
+                else if (DreamController.loadedScene != Scenes.Cell)
                 {
                     standUpPosition = dreamTransform.position;
                     standUpRotation = dreamTransform.rotation.eulerAngles;
@@ -90,7 +90,7 @@ public class SleepingAndWaking : MonoBehaviour{
 
             case SleepState.goingDown:
                 
-                if (r_dreamController.loadedScene == Scenes.Cell)
+                if (DreamController.loadedScene == Scenes.Cell)
                 {
                     sleepingPosition = cellSleepTransform.position;
                     sleepingRotation = cellSleepTransform.rotation.eulerAngles;
@@ -134,7 +134,7 @@ public class SleepingAndWaking : MonoBehaviour{
     {
         sleepState = SleepState.asleep;
 
-        if (r_dreamController.loadedScene == Scenes.Cell)
+        if (DreamController.loadedScene == Scenes.Cell)
             r_dreamController.StartDream();
         else
             r_dreamController.EndDream();
@@ -144,17 +144,17 @@ public class SleepingAndWaking : MonoBehaviour{
     {
         sleepState = SleepState.lyingAwake;
 
-        if (r_dreamController.loadedScene == Scenes.Mountain)
+        if (DreamController.loadedScene == Scenes.Mountain)
         {
            dreamTransform = GameObject.Find("MountainStandingTransform").transform;
            SetPosition(dreamTransform);
         }
-        else if(r_dreamController.loadedScene == Scenes.Columns)
+        else if(DreamController.loadedScene == Scenes.Columns)
         {
             dreamTransform = GameObject.Find("ColumnStandingTransform").transform;
             SetPosition(dreamTransform);
         }
-        else if (r_dreamController.loadedScene == Scenes.Fire)
+        else if (DreamController.loadedScene == Scenes.Fire)
         {
             dreamTransform = GameObject.Find("FireStandingTransform").transform;
             SetPosition(dreamTransform);

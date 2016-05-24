@@ -22,7 +22,7 @@ public class ToiletButton : Button {
     {
         base.Start();
         waterUp = Vector3.zero;
-        waterDown = Vector3.forward * -0.06f;
+        waterDown = Vector3.forward * -0.07f;
     }
 
     public override void Update()
@@ -30,7 +30,8 @@ public class ToiletButton : Button {
         base.Update();
         if (pressed)
         {
-            toiletWater.transform.localPosition = Vector3.Lerp(toiletWater.transform.localPosition, waterDown, 0.3f);
+            print(pressed + " " + toiletWater.transform.localPosition.z);
+            toiletWater.transform.localPosition = Vector3.Lerp(toiletWater.transform.localPosition, waterDown, 0.4f);
 
             if (inToilet.itemAtLocation)
             {
