@@ -56,6 +56,7 @@ public class DreamController : MonoBehaviour {
         _dreamText = GameObject.Find("Dream Canvas").GetComponent<DreamText>();
         _dayManager = GetComponent<DayManager>();
         m_CamBackground = Camera.main.gameObject.GetComponent<CamBackgroundColor>();
+
         LoadScene(Scenes.Cell);
     }
 
@@ -95,7 +96,7 @@ public class DreamController : MonoBehaviour {
             LoadScene(Scenes.Mountain);
             m_CamBackground.SetBackgroundColor(mountainSkyColor);
         }
-        else if(mountain_plant)
+        else if(mountain_plant || fire_fire || fire_thrones && !columns_orb && ! columns_water)
         {
             LoadScene(Scenes.Columns);
             m_CamBackground.SetBackgroundColor(columnSkyColor);
@@ -108,7 +109,7 @@ public class DreamController : MonoBehaviour {
 
         _needs.ToggleHungerEffects(false);
         _cellManager.ShowHideCell(false);
-        QualitySettings.shadowDistance = 50;
+        QualitySettings.shadowDistance = 100;
         _FPSController.SetWalkSpeed(3);
     }
     
@@ -120,6 +121,9 @@ public class DreamController : MonoBehaviour {
         m_CamBackground.SetSkyBox();
 
         _sleepingAndWaking.SetPosition(cellSleepingTransform);
+        player.transform.rotation = _sleepingAndWaking.cellSleepTransform.rotation;
+        _FPSController.ResetMouseLook();
+
         _needs.ToggleHungerEffects(true);
         _cellManager.ShowHideCell(true);
         QualitySettings.shadowDistance = 10;

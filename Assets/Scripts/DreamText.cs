@@ -8,7 +8,7 @@ public class DreamText : MonoBehaviour {
     public AnimationCurve alphaCurve;
 
     float displayTimer;
-    float displayTimerMax = 10;
+    public float displayTimerMax = 10;
 
 	// Use this for initialization
 	void Start () {

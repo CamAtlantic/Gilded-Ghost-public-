@@ -97,13 +97,13 @@ MonoBehaviour:
       rgba: 45046
     key3:
       serializedVersion: 2
-      rgba: 4707065
+      rgba: 8113149
     key4:
       serializedVersion: 2
-      rgba: 8113149
+      rgba: 14348031
     key5:
       serializedVersion: 2
-      rgba: 9818111
+      rgba: 14348031
     key6:
       serializedVersion: 2
       rgba: 16777215
@@ -113,9 +113,9 @@ MonoBehaviour:
     ctime0: 0
     ctime1: 5204
     ctime2: 10409
-    ctime3: 14842
-    ctime4: 20624
-    ctime5: 58403
+    ctime3: 20624
+    ctime4: 51272
+    ctime5: 51272
     ctime6: 65535
     ctime7: 65535
     atime0: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
     atime5: 0
     atime6: 0
     atime7: 0
-    m_NumColorKeys: 6
+    m_NumColorKeys: 5
     m_NumAlphaKeys: 2
   maxIntensity: 2.5
   minIntensity: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
       rgba: 12379370
     key3:
       serializedVersion: 2
-      rgba: 2894892
+      rgba: 12379370
     key4:
       serializedVersion: 2
       rgba: 2894892

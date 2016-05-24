@@ -82,11 +82,11 @@ public class MainGUI : MonoBehaviour {
 
         if(r_dreamController.loadedScene == Scenes.Fire)
         {
-            if (r_fireScript == null && GameObject.Find("Fire").GetComponent<DontLookAtFire>())
+            if (r_fireScript == null && GameObject.Find("Fire"))
             {
                 r_fireScript = GameObject.Find("Fire").GetComponent<DontLookAtFire>();
             }
-            if (r_fireScript != null)
+            if (r_fireScript != null && reticule != LookingAt.interactable)
             {
                 float ringScale = normalScale_SelectRing + (1 / r_fireScript.abs_Sum) * 10;
                 ringScale = Mathf.Clamp(ringScale, 0, 1f);
@@ -105,4 +105,5 @@ public class MainGUI : MonoBehaviour {
         selector_Image.color = Color.Lerp(selector_Image.color, newColor, speed_SelectRing);
         selectRing_Image.color = Color.Lerp(selectRing_Image.color, newColor, speed_SelectRing);
     }
+
 }

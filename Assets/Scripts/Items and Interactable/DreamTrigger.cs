@@ -59,6 +59,16 @@ public class DreamTrigger : Interactable
         }
     }
 
+    public void TriggerLieDown(Vector3 position, Vector3 rotation)
+    {
+
+        if (!triggerLieDownOnce)
+        {
+            triggerLieDownOnce = true;
+            r_sleepingAndWaking.LieDown(position, rotation);
+        }
+    }
+
     public void Spin()
     {
         if(r_rotate == null)

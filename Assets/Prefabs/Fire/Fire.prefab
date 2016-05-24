@@ -154,7 +154,7 @@ GameObject:
   - 4: {fileID: 464574}
   - 108: {fileID: 10849574}
   m_Layer: 0
-  m_Name: Point light
+  m_Name: FireLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1832,7 +1832,7 @@ Light:
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
-    m_Strength: 1
+    m_Strength: 0.8
     m_Bias: 0.05
     m_NormalBias: 0
     m_NearPlane: 0.1
@@ -1916,9 +1916,16 @@ MonoBehaviour:
   triggered: 0
   spinFinished: 0
   lookAtFireTriggerAngle: 10
-  slowViewTriggerAngle: 45
-  rotateAmount: 10
-  rotateLerpSpeed: 0.1
+  slowViewTriggerAngle: 50
+  rotateAmountNormal: 50
+  rotateAmountBurst: 100
+  lookAtFireTimer: 0
+  lookAtFireTimerMax: 7
+  map_AngleXY: 0
+  abs_Sum: 0
+  lookingAtFire: 0
+  flameRotateSpeedModifier: 5
+  lightIntensityModifier: 5
 --- !u!114 &11412344
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -24,7 +24,15 @@ public class DontLookAtFire : DreamTrigger {
     public bool lookingAtFire;
 
     Rotate[] flameArray;
+    float flameRotateSpeedNormal;
+    public float flameRotateSpeedModifier = 5;
 
+    ParticleSystem particles;
+
+    Light fireLight;
+    float lightIntensityNormal;
+    public float lightIntensityModifier = 5;
+    //CharacterController charController;
     public override void Awake()
     {
         base.Awake();
@@ -32,13 +40,20 @@ public class DontLookAtFire : DreamTrigger {
         cam = Camera.main;
         r_mouseLook = player.GetComponent<FirstPersonController>().m_MouseLook;
         flameArray = GetComponentsInChildren<Rotate>();
+        fireLight = GetComponentInChildren<Light>();
+        lightIntensityNormal = fireLight.intensity;
+        flameRotateSpeedNormal = GetComponentInChildren<Rotate>().speed;
+        particles = GetComponentInChildren<ParticleSystem>();
+        //charController = player.GetComponent<CharacterController>();
     }
 
     public override void Update()
     {
         base.Update();
+
         #region Camera Math
-        Vector3 dir = transform.position - player.transform.position;
+        Vector3 dir = ((fireLight.transform.position + transform.position) / 2) - player.transform.position;
+
         float angleY = ArcFunctions.AngleHalf(dir, player.transform.forward, Vector3.up);
         float abs_AngleY = Mathf.Abs(angleY);
         float map_AngleY = map(abs_AngleY, 0, slowViewTriggerAngle, 1, 0);
@@ -74,16 +89,11 @@ public class DontLookAtFire : DreamTrigger {
         #endregion
 
         //-----------LookAt trigger
-
+        
         if(abs_Sum < lookAtFireTriggerAngle)
         {
             lookingAtFire = true;
             lookAtFireTimer += Time.deltaTime;
-            GetComponentInChildren<Light>().intensity += lookAtFireTimer * lookAtFireTimer;
-            foreach(Rotate rot in flameArray)
-            {
-                rot.speed += lookAtFireTimer / 100;
-            }
         }
         else
         {
@@ -91,19 +101,23 @@ public class DontLookAtFire : DreamTrigger {
             lookAtFireTimer -= Time.deltaTime / 2;
             if (lookAtFireTimer < 0)
                 lookAtFireTimer = 0;
-            foreach (Rotate rot in flameArray)
-            {
-                rot.speed -= lookAtFireTimer / 100;
-            }
         }
 
         if(lookAtFireTimer > lookAtFireTimerMax)
         {
             DreamTriggerEffect();
         }
-      
-        rotateAmount = Mathf.Lerp(rotateAmount, 10, 0.4f);
-        float newScaleNumber = 0.5f + (lookAtFireTimer / lookAtFireTimerMax);
+
+        float fireTimerPercentage = lookAtFireTimer / lookAtFireTimerMax;
+
+        foreach (Rotate rot in flameArray)
+        {
+            rot.speed = flameRotateSpeedNormal + fireTimerPercentage * flameRotateSpeedModifier;
+        }
+
+        particles.SetEmissionRate(2 + fireTimerPercentage * 4);
+        fireLight.intensity = lightIntensityNormal + fireTimerPercentage * lightIntensityModifier;
+        float newScaleNumber = 0.5f + fireTimerPercentage;
         transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, newScaleNumber, 1), 0.2f);
     }
 
@@ -112,6 +126,13 @@ public class DontLookAtFire : DreamTrigger {
         base.DreamTriggerEffect();
         r_dreamController.fire_fire = true;
         TriggerLieDown();
+    }
+
+    
+    void OnTriggerEnter(Collider other)
+    {
+        TriggerLieDown();
+        
     }
 
     float map(float s, float a1, float a2, float b1, float b2)

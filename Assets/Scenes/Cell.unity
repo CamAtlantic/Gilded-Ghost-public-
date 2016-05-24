@@ -42,7 +42,7 @@ LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
   m_GIWorkflowMode: 1
-  m_LightmapsMode: 1
+  m_LightmapsMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableRealtimeLightmaps: 1
   m_LightmapEditorSettings:
     serializedVersion: 3
-    m_Resolution: 10
+    m_Resolution: 2
     m_BakeResolution: 40
     m_TextureWidth: 1024
     m_TextureHeight: 1024
@@ -66,9 +66,9 @@ LightmapSettings:
     m_FinalGather: 1
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 0
-  m_LightingDataAsset: {fileID: 112000024, guid: bdae1a549830aae499ca2ccfe9bc0b74,
+  m_LightingDataAsset: {fileID: 112000023, guid: 7bf024c12bdfdcd4f85c32c9a5885095,
     type: 2}
-  m_RuntimeCPUUsage: 50
+  m_RuntimeCPUUsage: 25
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -398,26 +398,6 @@ Prefab:
     - target: {fileID: 493816, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
       propertyPath: m_RootOrder
       value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 10809316, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_SpotAngle
-      value: 21.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 10809316, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_Shadows.m_NormalBias
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 10809316, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_Shadows.m_Bias
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 10809316, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_Shadows.m_NearPlane
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 10809316, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_Intensity
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 108594, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
       propertyPath: m_Name
@@ -829,57 +809,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 10809316, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_SpotAngle
-      value: 64.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 493816, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 493816, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 108594, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
       propertyPath: m_Name
       value: TrayCorridorLight
-      objectReference: {fileID: 0}
-    - target: {fileID: 10809316, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_BounceIntensity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 10809316, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_Range
-      value: 2.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 10809316, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 108594, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 10809316, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_Shadows.m_NearPlane
-      value: 0.13
-      objectReference: {fileID: 0}
-    - target: {fileID: 10809316, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_Shadows.m_NormalBias
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 10809316, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_Shadows.m_Bias
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 10809316, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 10809316, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
-      propertyPath: m_Intensity
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0000e55fa34a3664289bfd468e0a8e23, type: 2}
@@ -1726,38 +1658,6 @@ Prefab:
     - target: {fileID: 443944, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
       propertyPath: m_RootOrder
       value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
-      propertyPath: nightDayFogColor.key3.rgba
-      value: 12379370
-      objectReference: {fileID: 0}
-    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
-      propertyPath: nightDayColor.key5.rgba
-      value: 14348031
-      objectReference: {fileID: 0}
-    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
-      propertyPath: nightDayColor.ctime5
-      value: 51272
-      objectReference: {fileID: 0}
-    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
-      propertyPath: nightDayColor.ctime3
-      value: 20624
-      objectReference: {fileID: 0}
-    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
-      propertyPath: nightDayColor.key3.rgba
-      value: 8113149
-      objectReference: {fileID: 0}
-    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
-      propertyPath: nightDayColor.key4.rgba
-      value: 14348031
-      objectReference: {fileID: 0}
-    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
-      propertyPath: nightDayColor.ctime4
-      value: 51272
-      objectReference: {fileID: 0}
-    - target: {fileID: 11473470, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
-      propertyPath: nightDayColor.m_NumColorKeys
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7daeeb90a6cc9ac4aa3add49097b6ab5, type: 2}
