@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityStandardAssets.ImageEffects;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public enum Lid { open,closed, opening, closing, wakeBlink, sleepBlink};
 
 public class Eyelids : MonoBehaviour {
-
+    GameObject player;
     GameObject topEyelid;
     RectTransform topEyelid_Rect;
     GameObject bottomEyelid;
@@ -26,7 +27,7 @@ public class Eyelids : MonoBehaviour {
 
     float progress_TopEyelid;
     float progress_BottomEyelid;
-    float progress = 0;
+    public static float progress = 0;
     float negProgress = 1;
 
     public float eyeOpenSpeed = 1;
@@ -41,18 +42,22 @@ public class Eyelids : MonoBehaviour {
 
     bool blurIsOn = true;
 
+    public MouseLook r_mouseLook;
+
     // Use this for initialization
     void Start () {
+        player = GameObject.Find("Player");
         topEyelid = GameObject.Find("TopEyelid");
         topEyelid_Rect = topEyelid.GetComponent<RectTransform>();
         bottomEyelid = GameObject.Find("BottomEyelid");
         bottomEyelid_Rect = bottomEyelid.GetComponent<RectTransform>();
 
+        r_mouseLook = player.GetComponent<FirstPersonController>().m_MouseLook;
+
         cam = Camera.main;
         blur = cam.GetComponent<BlurOptimized>();
         
         sleepingScript = GameObject.Find("Player").GetComponent<SleepingAndWaking>();
-
 
         normal_Y_TopEyelid = topEyelid_Rect.anchoredPosition.y;
         normal_Y_BottomEyelid = bottomEyelid_Rect.anchoredPosition.y;
@@ -60,7 +65,7 @@ public class Eyelids : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        sleepState = sleepingScript.sleepState;
+        sleepState = SleepingAndWaking.sleepState;
 
         switch(eye)
         {
@@ -71,6 +76,7 @@ public class Eyelids : MonoBehaviour {
                     MoveEyelid(bottomEyelid_Rect, -eyeOpenSpeed);
 
                     blur.blurSize = negProgress * blurSpeed;
+                    r_mouseLook.EyelidSlow(false, 1);
                 }
                 else
                 {
@@ -94,8 +100,11 @@ public class Eyelids : MonoBehaviour {
                 break;
 
             case Lid.closing:
-                if(sleepState != SleepState.lyingGoingToSleep)
+                if (sleepState != SleepState.lyingGoingToSleep)
+                {
                     eye = Lid.opening;
+                    r_mouseLook.EyelidSlow(false, 1);
+                }
 
                 if (progress > 0.2f)
                 {
@@ -103,11 +112,12 @@ public class Eyelids : MonoBehaviour {
                     MoveEyelid(bottomEyelid_Rect, eyeOpenSpeed);
 
                     blur.blurSize = negProgress * blurSpeed;
+                    r_mouseLook.EyelidSlow(true, progress);
                 }
                 else
                 {
                     eye = Lid.closed;
-
+                    r_mouseLook.EyelidSlow(false, 1);
                     //CLOSED EYELIDS POINT
                     //the PC is asleep. I need to send a message out.
 

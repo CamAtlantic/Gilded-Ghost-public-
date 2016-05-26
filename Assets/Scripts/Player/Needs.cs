@@ -2,28 +2,32 @@
 using System.Collections;
 using UnityStandardAssets.ImageEffects;
 
+public enum Hunger { Starving, Hungry, Peckish, Full}
+
 public class Needs : MonoBehaviour {
 
-    DreamController _dreamController;
-    DayManager _dayManager;
     GameObject _camObject;
     VignetteAndChromaticAberration _chromAb;
     NoiseAndGrain _noiseAndGrain;
 
-    public float hunger;
+    public static Hunger hungerState;
+
     public float hungryThreshold = 150;
     public float starvingThreshold;
+    
+    public float digestionSpeed = 3;
+
+    private float hunger;
     public float hungerMax;
 
-    public bool hungry;
-    public bool starving;
+    public static int hungerInt;
 
-    public float digestionSpeed = 3;
+    public float noiseModifier = 20;
+    public float chromAbModifier = 75;
+    public float lerpSpeed = 0.1f;
 
     void Awake()
     {
-        _dreamController = GameObject.Find("MainController").GetComponent<DreamController>();
-        _dayManager = GameObject.Find("MainController").GetComponent<DayManager>();
         _camObject = Camera.main.gameObject;
         _chromAb = _camObject.GetComponent<VignetteAndChromaticAberration>();
         _noiseAndGrain = _camObject.GetComponent<NoiseAndGrain>();
@@ -31,11 +35,7 @@ public class Needs : MonoBehaviour {
 
     void Start()
     {
-        hungryThreshold = _dayManager.dayLengthSeconds * 0.5f;
-        hungerMax = hungryThreshold * 10;
-        starvingThreshold = hungryThreshold * 2;
-
-        //hunger = hungryThreshold * 0.5f;
+        hungerMax = DayManager.dayLengthSeconds;  
     }
 
     void Update()
@@ -43,7 +43,24 @@ public class Needs : MonoBehaviour {
         if (DreamController.loadedScene == Scenes.Cell)
         {
             hunger += Time.deltaTime;
+            hungerInt = (int)(hunger / (hungerMax / 3));
 
+            float noiseIntensity= 0;
+            float chromAbIntensity = 0;
+
+            if (hungerInt >= 2)
+                noiseIntensity = 1;
+            if (hungerInt >= 3)
+                chromAbIntensity = 1;
+
+            _noiseAndGrain.intensityMultiplier = Mathf.Lerp(_noiseAndGrain.intensityMultiplier, noiseIntensity * noiseModifier, lerpSpeed);
+            _noiseAndGrain.generalIntensity = Mathf.Lerp(_noiseAndGrain.intensityMultiplier, noiseIntensity,lerpSpeed);
+
+            _chromAb.chromaticAberration = Mathf.Lerp(_chromAb.chromaticAberration, chromAbIntensity * chromAbModifier, lerpSpeed);
+
+            #region oldHunger;
+            /*
+            
             if (valueOfEatenFood > 0)
             {
                 float amount = Time.deltaTime * digestionSpeed;
@@ -55,8 +72,7 @@ public class Needs : MonoBehaviour {
             if (amountPastHungerThreshold > 0)
             {
                 hungry = true;
-                _noiseAndGrain.intensityMultiplier = amountPastHungerThreshold * 10;
-                _noiseAndGrain.generalIntensity = amountPastHungerThreshold;
+                
             }
             else hungry = false;
 
@@ -64,13 +80,14 @@ public class Needs : MonoBehaviour {
             if (amountPastStarvingThreshold > 0)
             {
                 starving = true;
-                _chromAb.chromaticAberration = amountPastStarvingThreshold * 150;
+                
             }
             else
             {
                 starving = false;
                 _chromAb.chromaticAberration = Mathf.Lerp(_chromAb.chromaticAberration, 0, 0.2f);
             }
+            
 
             #region Hunger Pulse
             if (hungry || starving)
@@ -88,24 +105,28 @@ public class Needs : MonoBehaviour {
             if (isStarvingPulse)
                 HungerPulse(amountPastStarvingThreshold, 5);
             #endregion
+    */
+            #endregion
+
         }
     }
 
     public float valueOfEatenFood = 0;
     public void EatFood(float value)
     {
-        valueOfEatenFood += value;
+        hunger -= DayManager.oneThirdDaySeconds; 
     }
 
     public void UpdateHungerWhileSleeping()
     {
-        hunger += _dayManager.sleepLengthSeconds / 2;
+        hunger += DayManager.oneThirdDaySeconds / 2;
     }
+
 
     //Hunger Pulse----------------------------------------
 
-    bool isHungerPulse = false;
-    bool isStarvingPulse = false;
+//    bool isHungerPulse = false;
+  //  bool isStarvingPulse = false;
     public AnimationCurve hungerPulseCurve;
     float pulseTimer = 0;
 
@@ -115,20 +136,20 @@ public class Needs : MonoBehaviour {
         if (curveEvaluation < baseAmount)
             curveEvaluation = baseAmount;
 
-        if (!starving)
+        //if (!starving)
         {
             _noiseAndGrain.intensityMultiplier = curveEvaluation * 10;
             _noiseAndGrain.generalIntensity = curveEvaluation;
         }
-        else
+        //else
             //this is why there are hunger pulse bugs, because its lowest number is 50x the base amount
             _chromAb.chromaticAberration = curveEvaluation * 50;
 
         if (pulseTimer > pulseTimerMax)
         {
             pulseTimer = 0;
-            isHungerPulse = false;
-            isStarvingPulse = false;
+//            isHungerPulse = false;
+  //          isStarvingPulse = false;
         }
 
         pulseTimer += Time.deltaTime;

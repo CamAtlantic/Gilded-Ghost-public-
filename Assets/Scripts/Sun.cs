@@ -3,9 +3,6 @@ using System.Collections;
 
 public class Sun : MonoBehaviour
 {
-    DayManager _dayManager;
-    DreamController _dreamController;
-
     public Gradient nightDayColor;
 
     public float maxIntensity = 3f;
@@ -31,8 +28,6 @@ public class Sun : MonoBehaviour
 
     void Start()
     {
-        _dayManager = GameObject.Find("MainController").GetComponent<DayManager>();
-        _dreamController = GameObject.Find("MainController").GetComponent<DreamController>();
         mainLight = GetComponent<Light>();
         skyMat = RenderSettings.skybox;
     }
@@ -41,18 +36,16 @@ public class Sun : MonoBehaviour
     {
         if (DreamController.loadedScene == Scenes.Cell)
         {
-            turnSpeed = 360 / _dayManager.dayLengthSeconds * Time.deltaTime;
+            turnSpeed = 360 / DayManager.dayLengthSeconds * Time.deltaTime;
             transform.RotateAround(transform.position, transform.right, turnSpeed);
 
             ColorAndIntensity();
         }
-
-
     }
 
     public void UpdateSunWhileSleeping()
     {
-        transform.RotateAround(transform.position, transform.right, 360 / _dayManager.dayLengthSeconds * _dayManager.sleepLengthSeconds);
+        transform.RotateAround(transform.position, transform.right, 360 / DayManager.dayLengthSeconds * DayManager.oneThirdDaySeconds);
     }
 
     void ColorAndIntensity()
@@ -66,11 +59,10 @@ public class Sun : MonoBehaviour
         tRange = 1 - minAmbientPoint;
         dot = Mathf.Clamp01((Vector3.Dot(mainLight.transform.forward, Vector3.down) - minAmbientPoint) / tRange);
         i = ((maxAmbient - minAmbient) * dot) + minAmbient;
-        RenderSettings.ambientIntensity = i;
-
         mainLight.color = nightDayColor.Evaluate(dot);
-        RenderSettings.ambientLight = mainLight.color;
 
+        RenderSettings.ambientIntensity = i;
+        RenderSettings.ambientLight = mainLight.color;
         RenderSettings.fogColor = nightDayFogColor.Evaluate(dot);
         RenderSettings.fogDensity = fogDensityCurve.Evaluate(dot) * fogScale;
 

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Icon : MonoBehaviour {
 
-    GameObject player;
+//    GameObject player;
     RawImage image;
 
     Color hiddenColor;
@@ -15,7 +15,7 @@ public class Icon : MonoBehaviour {
 
     public virtual void Awake()
     {
-        player = GameObject.Find("Player");
+  //      player = GameObject.Find("Player");
         image = GetComponent<RawImage>();
 
         hiddenColor = image.color;

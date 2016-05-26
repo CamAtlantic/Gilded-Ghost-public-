@@ -34,7 +34,7 @@ public class DreamController : MonoBehaviour {
     public bool mountain_plant = false;
     [Header("Columns")]
     public bool columns_water = false;
-    public bool columns_orb = false;
+    public bool columns_idol = false;
     [Header("Fire")]
     public bool fire_fire = false;
     public bool fire_thrones = false;
@@ -78,7 +78,7 @@ public class DreamController : MonoBehaviour {
         //need to replace this with a dream-specific implementation.
         //should display text and then wake the player.
 
-        if (_sleepingAndWaking.sleepState == SleepState.asleep)
+        if (SleepingAndWaking.sleepState == SleepState.asleep)
         {
             if (loadedScene != Scenes.Cell && _dreamText.DisplayText())
                 _sleepingAndWaking.WakeUp();
@@ -97,7 +97,7 @@ public class DreamController : MonoBehaviour {
         #region Update hasBeenTo bools
         if (mountain_door || mountain_plant)
             hasBeenToMountain = true;
-        if (columns_water || columns_orb)
+        if (columns_water || columns_idol)
             hasBeenToColumns = true;
         if (fire_fire || fire_thrones)
             hasBeenToFire = true;

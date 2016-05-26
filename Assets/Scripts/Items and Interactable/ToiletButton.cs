@@ -2,11 +2,16 @@
 using System.Collections;
 
 public class ToiletButton : Button {
-
+    DreamController r_dreamController;
     ItemLocation inToilet;
     GameObject toiletWater;
+
     Vector3 waterUp;
     Vector3 waterDown;
+
+    Vector3 floodPosition = new Vector3(0,0.06f,0.14f);
+    Vector3 floodScale = new Vector3(1.5f,1.5f,1.5f);
+    Vector3 normalScale;
 
     int flushCount = 0;
     Vector3 flushVector = new Vector3(0, -0.05f, 0);
@@ -16,6 +21,7 @@ public class ToiletButton : Button {
         base.Awake();
         toiletWater = GameObject.Find("ToiletWater");
         inToilet = GameObject.Find("InToilet").GetComponent<ItemLocation>();
+        r_dreamController = GameObject.Find("MainController").GetComponent<DreamController>();
     }
 
     public override void Start()
@@ -23,6 +29,7 @@ public class ToiletButton : Button {
         base.Start();
         waterUp = Vector3.zero;
         waterDown = Vector3.forward * -0.07f;
+        normalScale = Vector3.one;
     }
 
     public override void Update()
@@ -30,9 +37,15 @@ public class ToiletButton : Button {
         base.Update();
         if (pressed)
         {
-            print(pressed + " " + toiletWater.transform.localPosition.z);
-            toiletWater.transform.localPosition = Vector3.Lerp(toiletWater.transform.localPosition, waterDown, 0.4f);
-
+            if (r_dreamController.columns_water)
+            {
+                toiletWater.transform.localPosition = Vector3.Lerp(toiletWater.transform.localPosition, waterUp, 0.4f);
+                toiletWater.transform.localScale = Vector3.Lerp(toiletWater.transform.localScale, normalScale, 0.4f);
+            }
+            else
+            {
+                toiletWater.transform.localPosition = Vector3.Lerp(toiletWater.transform.localPosition, waterDown, 0.4f);
+            }
             if (inToilet.itemAtLocation)
             {
                 Vector3 toiletFlushLocation = flushVector * (flushCount + 1);
@@ -42,12 +55,19 @@ public class ToiletButton : Button {
                     toiletFlushLocation = new Vector3(0, -0.4f, 0);
                 }
                 inToilet.itemAtLocation.transform.localPosition = Vector3.Lerp(inToilet.itemAtLocation.transform.localPosition, toiletFlushLocation, 0.3f);
-
             }
         }
         else
         {
-            toiletWater.transform.localPosition = Vector3.Lerp(toiletWater.transform.localPosition, waterUp, 0.3f);
+            if (r_dreamController.columns_water)
+            {
+                toiletWater.transform.localPosition = Vector3.Lerp(toiletWater.transform.localPosition, floodPosition, 0.4f);
+                toiletWater.transform.localScale = Vector3.Lerp(toiletWater.transform.localScale, floodScale, 0.4f);
+            }
+            else
+            {
+                toiletWater.transform.localPosition = Vector3.Lerp(toiletWater.transform.localPosition, waterUp, 0.3f);
+            }
 
             if(flushCount >= 3)
             {
@@ -61,7 +81,7 @@ public class ToiletButton : Button {
             }
         }
     }
-
+    
     public override void InteractTrigger()
     {
         base.InteractTrigger();

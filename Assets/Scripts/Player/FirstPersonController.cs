@@ -41,11 +41,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
-
-        [HideInInspector] public bool mouseLookSlow = false;
-
+        
         SleepingAndWaking m_SleepingAndWaking;
-        DreamController m_DreamController;
 
         // Use this for initialization
         private void Start()
@@ -64,7 +61,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			m_MouseLook.Init(transform , m_Camera.transform);
 
             m_SleepingAndWaking = GetComponent<SleepingAndWaking>();
-            m_DreamController = GameObject.Find("MainController").GetComponent<DreamController>();
         }
 
 
@@ -153,7 +149,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
             }
 
-            if (m_SleepingAndWaking.sleepState == SleepState.standing)
+            if (SleepingAndWaking.sleepState == SleepState.standing)
             {
                 m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);     
             }
@@ -268,14 +264,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            if(mouseLookSlow)
-            {
-                m_MouseLook.slow = true;
-            }
-            else
-            {
-                m_MouseLook.slow = false;
-            }
             m_MouseLook.LookRotation(transform, m_Camera.transform);
             
         }

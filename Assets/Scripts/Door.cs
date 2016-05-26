@@ -14,6 +14,9 @@ public class Door : MonoBehaviour {
     Vector3 eyeClosedPosition;
     Vector3 eyeOpenPosition;
 
+    GameObject dramaLight;
+
+    bool doorOpen;
     bool traySlotOpen;
     bool eyeSlotOpen;
 
@@ -26,10 +29,13 @@ public class Door : MonoBehaviour {
         traySlot = transform.FindChild("TraySlot");
         eyeSlot = transform.FindChild("EyeSlot");
         _tray = GameObject.Find("Tray").GetComponent<Tray>();
+        dramaLight = GameObject.Find("DramaLight");
     }
 
     void Start()
     {
+        dramaLight.SetActive(false);
+
         trayClosedPosition = traySlot.localPosition;
         trayOpenPosition = new Vector3(trayClosedPosition.x, trayClosedPosition.y, trayClosedPosition.z + 0.25f);
 
@@ -48,18 +54,32 @@ public class Door : MonoBehaviour {
                 CloseTraySlot();
         }
         else
-        {
             traySlot.localPosition = Vector3.Lerp(traySlot.localPosition, trayClosedPosition, openCloseSpeed);
-        }
-
         if(eyeSlotOpen)
-        {
             eyeSlot.localPosition = Vector3.Lerp(eyeSlot.localPosition, eyeOpenPosition, openCloseSpeed);
-        }
         else
-        {
             eyeSlot.localPosition = Vector3.Lerp(eyeSlot.localPosition, eyeClosedPosition, openCloseSpeed);
+
+        if(doorOpen && SleepingAndWaking.sleepState == SleepState.goingUp)
+        {
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, rot, Time.deltaTime * 2);
+            Quaternion relative = Quaternion.Inverse(transform.localRotation) * rot;
+            if (relative.w > 0.95f)
+            {
+                dramaLight.SetActive(false);
+                if (relative.w == 1)
+                    doorOpen = false;
+            }
         }
+    }
+
+    Quaternion rot;
+    public void DramaOpenDoor()
+    {
+        transform.localRotation *= Quaternion.Euler(0, 0, 20);
+        rot = transform.localRotation * Quaternion.Euler(0, 0, -20);
+        dramaLight.SetActive(true);
+        doorOpen = true;
     }
 
 	public void OpenTraySlot()

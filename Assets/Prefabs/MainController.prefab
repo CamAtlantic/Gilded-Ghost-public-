@@ -52,7 +52,6 @@ MonoBehaviour:
   mountainSkyColor: {r: 0.3019608, g: 0.21176471, b: 0.21176471, a: 1}
   columnSkyColor: {r: 0.78431374, g: 0.7411765, b: 0.68235296, a: 1}
   fireSkyColor: {r: 0.29514492, g: 0.3028989, b: 0.3897059, a: 0}
-  loadedScene: 1
 --- !u!114 &11446628
 MonoBehaviour:
   m_ObjectHideFlags: 1

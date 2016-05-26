@@ -5,14 +5,11 @@ using System.Collections.Generic;
 public class CellManager : MonoBehaviour {
 
     public GameObject plantPrefab;
+    public GameObject birdPrefab;
 
     bool plantHasSpawned = false;
-
-    void Awake()
-    { 
-   
-    }
-
+    bool birdHasSpawned = false;
+    
     public void SpawnPlant()
     {
         if(!plantHasSpawned)
@@ -20,6 +17,16 @@ public class CellManager : MonoBehaviour {
             GameObject plant;
             plant = Instantiate(plantPrefab);
             plant.transform.SetParent(GameObject.Find("Cell").transform);
+        }
+    }
+
+    public void SpawnBird()
+    {
+        if (!birdHasSpawned)
+        {
+            GameObject bird;
+            bird = Instantiate(birdPrefab);
+            bird.transform.SetParent(GameObject.Find("Cell").transform);
         }
     }
 

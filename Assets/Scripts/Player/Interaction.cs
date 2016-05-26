@@ -55,14 +55,8 @@ public class Interaction : MonoBehaviour
         {
             objectHit = hit.transform;
             reticule = LookingAt.none;
-
-            //full distance for fire, if it's not fire move along
-            if (objectHit.CompareTag("Fire"))
-            {
-                reticule = LookingAt.Fire;
-            }
-
-            else if (Vector3.Distance(cam.transform.position, objectHit.transform.position) < interactDist)
+            
+            if (Vector3.Distance(cam.transform.position, objectHit.transform.position) < interactDist)
             {
                 //Identify type of object------------------------
                 if (objectHit.CompareTag("Interactable"))
@@ -81,6 +75,13 @@ public class Interaction : MonoBehaviour
                 {
                     reticule = LookingAt.itemLocation;
                 }
+            }
+
+            //full distance for fire, if it's not fire move along
+            
+            else if (objectHit.CompareTag("Fire"))
+            {
+                reticule = LookingAt.Fire;
             }
 
             GetInput();

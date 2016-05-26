@@ -19,7 +19,7 @@ public class ColumnsOrb : DreamTrigger
     public override void DreamTriggerEffect()
     {
         base.DreamTriggerEffect();
-        r_dreamController.columns_orb = true;
-        r_dreamText.SetDreamText(r_dreamText.columns_orb);
+        r_dreamController.columns_idol = true;
+        r_dreamText.SetDreamText(r_dreamText.columns_idol);
     }
 }

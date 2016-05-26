@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Water : DreamTrigger {
 
+    GameObject floodWater;
+    GameObject toiletWater;
+
     public float amplitudeY = 0.5f;
     public float omegaY = 1;
     public float index;
@@ -11,14 +14,15 @@ public class Water : DreamTrigger {
     float playerInWaterTime;
     public float playerInWaterTimeMax = 5;
 
-    SleepingAndWaking r_sleepScript;
+    public static float playerDrownAmount;
 
     Vector3 movePosition;
     public override void Awake()
     {
         base.Awake();
         tag = "Untagged";
-        r_sleepScript = player.GetComponent<SleepingAndWaking>();
+        floodWater = GameObject.Find("FloodWater");
+        toiletWater = GameObject.Find("ToiletWater");
 
         movePosition = transform.position;
     }
@@ -27,8 +31,9 @@ public class Water : DreamTrigger {
     {
         index += Time.deltaTime;
         float y = amplitudeY * Mathf.Sin(omegaY * index);
+        playerDrownAmount = playerInWaterTime / playerInWaterTimeMax;
 
-        if (r_sleepScript.sleepState == SleepState.standing)
+        if (SleepingAndWaking.sleepState == SleepState.standing)
         {
             float moveAmount = (Time.deltaTime / 24);
             movePosition += new Vector3(0,moveAmount + y,0);
@@ -64,5 +69,10 @@ public class Water : DreamTrigger {
         base.DreamTriggerEffect();
         r_dreamController.columns_water = true;
         r_dreamText.SetDreamText(r_dreamText.columns_water);
+
+        floodWater.transform.localPosition = new Vector3(floodWater.transform.localPosition.x, 0.015f, floodWater.transform.localPosition.z);
+
+        toiletWater.transform.localPosition = new Vector3(toiletWater.transform.localPosition.x, 0.06f, 0.14f);
+        toiletWater.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
     }
 }

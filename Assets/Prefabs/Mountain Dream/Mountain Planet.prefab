@@ -379,6 +379,7 @@ MonoBehaviour:
   r_sleepingAndWaking: {fileID: 0}
   r_dreamController: {fileID: 0}
   r_rotate: {fileID: 0}
+  r_dreamText: {fileID: 0}
   triggered: 0
   spinFinished: 0
 --- !u!114 &11469248

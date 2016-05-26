@@ -4,16 +4,17 @@ using System.Collections;
 [RequireComponent(typeof(DreamController))]
 public class DayManager : MonoBehaviour {
 
-    DreamController _dreamController;
     Door _door;
     Tray _tray;
 
-    int dayCount;
+    public int dayCount;
     [Space(10)]
-    public float dayLengthSeconds = 60;
+    public bool fast = false;
+    [SerializeField]
+    public static float dayLengthSeconds = 300;
     public float currentSeconds = 0;
     public float percentageOfDay;
-    public float sleepLengthSeconds;
+    public static float oneThirdDaySeconds;
     [Space(10)]
     [Header("Event Trigger Times")]
     public float feedingTime = 0.15f;
@@ -26,7 +27,8 @@ public class DayManager : MonoBehaviour {
     
     void Awake()
     {
-        _dreamController = GetComponent<DreamController>();
+        if (fast)
+            dayLengthSeconds = 30;
     }
     
     // Use this for initialization
@@ -35,7 +37,7 @@ public class DayManager : MonoBehaviour {
         _door = GameObject.Find("Door").GetComponent<Door>();
         _tray = GameObject.Find("Tray").GetComponent<Tray>();
 
-        sleepLengthSeconds = dayLengthSeconds / 3;
+        oneThirdDaySeconds = dayLengthSeconds / 3;
     }
 	
 	// Update is called once per frame
@@ -57,6 +59,11 @@ public class DayManager : MonoBehaviour {
         #region input
         if (Input.GetKeyDown(KeyCode.Minus)) dayLengthSeconds *= 2;
         if (Input.GetKeyDown(KeyCode.Equals)) dayLengthSeconds *= 0.5f;
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Application.CaptureScreenshot("Screenshot" + Time.time + ".png", 5);
+        }
         #endregion
     }
 
@@ -88,14 +95,12 @@ public class DayManager : MonoBehaviour {
     {
         currentSeconds += Time.deltaTime;
         percentageOfDay = currentSeconds / dayLengthSeconds;
-        
     }
 
 
     public void UpdateTimeWhileSleeping()
     {
-
-        currentSeconds += sleepLengthSeconds;
+        currentSeconds += oneThirdDaySeconds;
     }
 
     void EndOfDay()

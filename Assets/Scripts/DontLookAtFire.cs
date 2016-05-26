@@ -67,7 +67,7 @@ public class DontLookAtFire : DreamTrigger {
 
         #region Annoying Camera
         //player
-        if (r_sleepingAndWaking.sleepState == SleepState.standing && abs_AngleY < slowViewTriggerAngle)
+        if (SleepingAndWaking.sleepState == SleepState.standing && abs_AngleY < slowViewTriggerAngle)
         {
             float y_rotate_Amount = map_AngleXY * map_AngleY * rotateAmount * Time.deltaTime;
             if (angleY > 0)
@@ -88,7 +88,7 @@ public class DontLookAtFire : DreamTrigger {
         #endregion
 
         #region LookAtTrigger
-        if (abs_Sum < lookAtFireTriggerAngle || Interaction.reticule == LookingAt.Fire)
+        if (Interaction.reticule == LookingAt.Fire)
         {
             lookingAtFire = true;
             lookAtFireTimer += Time.deltaTime;

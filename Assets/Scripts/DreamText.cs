@@ -24,7 +24,7 @@ public class DreamText : MonoBehaviour {
     [HideInInspector]
     public string columns_water = "The murk swallows you, but perhaps this is the first step toward absolution. Maybe things could have been different.";
     [HideInInspector]
-    public string columns_orb = " Each logical turn brings you away from the darkness, but it remains. Maybe things could have been different.";
+    public string columns_idol = " Each logical turn brings you away from the darkness, but it remains. Maybe things could have been different.";
 
 
     [HideInInspector]

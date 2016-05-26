@@ -46,6 +46,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
             fireCameraRotate = true;
         }
 
+        public void EyelidSlow(bool onOff, float modifier)
+        {
+            slow = onOff;
+            slowSensitivity = modifier;
+        }
+
         public void LookRotation(Transform character, Transform camera)
         {
             if(slow)

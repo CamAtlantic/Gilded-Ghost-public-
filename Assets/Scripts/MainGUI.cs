@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class MainGUI : MonoBehaviour {
 
     Interaction interactionScript;
-    DreamController r_dreamController;
 
     GameObject selector;
     RawImage selector_Image;
@@ -30,16 +29,13 @@ public class MainGUI : MonoBehaviour {
     public Color interactable_Color;
     [Space(10)]
     public Color lookingAtFireColor;
-
-    private LookingAt reticule = LookingAt.none;
-
+    
     DontLookAtFire r_fireScript;
     public float fireReticleSize;
 
 	// Use this for initialization
 	void Start () {
         interactionScript = GameObject.Find("Player").GetComponent<Interaction>();
-        r_dreamController = GameObject.Find("MainController").GetComponent<DreamController>();
 
         selectRing = GameObject.Find("SelectRing");
         selectRing_Rect = selectRing.GetComponent<RectTransform>();
@@ -96,7 +92,7 @@ public class MainGUI : MonoBehaviour {
             {
                 r_fireScript = GameObject.Find("Fire").GetComponent<DontLookAtFire>();
             }
-            if (r_fireScript != null && reticule != LookingAt.interactable)
+            if (r_fireScript != null && Interaction.reticule != LookingAt.interactable)
             {
                 float ringScale = normalScale_SelectRing + (1 / r_fireScript.abs_Sum) * 10;
                 ringScale = Mathf.Clamp(ringScale, 0, 1f);
@@ -105,6 +101,8 @@ public class MainGUI : MonoBehaviour {
                     ringColor = lookingAtFireColor;
                 IconLerp(selectEye, ringScale, ringColor);
             }
+            else
+                IconLerp(selectEye, 0.03f, normal_Color);
         }
 	}
 
