@@ -360,8 +360,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e013557cbc4d244b928b1c795a31e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cellLightObject: {fileID: 0}
+  cellLightLight: {fileID: 0}
   plantPrefab: {fileID: 171878, guid: ef429f24076747b46a309402040b176d, type: 2}
   birdPrefab: {fileID: 149158, guid: 87758642d91550d499cb23f713d8cd39, type: 2}
+  lighterPrefab: {fileID: 0}
 --- !u!1001 &392442935
 Prefab:
   m_ObjectHideFlags: 0
@@ -531,6 +534,10 @@ Prefab:
     - target: {fileID: 468100, guid: c359f52bd349c9e479fa9b439fcd4d11, type: 2}
       propertyPath: m_RootOrder
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 10803752, guid: c359f52bd349c9e479fa9b439fcd4d11, type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c359f52bd349c9e479fa9b439fcd4d11, type: 2}

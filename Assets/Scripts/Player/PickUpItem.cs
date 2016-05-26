@@ -10,15 +10,11 @@ public class PickUpItem : MonoBehaviour
     //---------------------------------
 
     public static GameObject heldItem;
-    private Item heldItemScript;
+    public static Item heldItemScript;
     Needs _needs;
-    Icon e_Icon;
+    public static Icon e_Icon;
 
     public float speed = 10;
-    /// <summary>
-    /// this really should be coming from the Item script
-    /// </summary>
-    public float foodHungerValue = 75;
 
     //---------------------------------
     //FUNCTIONS------------------------
@@ -47,21 +43,7 @@ public class PickUpItem : MonoBehaviour
         Reset();
     }
 
-    public void EatFood()
-    {
-        if (heldItem)
-        {
-            _needs.EatFood(foodHungerValue);
-            Destroy(heldItem);
-
-            if (!e_Icon.hasBeenCleared)
-                e_Icon.Clear();
-
-            Reset();
-        }
-    }
-
-    void Reset()
+    public static void Reset()
     {
         heldItem = null;
         heldItemScript = null;

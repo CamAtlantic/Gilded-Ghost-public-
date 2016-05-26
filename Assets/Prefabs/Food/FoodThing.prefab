@@ -10,8 +10,8 @@ GameObject:
   - 4: {fileID: 477952}
   - 33: {fileID: 3369164}
   - 23: {fileID: 2345524}
-  - 114: {fileID: 11433620}
   - 64: {fileID: 6464614}
+  - 114: {fileID: 11423360}
   m_Layer: 0
   m_Name: FoodThing
   m_TagString: Item
@@ -76,7 +76,7 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 0
   m_Mesh: {fileID: 4300044, guid: bae8ecd17b3d1594197ca2235c8fe9a5, type: 3}
---- !u!114 &11433620
+--- !u!114 &11423360
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -84,9 +84,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 174264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6576958a3d2c4b24d968a7d686b80334, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b5224825c850884dac438bd956e1606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemState: 0
   cam: {fileID: 0}
   heldPosition: {x: 0.3, y: -0.15, z: 0.34}
   heldRotation: {x: 338.67, y: 250.48, z: 80.9295}
@@ -96,6 +97,7 @@ MonoBehaviour:
   itemLocation: {fileID: 0}
   itemLocationScript: {fileID: 0}
   speed: 10
+  foodHungerValue: 75
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

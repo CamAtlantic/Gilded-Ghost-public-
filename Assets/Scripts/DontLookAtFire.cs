@@ -126,6 +126,7 @@ public class DontLookAtFire : DreamTrigger {
         r_dreamController.fire_fire = true;
         r_dreamText.SetDreamText(r_dreamText.fire_fire);
         TriggerLieDown();
+        r_cellManager.SpawnLighter();
     }
 
     

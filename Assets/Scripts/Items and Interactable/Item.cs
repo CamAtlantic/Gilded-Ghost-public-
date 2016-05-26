@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Item : MonoBehaviour {
     public enum State{ Held, LerpToLocation, AtLocation }
-    State itemState;
+    public State itemState;
 
     GameObject player;
     public Camera cam;
@@ -21,13 +21,14 @@ public class Item : MonoBehaviour {
     public ItemLocation itemLocationScript;
 
     public float speed = 10;
+    public static Icon e_Icon;
 
-    
-    void Awake()
+    public virtual void Awake()
     {
         tag = "Item";
         player = GameObject.Find("Player");
-        
+        e_Icon = GameObject.Find("E_Icon").GetComponent<Icon>();
+
         cam = Camera.main;
         collide = GetComponent<MeshCollider>();
 
@@ -36,15 +37,17 @@ public class Item : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //if (player != null)
-            speed = player.GetComponent<PickUpItem>().speed;
+        speed = player.GetComponent<PickUpItem>().speed;
     }
 
     // Update is called once per frame
-    void Update () {
+    public virtual void Update () {
 	    if(itemState == State.Held)
         {
             LerpTo(heldPosition, heldRotation);
+
+            if (Input.GetKeyDown(KeyCode.E))
+                Use();
         }
         if (itemLocationScript != null && itemState == State.LerpToLocation)
         {
@@ -57,7 +60,6 @@ public class Item : MonoBehaviour {
                 collide.enabled = true;
             }
         }
-        
 	}
 
     public void PickUp()
@@ -81,6 +83,12 @@ public class Item : MonoBehaviour {
     {
         transform.localPosition = Vector3.Lerp(transform.localPosition, position, speed * Time.deltaTime);
         transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(rotation), speed * Time.deltaTime);
+    }
+
+    public virtual void Use()
+    {
+        if (!e_Icon.hasBeenCleared)
+            e_Icon.Clear();
     }
 
 }

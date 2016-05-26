@@ -28,7 +28,7 @@ public class DayManager : MonoBehaviour {
     void Awake()
     {
         if (fast)
-            dayLengthSeconds = 30;
+            dayLengthSeconds = 60;
     }
     
     // Use this for initialization

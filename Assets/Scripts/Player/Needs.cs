@@ -17,7 +17,7 @@ public class Needs : MonoBehaviour {
     
     public float digestionSpeed = 3;
 
-    private float hunger;
+    public static float hunger;
     public float hungerMax;
 
     public static int hungerInt;
@@ -112,7 +112,8 @@ public class Needs : MonoBehaviour {
     }
 
     public float valueOfEatenFood = 0;
-    public void EatFood(float value)
+
+    public static void EatFood(float value)
     {
         hunger -= DayManager.oneThirdDaySeconds; 
     }

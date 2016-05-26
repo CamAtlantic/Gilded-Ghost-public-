@@ -61,7 +61,7 @@ public class Sun : MonoBehaviour
         i = ((maxAmbient - minAmbient) * dot) + minAmbient;
         mainLight.color = nightDayColor.Evaluate(dot);
 
-        RenderSettings.ambientIntensity = i;
+        //RenderSettings.ambientIntensity = i;
         RenderSettings.ambientLight = mainLight.color;
         RenderSettings.fogColor = nightDayFogColor.Evaluate(dot);
         RenderSettings.fogDensity = fogDensityCurve.Evaluate(dot) * fogScale;

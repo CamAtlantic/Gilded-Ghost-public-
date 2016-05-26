@@ -35,11 +35,7 @@ public class Interaction : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            pickUpScript.EatFood();
-        }
-
+        
         //Check if ray hits------------------------------
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
