@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Door : MonoBehaviour {
+    SleepingAndWaking r_sleepScript;
 
     Tray _tray;
 
@@ -30,6 +31,7 @@ public class Door : MonoBehaviour {
         eyeSlot = transform.FindChild("EyeSlot");
         _tray = GameObject.Find("Tray").GetComponent<Tray>();
         dramaLight = GameObject.Find("DramaLight");
+        r_sleepScript = GameObject.Find("Player").GetComponent<SleepingAndWaking>();
     }
 
     void Start()
@@ -60,7 +62,7 @@ public class Door : MonoBehaviour {
         else
             eyeSlot.localPosition = Vector3.Lerp(eyeSlot.localPosition, eyeClosedPosition, openCloseSpeed);
 
-        if(doorOpen && SleepingAndWaking.sleepState == SleepState.goingUp)
+        if(doorOpen && r_sleepScript.sleepState == SleepState.goingUp)
         {
             transform.localRotation = Quaternion.Lerp(transform.localRotation, rot, Time.deltaTime * 2);
             Quaternion relative = Quaternion.Inverse(transform.localRotation) * rot;

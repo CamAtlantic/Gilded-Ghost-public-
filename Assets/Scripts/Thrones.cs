@@ -5,6 +5,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class Thrones : DreamTrigger {
 
     Transform location;
+
     public override void Awake()
     {
         base.Awake();
@@ -28,5 +29,6 @@ public class Thrones : DreamTrigger {
         r_dreamController.fire_thrones = true;
         r_dreamText.SetDreamText(r_dreamText.fire_thrones);
         TriggerLieDown(location.transform.position, (transform.localRotation * Quaternion.Euler(new Vector3(-90, 180, 0))).eulerAngles);
+            r_cellManager.KillLight();
     }
 }

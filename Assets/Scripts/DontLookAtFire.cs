@@ -5,6 +5,7 @@ using UnityStandardAssets.Characters.FirstPerson;
 public class DontLookAtFire : DreamTrigger {
 
     Camera cam;
+    SleepingAndWaking r_sleepScript;
 
     public float lookAtFireTriggerAngle = 0.05f;
     public float slowViewTriggerAngle = 90;
@@ -33,6 +34,8 @@ public class DontLookAtFire : DreamTrigger {
     float lightIntensityNormal;
     public float lightIntensityModifier = 5;
 
+    bool notSureWhyThisHappensMoreThanOnceButOkay = false;
+
     public override void Awake()
     {
         base.Awake();
@@ -44,6 +47,8 @@ public class DontLookAtFire : DreamTrigger {
         lightIntensityNormal = fireLight.intensity;
         flameRotateSpeedNormal = GetComponentInChildren<Rotate>().speed;
         particles = GetComponentInChildren<ParticleSystem>();
+        r_sleepScript = GameObject.Find("Player").GetComponent<SleepingAndWaking>();
+
     }
 
     public override void Update()
@@ -67,7 +72,7 @@ public class DontLookAtFire : DreamTrigger {
 
         #region Annoying Camera
         //player
-        if (SleepingAndWaking.sleepState == SleepState.standing && abs_AngleY < slowViewTriggerAngle)
+        if (r_sleepScript.sleepState == SleepState.standing && abs_AngleY < slowViewTriggerAngle)
         {
             float y_rotate_Amount = map_AngleXY * map_AngleY * rotateAmount * Time.deltaTime;
             if (angleY > 0)
@@ -126,7 +131,11 @@ public class DontLookAtFire : DreamTrigger {
         r_dreamController.fire_fire = true;
         r_dreamText.SetDreamText(r_dreamText.fire_fire);
         TriggerLieDown();
-        r_cellManager.SpawnLighter();
+        if (!notSureWhyThisHappensMoreThanOnceButOkay)
+        {
+            notSureWhyThisHappensMoreThanOnceButOkay = true;
+            r_cellManager.SpawnLighter();
+        }
     }
 
     

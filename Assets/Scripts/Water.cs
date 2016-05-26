@@ -5,6 +5,7 @@ public class Water : DreamTrigger {
 
     GameObject floodWater;
     GameObject toiletWater;
+    SleepingAndWaking r_sleepScript;
 
     public float amplitudeY = 0.5f;
     public float omegaY = 1;
@@ -23,6 +24,7 @@ public class Water : DreamTrigger {
         tag = "Untagged";
         floodWater = GameObject.Find("FloodWater");
         toiletWater = GameObject.Find("ToiletWater");
+        r_sleepScript = GameObject.Find("Player").GetComponent<SleepingAndWaking>();
 
         movePosition = transform.position;
     }
@@ -33,7 +35,7 @@ public class Water : DreamTrigger {
         float y = amplitudeY * Mathf.Sin(omegaY * index);
         playerDrownAmount = playerInWaterTime / playerInWaterTimeMax;
 
-        if (SleepingAndWaking.sleepState == SleepState.standing)
+        if (r_sleepScript.sleepState == SleepState.standing)
         {
             float moveAmount = (Time.deltaTime / 24);
             movePosition += new Vector3(0,moveAmount + y,0);

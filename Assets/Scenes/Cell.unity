@@ -364,7 +364,7 @@ MonoBehaviour:
   cellLightLight: {fileID: 0}
   plantPrefab: {fileID: 171878, guid: ef429f24076747b46a309402040b176d, type: 2}
   birdPrefab: {fileID: 149158, guid: 87758642d91550d499cb23f713d8cd39, type: 2}
-  lighterPrefab: {fileID: 0}
+  lighterPrefab: {fileID: 187366, guid: cfc797985d49427499f8f0a378e315a5, type: 2}
 --- !u!1001 &392442935
 Prefab:
   m_ObjectHideFlags: 0

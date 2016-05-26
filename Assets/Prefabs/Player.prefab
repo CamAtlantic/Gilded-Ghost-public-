@@ -137,13 +137,13 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
-  Priority: 128
+  Priority: 256
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -178,7 +178,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -189,7 +189,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -200,7 +200,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
 --- !u!114 &11418046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,7 +296,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
   m_JumpSound: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
   m_LandSound: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
-  mouseLookSlow: 0
 --- !u!114 &11419936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -308,9 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 833d3518466012c4f9e68eb65b612d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heldItem: {fileID: 0}
   speed: 10
-  foodHungerValue: 75
 --- !u!114 &11420530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -419,7 +416,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectHit: {fileID: 0}
-  reticule: 0
   noItem_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967035
@@ -438,13 +434,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 552ef429c0055bc4bbce3cd6be5debcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hunger: 0
   hungryThreshold: 150
   starvingThreshold: 0
-  hungerMax: 0
-  hungry: 0
-  starving: 0
   digestionSpeed: 7.5
+  hungerMax: 0
+  noiseModifier: 20
+  chromAbModifier: 75
+  lerpSpeed: 0.1
   valueOfEatenFood: 0
   hungerPulseCurve:
     serializedVersion: 2

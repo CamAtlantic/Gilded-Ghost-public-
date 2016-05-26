@@ -14,8 +14,7 @@ public class Eyelids : MonoBehaviour {
 
     Camera cam;
     BlurOptimized blur;
-
-    SleepingAndWaking sleepingScript;
+    SleepingAndWaking r_sleepingScript;
 
     public Lid eye = Lid.opening;
     private SleepState sleepState;
@@ -56,8 +55,8 @@ public class Eyelids : MonoBehaviour {
 
         cam = Camera.main;
         blur = cam.GetComponent<BlurOptimized>();
-        
-        sleepingScript = GameObject.Find("Player").GetComponent<SleepingAndWaking>();
+
+        r_sleepingScript = GameObject.Find("Player").GetComponent<SleepingAndWaking>();
 
         normal_Y_TopEyelid = topEyelid_Rect.anchoredPosition.y;
         normal_Y_BottomEyelid = bottomEyelid_Rect.anchoredPosition.y;
@@ -65,9 +64,9 @@ public class Eyelids : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        sleepState = SleepingAndWaking.sleepState;
+        sleepState = r_sleepingScript.sleepState;
 
-        switch(eye)
+        switch (eye)
         {
             case Lid.opening:
                 if (progress < 1)
@@ -121,7 +120,7 @@ public class Eyelids : MonoBehaviour {
                     //CLOSED EYELIDS POINT
                     //the PC is asleep. I need to send a message out.
 
-                    sleepingScript.Sleep();
+                    r_sleepingScript.Sleep();
                 }
                 break;
 

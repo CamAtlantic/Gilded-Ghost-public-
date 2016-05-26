@@ -10,7 +10,7 @@ public class SleepingAndWaking : MonoBehaviour{
     DreamController r_dreamController;
     CharacterController _controller;
 
-    public static SleepState sleepState;
+    public SleepState sleepState;
 
     public int facingTriggerDegree = 70;
     //public float standingSleepingSpeed = 0.03f;

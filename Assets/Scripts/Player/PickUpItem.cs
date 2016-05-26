@@ -4,14 +4,12 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class PickUpItem : MonoBehaviour
 {
-
     //---------------------------------
     //VARIABLES------------------------
     //---------------------------------
 
     public static GameObject heldItem;
     public static Item heldItemScript;
-    Needs _needs;
     public static Icon e_Icon;
 
     public float speed = 10;
@@ -30,7 +28,6 @@ public class PickUpItem : MonoBehaviour
         heldItem = item;
         heldItemScript = heldItem.GetComponent<Item>();
         heldItemScript.PickUp();
-        _needs = GetComponent<Needs>();
         e_Icon.ShowIcon();
     }
 

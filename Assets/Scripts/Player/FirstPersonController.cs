@@ -149,7 +149,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 m_MoveDir += Physics.gravity*m_GravityMultiplier*Time.fixedDeltaTime;
             }
 
-            if (SleepingAndWaking.sleepState == SleepState.standing)
+            if (m_SleepingAndWaking.sleepState == SleepState.standing)
             {
                 m_CollisionFlags = m_CharacterController.Move(m_MoveDir * Time.fixedDeltaTime);     
             }

@@ -39,9 +39,6 @@ public class CellManager : MonoBehaviour {
             mat.SetColor("_EmissionColor", newC);
             DynamicGI.SetEmissive(rend, newC);
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-            KillLight();
     }
 
     public void SpawnPlant()

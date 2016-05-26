@@ -12,6 +12,7 @@ public enum Scenes { System,Cell,Mountain,Columns,Fire};
 public class DreamController : MonoBehaviour {
 
     #region references
+    SleepingAndWaking r_sleepScript;
     CellManager _cellManager;
     DreamText _dreamText;
     SleepingAndWaking _sleepingAndWaking;
@@ -60,7 +61,7 @@ public class DreamController : MonoBehaviour {
         _dreamText = GameObject.Find("Dream Canvas").GetComponent<DreamText>();
         _dayManager = GetComponent<DayManager>();
         m_CamBackground = Camera.main.gameObject.GetComponent<CamBackgroundColor>();
-
+        r_sleepScript = GameObject.Find("Player").GetComponent<SleepingAndWaking>();
         LoadScene(Scenes.Cell);
     }
 
@@ -78,7 +79,7 @@ public class DreamController : MonoBehaviour {
         //need to replace this with a dream-specific implementation.
         //should display text and then wake the player.
 
-        if (SleepingAndWaking.sleepState == SleepState.asleep)
+        if (r_sleepScript.sleepState == SleepState.asleep)
         {
             if (loadedScene != Scenes.Cell && _dreamText.DisplayText())
                 _sleepingAndWaking.WakeUp();
