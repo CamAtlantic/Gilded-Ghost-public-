@@ -468,6 +468,18 @@ Prefab:
       propertyPath: m_Name
       value: SpaceDoorParent
       objectReference: {fileID: 0}
+    - target: {fileID: 106190, guid: 3700fae3920e70e4da06575fb58b137d, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 412600, guid: 3700fae3920e70e4da06575fb58b137d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 412600, guid: 3700fae3920e70e4da06575fb58b137d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3700fae3920e70e4da06575fb58b137d, type: 2}
   m_IsPrefabParent: 0
@@ -787,6 +799,10 @@ Prefab:
     - target: {fileID: 466042, guid: 14f8798cee0f5ed44b7b7fbdbebba856, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 147948, guid: 14f8798cee0f5ed44b7b7fbdbebba856, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 14f8798cee0f5ed44b7b7fbdbebba856, type: 2}
@@ -1632,7 +1648,7 @@ Prefab:
     - target: {fileID: 2300000, guid: 7d4689596688a2841ba4747dc4ee19d0, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b1a32aad8d01bee49b0306937f7deb28, type: 2}
+      objectReference: {fileID: 2100000, guid: f37eb59c5726bc0449efb8dd20e747ec, type: 2}
     - target: {fileID: 400000, guid: 7d4689596688a2841ba4747dc4ee19d0, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1975492
