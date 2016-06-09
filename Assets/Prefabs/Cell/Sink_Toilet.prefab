@@ -170,7 +170,7 @@ GameObject:
   - 64: {fileID: 6455094}
   - 114: {fileID: 11452854}
   m_Layer: 8
-  m_Name: Location006
+  m_Name: SinkLocation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,6 +8,9 @@ public class MountainDoor : MonoBehaviour {
     DoorPlate two;
     DoorPlate three;
 
+    GameObject plane1;
+    //GameObject plane2;
+
     bool open;
 
     void Awake()
@@ -16,33 +19,36 @@ public class MountainDoor : MonoBehaviour {
         one = all[0];
         two = all[1];
         three = all[2];
+
+        plane1 = GameObject.Find("Plane 1");
+       // plane2 = GameObject.Find("Plane 2");
+
+        plane1.SetActive(false);
     }
 
 	// Use this for initialization
 	void Start () {
-        foreach (DoorPlate ring in all)
-        {
-            int rot = Random.Range(1, 8) * 45;
-            ring.gameObject.transform.localRotation *= Quaternion.Euler(0, 0, rot); 
-        }
-
-        if(open)
-        {
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(-90, 0, -90), 0.3f);
-        }
+       
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	if(one.relative == two.relative && two.relative == three.relative)
+
+        if (one.currentSlot == two.currentSlot && two.currentSlot == three.currentSlot)
         {
             Open();
         }
-	}
+
+        if (open)
+        {
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(-90, 0, -90), 0.05f);
+        }
+    }
 
     void Open()
     {
         print(true);
         open = true;
+        plane1.SetActive(true);
     }
 }

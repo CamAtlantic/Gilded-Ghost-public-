@@ -169,6 +169,10 @@ Prefab:
       propertyPath: m_Name
       value: Dream Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 11454188, guid: 63a30a76a0959364aa666c31fe4019db, type: 2}
+      propertyPath: displayTimerMax
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 63a30a76a0959364aa666c31fe4019db, type: 2}
   m_IsPrefabParent: 0
@@ -610,7 +614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IsWalking: 0
   m_WalkSpeed: 1
-  m_RunSpeed: 6
+  m_RunSpeed: 8
   m_RunstepLengthen: 0
   m_JumpSpeed: 0
   m_StickToGroundForce: 10
@@ -1041,6 +1045,18 @@ Prefab:
     - target: {fileID: 22455722, guid: c13114142b42df3449d5fc0222d6af8c, type: 2}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22460054, guid: c13114142b42df3449d5fc0222d6af8c, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22460054, guid: c13114142b42df3449d5fc0222d6af8c, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22460054, guid: c13114142b42df3449d5fc0222d6af8c, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c13114142b42df3449d5fc0222d6af8c, type: 2}

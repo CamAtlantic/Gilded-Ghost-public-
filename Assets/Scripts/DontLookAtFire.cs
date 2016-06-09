@@ -142,6 +142,7 @@ public class DontLookAtFire : DreamTrigger {
     void OnTriggerEnter(Collider other)
     {
         TriggerLieDown();
+        DreamTriggerEffect();
     }
 
     float map(float s, float a1, float a2, float b1, float b2)

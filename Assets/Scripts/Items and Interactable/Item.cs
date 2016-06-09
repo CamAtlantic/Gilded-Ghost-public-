@@ -33,7 +33,9 @@ public class Item : MonoBehaviour {
         collide = GetComponent<MeshCollider>();
 
         itemState = State.AtLocation;
+        
     }
+    
 
 	// Use this for initialization
 	void Start () {
