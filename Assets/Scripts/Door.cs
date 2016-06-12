@@ -94,10 +94,9 @@ public class Door : MonoBehaviour {
         if(traySlotOpen == false)
         {
             traySlotOpen = true;
-            audio.PlayOneShot(traySlotSound);
-            
+            if (DreamController.loadedScene == Scenes.Cell)
+                audio.PlayOneShot(traySlotSound);
         }
-        
     }
 
     public void CloseTraySlot()
@@ -105,7 +104,8 @@ public class Door : MonoBehaviour {
         if (traySlotOpen == true)
         {
             traySlotOpen = false;
-            audio.PlayOneShot(traySlotSound);
+            if (DreamController.loadedScene == Scenes.Cell)
+                audio.PlayOneShot(traySlotSound);
         }
     }
 
@@ -114,7 +114,8 @@ public class Door : MonoBehaviour {
         if (eyeSlotOpen == false)
         {
             eyeSlotOpen = true;
-            audio.PlayOneShot(eyeSlotSound);
+            if (DreamController.loadedScene == Scenes.Cell)
+                audio.PlayOneShot(eyeSlotSound);
         }
     }
 
@@ -123,7 +124,8 @@ public class Door : MonoBehaviour {
         if (eyeSlotOpen == true)
         {
             eyeSlotOpen = false;
-            audio.PlayOneShot(eyeSlotSound);
+            if(DreamController.loadedScene == Scenes.Cell)
+                audio.PlayOneShot(eyeSlotSound);
         }
     }
 }
