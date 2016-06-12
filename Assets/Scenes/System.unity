@@ -123,7 +123,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22417474, guid: 63a30a76a0959364aa666c31fe4019db, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 22417474, guid: 63a30a76a0959364aa666c31fe4019db, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -341,7 +341,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22455748, guid: 59e9c1e314264ce4cb960489ac6b521a, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 22455748, guid: 59e9c1e314264ce4cb960489ac6b521a, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -425,6 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 552ef429c0055bc4bbce3cd6be5debcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audio: {fileID: 0}
   hungryThreshold: 150
   starvingThreshold: 0
   digestionSpeed: 7.5
@@ -519,9 +520,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: dab287530afe19d40a83a00483da243e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1004,7 +1005,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22455722, guid: c13114142b42df3449d5fc0222d6af8c, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 22455722, guid: c13114142b42df3449d5fc0222d6af8c, type: 2}
       propertyPath: m_AnchoredPosition.x

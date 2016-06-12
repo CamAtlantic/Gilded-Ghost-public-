@@ -67,19 +67,22 @@ public class DayManager : MonoBehaviour {
         #endregion
     }
 
-    bool foodBeenServed = false;
+    public static bool foodBeenServed = false;
     void FeedingTime()
     {
         //this script is a bit shit, it shoudl just bbe a trigger and then it's handled by everything else
         feedingTimer += Time.deltaTime;
 
-        _door.OpenEyeSlot();
-        _door.OpenTraySlot();
-
-        if (feedingTimer > trayPushTime && !foodBeenServed)
+        if (!foodBeenServed)
         {
-            foodBeenServed = true;
-            _tray.PushInside();
+            _door.OpenEyeSlot();
+            _door.OpenTraySlot();
+
+            if (feedingTimer > trayPushTime)
+            {
+                foodBeenServed = true;
+                _tray.PushInside();
+            }
         }
 
         if (feedingTimer > maxFeedingTimer)

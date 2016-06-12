@@ -5,7 +5,8 @@ public class Item : MonoBehaviour {
     public enum State{ Held, LerpToLocation, AtLocation }
     public State itemState;
 
-    GameObject player;
+    [HideInInspector]
+    public GameObject player;
     public Camera cam;
     Collider collide;
 
@@ -22,6 +23,8 @@ public class Item : MonoBehaviour {
 
     public float speed = 10;
     public static Icon e_Icon;
+    [HideInInspector]
+    new public AudioSource audio;
 
     public virtual void Awake()
     {
@@ -33,7 +36,8 @@ public class Item : MonoBehaviour {
         collide = GetComponent<MeshCollider>();
 
         itemState = State.AtLocation;
-        
+        audio = GetComponent<AudioSource>();
+
     }
     
 
@@ -60,11 +64,17 @@ public class Item : MonoBehaviour {
                 transform.localPosition = itemLocationScript.placedPosition;
                 itemState = State.AtLocation;
                 collide.enabled = true;
+                OnPutDown();
             }
         }
 	}
 
-    public void PickUp()
+    public virtual void OnPutDown()
+    {
+        //override
+    }
+
+    public virtual void PickUp()
     {
         if (transform.parent && transform.parent.GetComponent<ItemLocation>())
             transform.parent.GetComponent<ItemLocation>().Reset();
@@ -74,7 +84,7 @@ public class Item : MonoBehaviour {
         collide.enabled = false;
     }
 
-    public void PutDownOn(GameObject itemLocation)
+    public virtual void PutDownOn(GameObject itemLocation)
     {
         transform.parent = itemLocation.transform;
         itemState = State.LerpToLocation;

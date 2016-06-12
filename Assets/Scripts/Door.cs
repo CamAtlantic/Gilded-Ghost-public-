@@ -21,8 +21,12 @@ public class Door : MonoBehaviour {
     bool traySlotOpen;
     bool eyeSlotOpen;
 
-    public float openCloseSpeed = 0.2f;
+    public AudioClip eyeSlotSound;
+    public AudioClip traySlotSound;
 
+    public float openCloseSpeed = 0.2f;
+    [HideInInspector]
+    new public AudioSource audio;
     //EVERYTHING IN THIS SCRIPT USES LOCALPOSITION
 
     void Awake()
@@ -32,6 +36,8 @@ public class Door : MonoBehaviour {
         _tray = GameObject.Find("Tray").GetComponent<Tray>();
         dramaLight = GameObject.Find("DramaLight");
         r_sleepScript = GameObject.Find("Player").GetComponent<SleepingAndWaking>();
+        audio = GetComponent<AudioSource>();
+
     }
 
     void Start()
@@ -52,8 +58,6 @@ public class Door : MonoBehaviour {
         {
             traySlot.localPosition = Vector3.Lerp(traySlot.localPosition, trayOpenPosition, openCloseSpeed);
 
-            if (!_tray.inside)
-                CloseTraySlot();
         }
         else
             traySlot.localPosition = Vector3.Lerp(traySlot.localPosition, trayClosedPosition, openCloseSpeed);
@@ -86,21 +90,40 @@ public class Door : MonoBehaviour {
 
 	public void OpenTraySlot()
     {
-        traySlotOpen = true;
+        
+        if(traySlotOpen == false)
+        {
+            traySlotOpen = true;
+            audio.PlayOneShot(traySlotSound);
+            
+        }
+        
     }
 
     public void CloseTraySlot()
     {
-        traySlotOpen = false;
+        if (traySlotOpen == true)
+        {
+            traySlotOpen = false;
+            audio.PlayOneShot(traySlotSound);
+        }
     }
 
     public void OpenEyeSlot()
     {
-        eyeSlotOpen = true;
+        if (eyeSlotOpen == false)
+        {
+            eyeSlotOpen = true;
+            audio.PlayOneShot(eyeSlotSound);
+        }
     }
 
     public void CloseEyeSlot()
     {
-        eyeSlotOpen = false;
+        if (eyeSlotOpen == true)
+        {
+            eyeSlotOpen = false;
+            audio.PlayOneShot(eyeSlotSound);
+        }
     }
 }

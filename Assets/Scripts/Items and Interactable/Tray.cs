@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(FoodMenu))]
 public class Tray : Interactable {
-
+    Door door;
     FoodMenu _foodMenu;
 
     Vector3 corridorPosition;
@@ -21,7 +21,8 @@ public class Tray : Interactable {
         base.Awake();
         _foodMenu = GetComponent<FoodMenu>();
 
-        foodSpaces = transform.GetComponentsInChildren<ItemLocation>();   
+        foodSpaces = transform.GetComponentsInChildren<ItemLocation>();
+        door = GameObject.Find("Door").GetComponent<Door>();
     }
 
 	// Use this for initialization
@@ -57,11 +58,13 @@ public class Tray : Interactable {
         PushOutside();
     }
 
+    //need different audio
     public void PushInside()
     {
         if (inside == false)
         {
             inside = true;
+            audio.PlayOneShot(audio.clip);
 
             for (int i = 0; i < foodSpaces.Length; i++)
             {
@@ -76,6 +79,8 @@ public class Tray : Interactable {
     public void PushOutside()
     {
         inside = false;
+        audio.PlayOneShot(audio.clip);
+        door.CloseTraySlot();
     }
 
     void SpawnFood(ItemLocation location, GameObject[] mainsOrSides)

@@ -2,8 +2,14 @@
 using System.Collections;
 
 public class Food : Item {
-
+    Needs needs;
     public float foodHungerValue = 75;
+
+    public override void Awake()
+    {
+        base.Awake();
+        needs = player.GetComponent<Needs>();
+    }
 
     public override void Use()
     {
@@ -13,7 +19,7 @@ public class Food : Item {
 
     void Eat()
     {
-        Needs.EatFood(foodHungerValue);
+        needs.EatFood(foodHungerValue);
         PickUpItem.Reset();
         Destroy(gameObject);
     }

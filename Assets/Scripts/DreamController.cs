@@ -70,6 +70,11 @@ public class DreamController : MonoBehaviour {
         _sun = GameObject.Find("Sun").GetComponent<Sun>();
         _cellManager = GameObject.Find("CellManager").GetComponent<CellManager>();
         cellSleepingTransform = GameObject.Find("CellSleepTransform").transform;
+
+
+        //if (loadedScene == Scenes.Cell)
+            DynamicGI.UpdateMaterials(GameObject.Find("Cell").GetComponent<Renderer>());
+
         SetActiveScene();
     }
 	

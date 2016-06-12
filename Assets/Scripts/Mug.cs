@@ -57,4 +57,17 @@ public class Mug : Item {
                 waterRend.enabled = false;
         }
     }
+
+    public override void PickUp()
+    {
+        base.PickUp();
+        audio.PlayOneShot(audio.clip);
+    }
+
+
+    public override void PutDownOn(GameObject itemLocation)
+    {
+        base.PutDownOn(itemLocation);
+        audio.PlayOneShot(audio.clip);
+    }
 }

@@ -36,7 +36,9 @@ public class SinkButton : Button {
     public override void InteractTrigger()
     {
         base.InteractTrigger();
-        if(sinkLocation.itemAtLocation.name == "Mug")
+        audio.PlayOneShot(audio.clip);
+        
+        if (sinkLocation.itemAtLocation && sinkLocation.itemAtLocation.name == "Mug")
         {
             mug.Fill(true);
         }

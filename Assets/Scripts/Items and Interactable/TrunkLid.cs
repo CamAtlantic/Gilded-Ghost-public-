@@ -44,10 +44,13 @@ public class TrunkLid : Interactable {
     void Open()
     {
         isOpen = true;
+        audio.PlayOneShot(audio.clip);
     }
 
     void Close()
     {
         isOpen = false;
+        audio.PlayOneShot(audio.clip);
+
     }
 }
