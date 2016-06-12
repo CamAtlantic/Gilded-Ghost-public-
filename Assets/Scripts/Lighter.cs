@@ -12,6 +12,8 @@ public class Lighter : Item {
     Vector3 largeFlamePos;
     Vector3 smallFlamePos;
 
+    public AudioClip pickUpSound;
+
     public override void Awake()
     {
         base.Awake();
@@ -46,6 +48,19 @@ public class Lighter : Item {
     {
         base.Use();
         open = !open;
+        if(open)
+            audio.PlayOneShot(audio.clip);
     }
 
+    public override void PickUp()
+    {
+        base.PickUp();
+        audio.PlayOneShot(pickUpSound);
+    }
+
+    public override void PutDownOn(GameObject itemLocation)
+    {
+        base.PutDownOn(itemLocation);
+        audio.PlayOneShot(pickUpSound);
+    }
 }

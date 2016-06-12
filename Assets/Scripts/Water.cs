@@ -47,14 +47,22 @@ public class Water : DreamTrigger {
             playerInWaterTime -= Time.deltaTime * 2;
         if (playerInWaterTime < 0)
             playerInWaterTime = 0;
+
+        if (player.transform.position.y < -50)
+            WaterEffect();
     }
     
     void OnTriggerStay()
     {
+        WaterEffect();
+    }
+
+    void WaterEffect()
+    {
         playerInWater = true;
         playerInWaterTime += Time.deltaTime;
 
-        if(playerInWaterTime > playerInWaterTimeMax)
+        if (playerInWaterTime > playerInWaterTimeMax)
         {
             DreamTriggerEffect();
             TriggerLieDown();

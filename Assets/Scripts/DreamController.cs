@@ -70,6 +70,11 @@ public class DreamController : MonoBehaviour {
         _sun = GameObject.Find("Sun").GetComponent<Sun>();
         _cellManager = GameObject.Find("CellManager").GetComponent<CellManager>();
         cellSleepingTransform = GameObject.Find("CellSleepTransform").transform;
+
+
+        //if (loadedScene == Scenes.Cell)
+            DynamicGI.UpdateMaterials(GameObject.Find("Cell").GetComponent<Renderer>());
+
         SetActiveScene();
     }
 	
@@ -102,6 +107,7 @@ public class DreamController : MonoBehaviour {
             hasBeenToColumns = true;
         if (fire_fire || fire_thrones)
             hasBeenToFire = true;
+       
         #endregion
 
         //Determines which dream to start, then starts it.
@@ -123,6 +129,8 @@ public class DreamController : MonoBehaviour {
             m_CamBackground.SetBackgroundColor(fireSkyColor);
             _dreamText.SetDreamText(_dreamText.fire_intro);
         }
+        else
+            _dreamText.SetDreamText("You have reached the end. What have you learned?");
 
         _needs.ToggleHungerEffects(false);
         _cellManager.ShowHideCell(false);

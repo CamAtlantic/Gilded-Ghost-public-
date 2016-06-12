@@ -7,6 +7,7 @@ public class Trunk : Interactable {
     Vector3 underBedPosition;
     Vector3 pulledOutPosition;
 
+
     public bool pulledOut = false;
     public float pushSpeed = 0.3f;
     
@@ -37,12 +38,14 @@ public class Trunk : Interactable {
         }
         else
             transform.localPosition = Vector3.Lerp(transform.localPosition, underBedPosition, pushSpeed);
+        
     }
 
     public override void InteractTrigger()
     {
         base.InteractTrigger();
 
+        //need different audio cues for pull/push
         if (pulledOut && !_trunkLidScript.isOpen)
             PushUnder();
         else
@@ -54,12 +57,14 @@ public class Trunk : Interactable {
         if (pulledOut == false)
         {
             pulledOut = true;
+            audio.PlayOneShot(audio.clip);
         }
     }
 
     public void PushUnder()
     {
         pulledOut = false;
+        audio.PlayOneShot(audio.clip);
     }
 
 }

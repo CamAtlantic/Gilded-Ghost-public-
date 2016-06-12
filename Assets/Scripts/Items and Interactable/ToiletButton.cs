@@ -85,6 +85,7 @@ public class ToiletButton : Button {
     public override void InteractTrigger()
     {
         base.InteractTrigger();
+        audio.PlayOneShot(audio.clip);
         flushCount++;
     }
 }

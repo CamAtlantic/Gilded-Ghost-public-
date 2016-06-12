@@ -289,7 +289,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 484960}
   - 114: {fileID: 11411414}
-  m_Layer: 0
+  - 135: {fileID: 13505046}
+  m_Layer: 2
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -501,22 +502,6 @@ GameObject:
   m_Layer: 10
   m_Name: SmallF
   m_TagString: Fire
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &190540
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 475614}
-  - 135: {fileID: 13540954}
-  m_Layer: 0
-  m_Name: Sphere
-  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -854,18 +839,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 484960}
   m_RootOrder: 1
---- !u!4 &475614
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 190540}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.06, y: 0, z: 0.06}
-  m_LocalScale: {x: 5.455268, y: 5.4552693, z: 5.4552693}
-  m_Children: []
-  m_Father: {fileID: 484960}
-  m_RootOrder: 29
 --- !u!4 &484960
 Transform:
   m_ObjectHideFlags: 1
@@ -905,7 +878,6 @@ Transform:
   - {fileID: 413088}
   - {fileID: 464574}
   - {fileID: 486854}
-  - {fileID: 475614}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &486226
@@ -2691,17 +2663,17 @@ MonoBehaviour:
   index: 0
   speed: 0.2
   angle: {x: 0, y: 0, z: 1}
---- !u!135 &13540954
+--- !u!135 &13505046
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 190540}
+  m_GameObject: {fileID: 148746}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 2.68
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &19857344
 ParticleSystem:

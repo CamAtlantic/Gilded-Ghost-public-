@@ -2,8 +2,10 @@
 using System.Collections;
 
 public class SinkButton : Button {
+    ItemLocation sinkLocation;
     GameObject water;
     Material waterMaterial;
+    Mug mug;
 
     Color fadeOutColor;
     Color fadeInColor;
@@ -13,6 +15,8 @@ public class SinkButton : Button {
         base.Awake();
         water = GameObject.Find("Water");
         waterMaterial = water.GetComponent<MeshRenderer>().material;
+        sinkLocation = GameObject.Find("SinkLocation").GetComponent<ItemLocation>();
+        mug = GameObject.Find("Mug").GetComponent<Mug>();
     }
     public override void Start()
     {
@@ -32,6 +36,11 @@ public class SinkButton : Button {
     public override void InteractTrigger()
     {
         base.InteractTrigger();
+        audio.PlayOneShot(audio.clip);
         
+        if (sinkLocation.itemAtLocation && sinkLocation.itemAtLocation.name == "Mug")
+        {
+            mug.Fill(true);
+        }
     }
 }

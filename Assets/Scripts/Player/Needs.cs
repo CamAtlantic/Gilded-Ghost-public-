@@ -5,6 +5,8 @@ using UnityStandardAssets.ImageEffects;
 public enum Hunger { Starving, Hungry, Peckish, Full}
 
 public class Needs : MonoBehaviour {
+    [HideInInspector]
+    new public AudioSource audio;
 
     GameObject _camObject;
     VignetteAndChromaticAberration _chromAb;
@@ -31,6 +33,7 @@ public class Needs : MonoBehaviour {
         _camObject = Camera.main.gameObject;
         _chromAb = _camObject.GetComponent<VignetteAndChromaticAberration>();
         _noiseAndGrain = _camObject.GetComponent<NoiseAndGrain>();
+        audio = GetComponent<AudioSource>();
     }
 
     void Start()
@@ -113,14 +116,16 @@ public class Needs : MonoBehaviour {
 
     public float valueOfEatenFood = 0;
 
-    public static void EatFood(float value)
+    public void EatFood(float value)
     {
-        hunger -= DayManager.oneThirdDaySeconds; 
+        hunger -= DayManager.oneThirdDaySeconds;
+        audio.PlayOneShot(audio.clip);
+
     }
 
     public void UpdateHungerWhileSleeping()
     {
-        hunger += DayManager.oneThirdDaySeconds / 2;
+        hunger += DayManager.oneThirdDaySeconds;
     }
 
 
